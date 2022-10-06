@@ -1,5 +1,5 @@
 const AlgouiIcon = () => {
-    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <svg className="algoui-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="0 0 32 32" xmlSpace="preserve">
             <path id="path_1_" d="M27,30.36c-1.731,0-3.161-1.316-3.341-3h-4.318c-0.18,1.684-1.609,3-3.341,3c-1.853,0-3.36-1.508-3.36-3.36
             c0-1.731,1.316-3.161,3-3.341v-4.318c-1.684-0.18-3-1.609-3-3.341c0-1.731,1.316-3.161,3-3.341V8.341

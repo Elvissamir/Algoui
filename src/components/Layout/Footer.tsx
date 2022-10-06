@@ -29,13 +29,16 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="developed-by">
-                    <CogIcon />
-                    <p className="text">Designed and Developed</p>
-                    <p className="text">by Elvis Carrasco</p>
+                    <div className="top">
+                        <CogIcon />
+                        <p className="text">Designed and Developed</p>
+                    </div>
+                    <p className="text">by</p>
+                    <p className="text">Elvis Carrasco</p>
                 </div>
                 <div className="footer-bottom">
-                    <p className="bottom-text">AlgoUI - Algorithms And Data Structures</p>
-                    <p className="bottom-text">2022</p>
+                    <p className="text">AlgoUI - Algorithms And Data Structures</p>
+                    <p className="text">2022</p>
                 </div>
             </footer>
         </div>

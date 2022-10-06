@@ -15,10 +15,10 @@ const Footer = () => {
         <div className="footer-container">
             <footer className="footer">
                 <div className="my-networks">
-                    <p>My Social Networks:</p>
+                    <p className="text-title">My Social Networks:</p>
                     <div className="my-email">
                         <MailIcon />
-                        <p>elvissam.software@gmail.com</p>
+                        <p className="text">elvissam.software@gmail.com</p>
                     </div>
                     <div className="other-networks">
                         {externalNetworks.map((network, index) => 
@@ -30,11 +30,12 @@ const Footer = () => {
                 </div>
                 <div className="developed-by">
                     <CogIcon />
-                    <p>Designed and Developed by Elvis Carrasco</p>
+                    <p className="text">Designed and Developed</p>
+                    <p className="text">by Elvis Carrasco</p>
                 </div>
                 <div className="footer-bottom">
-                    <p>AlgoUI - Algorithms And Data Structures</p>
-                    <p>2022</p>
+                    <p className="bottom-text">AlgoUI - Algorithms And Data Structures</p>
+                    <p className="bottom-text">2022</p>
                 </div>
             </footer>
         </div>

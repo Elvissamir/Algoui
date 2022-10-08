@@ -1,9 +1,9 @@
-import AlgouiIcon from "../../assets/icons/AlgouiIcon"
-import CogIcon from "../../assets/icons/CogIcon"
-import GithubIcon from "../../assets/icons/GithubIcon"
-import LinkedinIcon from "../../assets/icons/LinkedinIcon"
-import MailIcon from "../../assets/icons/MailIcon"
-import WorldIcon from "../../assets/icons/WorldIcon"
+import AlgouiIcon from "../assets/icons/AlgouiIcon"
+import CogIcon from "../assets/icons/CogIcon"
+import GithubIcon from "../assets/icons/GithubIcon"
+import LinkedinIcon from "../assets/icons/LinkedinIcon"
+import MailIcon from "../assets/icons/MailIcon"
+import WorldIcon from "../assets/icons/WorldIcon"
 
 const Footer = () => {
     const externalNetworks = [

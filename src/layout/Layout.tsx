@@ -1,8 +1,8 @@
 import AppRouter from "../components/AppRouter"
-import Content from "./Content"
-import Footer from "./Footer"
 import Mobilebar from "./Mobilebar"
 import Navbar from "./Navbar"
+import Content from "./Content"
+import Footer from "./Footer"
 
 const Layout = () => {
     return (

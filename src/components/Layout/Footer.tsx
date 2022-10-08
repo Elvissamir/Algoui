@@ -1,3 +1,4 @@
+import AlgouiIcon from "../../assets/icons/AlgouiIcon"
 import CogIcon from "../../assets/icons/CogIcon"
 import GithubIcon from "../../assets/icons/GithubIcon"
 import LinkedinIcon from "../../assets/icons/LinkedinIcon"
@@ -37,8 +38,11 @@ const Footer = () => {
                     <p className="text">Elvis Carrasco</p>
                 </div>
                 <div className="footer-bottom">
-                    <p className="text">AlgoUI - Algorithms And Data Structures</p>
-                    <p className="text">2022</p>
+                    <p className="text">Algo<span className="algoui-sletters">UI</span></p>
+                    <AlgouiIcon />
+                </div>
+                <div className="footer-end">
+                    <p className="text">Algorithms And Data Structures 2022</p>
                 </div>
             </footer>
         </div>

@@ -7,4 +7,6 @@
 /* breakpoints */
 /* 320px, 640px, 768px, 1024px, 1280px, 1536px */
 
-@import './assets/styles/footer.scss'
+@import './assets/styles/layout/index';
+@import './assets/styles/core/index';
+@import './assets/styles/components/index';

@@ -47,6 +47,10 @@
                 display: flex;
                 justify-content: center;
                 margin-right: 10px;
+                
+                .icon {
+                    border-radius: 5px;
+                }
 
                 .world-icon {
                     height: 30px;
@@ -57,12 +61,18 @@
                     margin-left: 2px;
                 }
             }
+
+            .external-link-icon:hover {
+                .icon path {
+                    fill: var(--brand-pink);
+                }
+            }
         }
 
         .my-email {
             display: flex;
             justify-content: center;
-            margin-top: 10px;
+            margin-top: 5px;
             font-weight: bolder;
 
             .icon {
@@ -76,13 +86,14 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        margin-top: 10px;
+        margin-top: 30px;
         font-weight: bolder;
         width: 100%;
 
         .top {
             display: flex;
             justify-content: center;
+            align-items: center;
 
             .cog-icon {
                 margin: 0 !important;
@@ -95,19 +106,41 @@
         .text {
             display: flex;
             justify-content: center;
-            margin-top: 5px;
         }
     }
 
     .footer-bottom {
         display: flex;
+        align-items: center;
         justify-content: center;
         font-weight: bolder;
-        margin-top: 20px;
+        margin-top: 35px;
 
         .text {
             margin-left: 5px;
         }
+
+        .algoui-sletters {
+            color: var(--brand-pink);
+        }
+
+        .icon {
+            fill: white;
+            margin-left: 5px;
+            height: 25px;
+            width: 25px;
+
+            path {
+                fill: var(--brand-white);
+            }
+        }
+    }
+
+    .footer-end {
+        display: flex;
+        font-weight: bolder;
+        margin-top: 5px;
+        font-size: 10px;
     }
 }
 

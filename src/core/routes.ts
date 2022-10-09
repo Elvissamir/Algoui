@@ -13,4 +13,9 @@ const routes: AppRoutes = {
     dstructures: { name: 'Data Structures', route: '/data-structures' }
 }
 
+const routesArr = Object.keys(routes).map(key => routes[key])
+
 export default routes
+export {
+    routesArr
+}

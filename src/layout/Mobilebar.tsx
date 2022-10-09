@@ -1,8 +1,11 @@
+import { useState } from "react"
 import GithubIcon from "../assets/icons/GithubIcon"
 import MenuIcon from "../assets/icons/MenuIcon"
 import externalLinks from "../core/externalLinks"
 
 const Mobilebar = () => {
+    const [showMenu, setShowMenu] = useState(false)
+
     return (
         <div className="mobilebar-container">
             <div className="mobilebar">

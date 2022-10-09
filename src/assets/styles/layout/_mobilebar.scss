@@ -4,7 +4,7 @@
     bottom: 0;
     background-color: var(--brand-white);
     border-top: var(--brand-purple) 2px solid;
-    padding: 15px;
+    padding: 10px;
     width: 100%;
 
     .mobilebar {
@@ -23,9 +23,10 @@
             .mobile-menu-btn {
                 display: flex;
                 cursor: pointer;
+                align-items: center;
                 color: var(--brand-purple);
                 font-weight: bolder;
-                font-size: 20px;
+                font-size: 16px;
                 border: none;
                 background-color: transparent;
                 padding: 5px;
@@ -49,7 +50,7 @@
                 display: flex;
                 color: var(--brand-purple);
                 align-items: center;
-                font-size: 20px;
+                font-size: 16px;
                 font-weight: bolder;
                 text-decoration: none;
 

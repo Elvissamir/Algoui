@@ -1,4 +1,6 @@
 import Logo from "../components/Logo"
+import NavList from "../components/NavList"
+import Mobilebar from "./Mobilebar"
 
 const MobileMenu = () => {
     return (
@@ -8,9 +10,10 @@ const MobileMenu = () => {
                     <Logo />
                 </div>
                 <div className="nav-list-container">
-
+                    <NavList />
                 </div>
             </div>
+            <Mobilebar />
         </div>
     )
 }

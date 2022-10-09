@@ -1,14 +1,13 @@
 import AppRouter from "../components/AppRouter"
-import Mobilebar from "./Mobilebar"
 import Navbar from "./Navbar"
 import Content from "./Content"
 import Footer from "./Footer"
+import MobileMenu from "./MobileMenu"
 
 const Layout = () => {
     return (
         <div className="layout-container">
-            <Mobilebar />
-            <Navbar />
+            <MobileMenu />
             <Content>
                 <AppRouter />
             </Content>

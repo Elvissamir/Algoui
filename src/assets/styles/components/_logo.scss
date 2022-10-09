@@ -1,0 +1,25 @@
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    
+    .text {
+        color: var(--brand-purple);
+        font-size: 18px;
+        font-weight: bolder;
+        
+        .special-text {
+            color: var(--brand-pink);
+        }
+    }
+
+    .icon {
+        margin-left: 5px;
+        height: 25px;
+        width: 25px;
+
+        path {
+            fill: var(--brand-purple);
+        }
+    }
+}

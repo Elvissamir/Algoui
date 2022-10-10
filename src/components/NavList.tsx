@@ -4,10 +4,10 @@ import { routesArr } from "../core/routes"
 const NavList = () => {
     return (
         <nav className="nav-menu">
-            <ul className="mobile-menu-list">
+            <ul className="nav-list">
                     {routesArr.map((route, index) => 
-                        <li className="mobile-item" key={index}>
-                            <Link to={route.route}>{route.name}</Link>
+                        <li className="nav-item" key={index}>
+                            <Link className="nav-link" to={route.route}>{route.name}</Link>
                         </li>
                     )}
                 </ul>

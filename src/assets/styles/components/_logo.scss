@@ -5,7 +5,7 @@
     
     .text {
         color: var(--brand-purple);
-        font-size: 18px;
+        font-size: 24px;
         font-weight: bolder;
         
         .special-text {
@@ -14,9 +14,9 @@
     }
 
     .icon {
-        margin-left: 5px;
-        height: 25px;
-        width: 25px;
+        margin-left: 6px;
+        height: 30px;
+        width: 30px;
 
         path {
             fill: var(--brand-purple);

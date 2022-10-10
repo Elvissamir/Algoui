@@ -1,0 +1,15 @@
+.navbar-container {
+    display: flex;
+    padding-top: 10px;
+    width: 100%;
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        .nav-menu {
+            margin-left: 10px;
+        }
+    }
+}

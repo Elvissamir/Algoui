@@ -25,3 +25,17 @@
         }
     }
 }
+
+@media (min-width: 1024px) {
+    .nav-menu {
+        .nav-list {
+            flex-direction: row;
+            margin-top: 0;
+            
+            .nav-item {
+                margin-top: 0;
+                margin-right: 10px;
+            }
+        }
+    }
+}

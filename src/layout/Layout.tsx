@@ -4,6 +4,7 @@ import Footer from "./Footer"
 import MobileMenu from "./MobileMenu"
 import { useState } from "react"
 import Mobilebar from "./Mobilebar"
+import Navbar from "./Navbar"
 
 const Layout = () => {
     const [showMenu, setShowMenu] = useState(false)
@@ -18,6 +19,7 @@ const Layout = () => {
             <Mobilebar 
                 showMenu={showMenu} 
                 toggleMenu={handleToggleMenu} />
+            <Navbar />
             <Content>
                 <AppRouter />
             </Content>

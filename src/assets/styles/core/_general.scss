@@ -1,0 +1,17 @@
+.x-container {
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .x-container {
+        margin-left: auto;
+        margin-right: auto;
+        width:80%;
+    }
+}
+
+@media (min-width: 1280px) {
+    .x-container {
+        width: 80%;
+    }
+}

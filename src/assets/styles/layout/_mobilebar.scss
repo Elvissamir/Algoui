@@ -1,5 +1,7 @@
 .mobilebar-container {
     display: flex;
+    position: fixed;
+    bottom: 0;
     background-color: var(--brand-white);
     border-top: var(--brand-purple) 2px solid;
     padding: 10px;

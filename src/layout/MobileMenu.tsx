@@ -1,18 +1,14 @@
-import { useState } from "react"
 import Logo from "../components/Logo"
 import NavList from "../components/NavList"
-import Mobilebar from "./Mobilebar"
 
-const MobileMenu = () => {
-    const [showMenu, setShowMenu] = useState(false)
+interface MobileMenuProps {
+    showMenu: boolean
+}
 
-    const handleToggleMenu = () => {
-        setShowMenu(!showMenu)
-    }
-
+const MobileMenu = ({ showMenu }: MobileMenuProps) => {
     return (
-        <div className="mobile-menu-container">
-            <div className={showMenu? "mobile-menu open" : 'mobile-menu'}> 
+        <div className={showMenu? "mobile-menu-container open" : 'mobile-menu-container'}>
+            <div className="mobile-menu"> 
                 <div className="top">
                     <Logo />
                 </div>
@@ -20,9 +16,6 @@ const MobileMenu = () => {
                     <NavList />
                 </div>
             </div>
-            <Mobilebar 
-                showMenu={showMenu} 
-                toggleMenu={handleToggleMenu} />
         </div>
     )
 }

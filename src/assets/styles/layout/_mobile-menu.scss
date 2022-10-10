@@ -2,10 +2,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: fixed;
+    top: 0;
     align-items: center;
     position: fixed;
     bottom: 0;
-    height: 100vh;
+    height: calc(100vh - 60px);
+    transition: all 0.5s ease-in-out;
+    transform: translateX(-100%);
     width: 100%;
 
     .mobile-menu {
@@ -14,13 +18,11 @@
         justify-content: center;
         align-items: center;
         background-color: white;
-        height: calc(100vh - 60px);
+        height: 100%;
         width: 100%;
-        transition: all 0.5s ease-in-out;
-        transform: translateX(-100%);
     }
+}
 
-    .open {
-        transform: translateX(0);
-    }
+.open {
+    transform: translateX(0);
 }

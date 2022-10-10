@@ -1,8 +1,15 @@
+import { useState } from "react"
 import Logo from "../components/Logo"
 import NavList from "../components/NavList"
 import Mobilebar from "./Mobilebar"
 
 const MobileMenu = () => {
+    const [showMenu, setShowMenu] = useState(false)
+
+    const handleToggleMenu = () => {
+        setShowMenu(!showMenu)
+    }
+
     return (
         <div className="mobile-menu-container">
             <div className="mobile-menu">
@@ -13,7 +20,9 @@ const MobileMenu = () => {
                     <NavList />
                 </div>
             </div>
-            <Mobilebar />
+            <Mobilebar 
+                showMenu={showMenu} 
+                toggleMenu={handleToggleMenu} />
         </div>
     )
 }

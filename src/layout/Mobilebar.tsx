@@ -1,18 +1,24 @@
-import { useState } from "react"
 import GithubIcon from "../assets/icons/GithubIcon"
-import MenuIcon from "../assets/icons/MenuIcon"
 import externalLinks from "../core/externalLinks"
 
-const Mobilebar = () => {
-    const [showMenu, setShowMenu] = useState(false)
+interface MobilebarProps {
+    showMenu: boolean
+    toggleMenu: () => void
+}
 
+const Mobilebar = ({showMenu, toggleMenu}: MobilebarProps) => {
     return (
         <div className="mobilebar-container">
             <div className="mobilebar">
                 <div className="left">
-                    <button className="mobile-menu-btn">
+                    <button onClick={toggleMenu} className="mobile-menu-btn">
                         <p className="text">Menu</p>
-                        <MenuIcon />
+                        <div className={showMenu? 'menu-x-icon open' : 'menu-x-icon'}>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
                     </button>
                 </div>
                 <div className="vertical-line"></div>

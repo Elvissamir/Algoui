@@ -12,7 +12,7 @@ const MobileMenu = () => {
 
     return (
         <div className="mobile-menu-container">
-            <div className="mobile-menu">
+            <div className={showMenu? "mobile-menu open" : 'mobile-menu'}> 
                 <div className="top">
                     <Logo />
                 </div>

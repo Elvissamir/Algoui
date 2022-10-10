@@ -16,5 +16,11 @@
         background-color: white;
         height: calc(100vh - 60px);
         width: 100%;
+        transition: all 0.5s ease-in-out;
+        transform: translateX(-100%);
+    }
+
+    .open {
+        transform: translateX(0);
     }
 }

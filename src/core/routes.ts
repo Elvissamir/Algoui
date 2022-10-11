@@ -22,12 +22,39 @@ const dstructuresRoutes: DataStructureRouteTable = {
     array: { 
         name: 'Array', 
         route: dstructuresUrl+'array',
-        algorithms: {} 
+        algorithms: {
+            selectionSort: {
+                name: 'Selection Sort',
+                route: dstructuresUrl+'array/selection-sort'
+            },
+            quickSort: {
+                name: 'Quick Sort',
+                route: dstructuresUrl+'array/quick-sort'
+            },
+            mergeSort: {
+                name: 'Merge Sort',
+                route: dstructuresUrl+'array/merge-sort'
+            },
+            binarySearch: {
+                name: 'Binary Search',
+                route: dstructuresUrl+'array/binary-search'
+            },
+            twoPointers: {
+                name: 'Two Pointers',
+                route: dstructuresUrl+'array/two-pointers'
+            },
+            slidingWindow: {
+                name: 'Sliding Window',
+                route: dstructuresUrl+'array/sliding-window'
+            }
+        } 
     },
     binaryTree: { 
         name: 'Binary Tree', 
         route: dstructuresUrl+'binary-tree',
-        algorithms: {}
+        algorithms: {
+            
+        }
     },
     graphs: { 
         name: 'Graphs', 

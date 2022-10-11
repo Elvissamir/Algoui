@@ -4,7 +4,7 @@ interface ContentProps {
 
 const Content = ({ children }: ContentProps) => {
     return (
-        <div className="content-container">
+        <div className="content-container x-container">
             <main className="content">
                 {children}
             </main>

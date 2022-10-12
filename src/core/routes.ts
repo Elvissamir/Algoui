@@ -53,18 +53,43 @@ const dstructuresRoutes: DataStructureRouteTable = {
         name: 'Binary Tree', 
         route: dstructuresUrl+'binary-tree',
         algorithms: {
-            
+            BFT: { 
+                name: 'Breadth First Traversal',
+                route: dstructuresUrl+'binary-tree/breadth-first-traversal'
+            },
+            DFTInorder: {
+                name: 'Depth First Traversal Inorder',
+                route: dstructuresUrl+'binary-tree/depth-first-inorder'
+            },
+            DFTIpreorder: {
+                name: 'Depth First Traversal Preorder',
+                route: dstructuresUrl+'binary-tree/depth-first-preorder'
+            },
+            DFTpostorder: {
+                name: 'Depth First Traversal Postorder',
+                route: dstructuresUrl+'binary-tree/depth-first-postorder'
+            }
         }
     },
     graphs: { 
         name: 'Graphs', 
         route: dstructuresUrl+'graphs',
-        algorithms: {} 
+        algorithms: {
+            shortestPath: {
+                name: "Dijkstra's Shortest Path",
+                route: dstructuresUrl+'graphs/shortest-path'
+            }
+        } 
     },
     linkedList: { 
         name: 'Linked List', 
         route: dstructuresUrl+'linked-list',
-        algorithms: {}
+        algorithms: {
+            cycleDetection: {
+                name: 'Floyd Cycle Detection',
+                route: dstructuresUrl+'linked-list/cycle-detection'
+            }
+        }
     },
     hashTables: { 
         name: 'Hash Table', 

@@ -7,88 +7,103 @@ interface AppRoutes {
     [key: string]: RouteInfo
 }
 
-interface DataStructureRouteTable {
-    [key: string]: DataStructureRoute
-}
+const algorithmsUrl = '/algorithms/'
+const dstructuresUrl = '/data-structures/'
 
-interface DataStructureRoute extends RouteInfo {
+interface DataStructureInfo extends RouteInfo {
     algorithms: AppRoutes
 }
 
-const algorithmsUrl = '/algorithms/'
-const dstructuresUrl = '/data-structures/'
+interface DataStructureRouteTable {
+    [key: string]: DataStructureInfo
+}
+
+const algorithmsRoutes: AppRoutes = {
+    selectionSort: {
+        name: 'Selection Sort',
+        route: algorithmsUrl+'/selection-sort'
+    },
+    quickSort: {
+        name: 'Quick Sort',
+        route: algorithmsUrl+'/quick-sort'
+    },
+    mergeSort: {
+        name: 'Merge Sort',
+        route: algorithmsUrl+'/merge-sort'
+    },
+    binarySearch: {
+        name: 'Binary Search',
+        route: algorithmsUrl+'/binary-search'
+    },
+    twoPointers: {
+        name: 'Two Pointers',
+        route: algorithmsUrl+'/two-pointers'
+    },
+    slidingWindow: {
+        name: 'Sliding Window',
+        route: algorithmsUrl+'/sliding-window'
+    },
+    BFT: { 
+        name: 'Breadth First Traversal',
+        route: algorithmsUrl+'breadth-first-traversal'
+    },
+    DFTInorder: {
+        name: 'Depth First Traversal Inorder',
+        route: algorithmsUrl+'depth-first-inorder'
+    },
+    DFTIpreorder: {
+        name: 'Depth First Traversal Preorder',
+        route: algorithmsUrl+'depth-first-preorder'
+    },
+    DFTpostorder: {
+        name: 'Depth First Traversal Postorder',
+        route: algorithmsUrl+'depth-first-postorder'
+    },
+    shortestPath: {
+        name: "Dijkstra's Shortest Path",
+        route: dstructuresUrl+'graphs/shortest-path'
+    },
+    cycleDetection: {
+        name: 'Floyd Cycle Detection',
+        route: dstructuresUrl+'linked-list/cycle-detection'
+    }
+}
 
 const dstructuresRoutes: DataStructureRouteTable = {
     array: { 
         name: 'Array', 
         route: dstructuresUrl+'array',
         algorithms: {
-            selectionSort: {
-                name: 'Selection Sort',
-                route: dstructuresUrl+'array/selection-sort'
-            },
-            quickSort: {
-                name: 'Quick Sort',
-                route: dstructuresUrl+'array/quick-sort'
-            },
-            mergeSort: {
-                name: 'Merge Sort',
-                route: dstructuresUrl+'array/merge-sort'
-            },
-            binarySearch: {
-                name: 'Binary Search',
-                route: dstructuresUrl+'array/binary-search'
-            },
-            twoPointers: {
-                name: 'Two Pointers',
-                route: dstructuresUrl+'array/two-pointers'
-            },
-            slidingWindow: {
-                name: 'Sliding Window',
-                route: dstructuresUrl+'array/sliding-window'
-            }
+            selectionSort: algorithmsRoutes.selectionSort,
+            quickSort: algorithmsRoutes.quickSort,
+            mergeSort: algorithmsRoutes.mergeSort,
+            binarySearch: algorithmsRoutes.binarySearch,
+            twoPointer: algorithmsRoutes.twoPointers,
+            slidingWindow: algorithmsRoutes.slidingWindow
         } 
     },
     binaryTree: { 
         name: 'Binary Tree', 
         route: dstructuresUrl+'binary-tree',
         algorithms: {
-            BFT: { 
-                name: 'Breadth First Traversal',
-                route: dstructuresUrl+'binary-tree/breadth-first-traversal'
-            },
-            DFTInorder: {
-                name: 'Depth First Traversal Inorder',
-                route: dstructuresUrl+'binary-tree/depth-first-inorder'
-            },
-            DFTIpreorder: {
-                name: 'Depth First Traversal Preorder',
-                route: dstructuresUrl+'binary-tree/depth-first-preorder'
-            },
-            DFTpostorder: {
-                name: 'Depth First Traversal Postorder',
-                route: dstructuresUrl+'binary-tree/depth-first-postorder'
-            }
+            BFT: algorithmsRoutes.BFT,
+            DFTInorder: algorithmsRoutes.DFTInorder,
+            DFTIpreorder: algorithmsRoutes.DFTIpreorder,
+            DFTIpostorder: algorithmsRoutes.DFTpostorder
         }
     },
     graphs: { 
         name: 'Graphs', 
         route: dstructuresUrl+'graphs',
         algorithms: {
-            shortestPath: {
-                name: "Dijkstra's Shortest Path",
-                route: dstructuresUrl+'graphs/shortest-path'
-            }
+            shortestPath: algorithmsRoutes.shortestPath
         } 
     },
     linkedList: { 
         name: 'Linked List', 
         route: dstructuresUrl+'linked-list',
         algorithms: {
-            cycleDetection: {
-                name: 'Floyd Cycle Detection',
-                route: dstructuresUrl+'linked-list/cycle-detection'
-            }
+            cycleDetection: algorithmsRoutes.cycleDetection
         }
     },
     hashTables: { 

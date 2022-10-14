@@ -134,5 +134,6 @@ const routesArr = Object.keys(routes).map(key => routes[key])
 export default routes
 export {
     routesArr,
-    dstructuresRoutes
+    dstructuresRoutes,
+    algorithmsRoutes,
 }

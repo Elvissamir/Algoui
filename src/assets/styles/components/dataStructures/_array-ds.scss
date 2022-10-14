@@ -1,0 +1,15 @@
+.array-item-list {
+    display: flex;
+    font-size: 40px;
+    font-weight: bolder;
+    list-style: none;
+
+    .array-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px black solid;
+        height: 50px;
+        width: 50px;
+    }
+}

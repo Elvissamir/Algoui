@@ -1,7 +1,43 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence, useAnimationControls } from 'framer-motion'
+import { useTransition, animated } from "@react-spring/web";
+
+type ArrayOperation = 'add-start' | 'add-end' | 'remove-start' | 'remove-end' | null
 
 const ArrayDS = () => {
     const [dataArray, setDataArray] = useState([1, 2, 3, 4, 5])
+    const [newItem, setNewItem] = useState<number | null>(23)
+    const [operation, setOperation] = useState<ArrayOperation>(null)
+
+    const handleAddToStart = () => {
+        if (newItem) {
+            const ndataArray = [...dataArray]
+            ndataArray.unshift(newItem)
+            setDataArray(ndataArray)
+        }
+
+        setOperation('add-start')
+    }
+
+    const handleAddToEnd = () => {
+        if (newItem) {
+            const ndataArray = [...dataArray]
+            ndataArray.push(newItem)
+            setDataArray(ndataArray)
+        }
+    }
+
+    const handleRemoveFromStart = () => {
+        const ndataArray = [...dataArray]
+        ndataArray.shift()
+        setDataArray(ndataArray)
+    }
+
+    const handleRemoveFromEnd = () => {
+        const ndataArray = [...dataArray]
+        ndataArray.pop()
+        setDataArray(ndataArray)
+    }
 
     return (
         <section className="content-section">
@@ -22,8 +58,8 @@ const ArrayDS = () => {
                             <label htmlFor="number-val">Value of the new item</label>
                             <input className="input-text" id="number-val" type='text'/>
                         </div>
-                        <button type="button">Add First</button>
-                        <button type="button">Add Last</button>
+                        <button onClick={handleAddToStart} type="button">Add First</button>
+                        <button onClick={handleAddToEnd} type="button">Add Last</button>
                     </div>
                     <div className="remove-item-controls">
                         <div className="input-field">
@@ -31,8 +67,8 @@ const ArrayDS = () => {
                             <input className="input-text" id='index-val' type="text" />
                         </div>
                         <button type="button">Remove From</button>
-                        <button type="button">Remove Last</button>
-                        <button type="button">Remove First</button>
+                        <button onClick={handleRemoveFromStart} type="button">Remove Last</button>
+                        <button onClick={handleRemoveFromEnd} type="button">Remove First</button>
                     </div>
                     <div className="sort-items-controls">
                         <button type="button">Sort (increasing)</button>
@@ -68,13 +104,7 @@ const ArrayDS = () => {
                     </div>
                 </div>
                 <div className='section-action'>
-                    <div className='array-container'>
-                        <ul className='array-item-list'>
-                            {dataArray.map((item, index) => 
-                                <li className='array-item' key={index}>{item}</li>
-                            )}
-                        </ul>
-                    </div>
+                    <div className='array-container'></div>
                 </div>
             </div>
             <div className="section-bottom"></div>

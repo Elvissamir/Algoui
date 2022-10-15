@@ -1,15 +1,24 @@
-.array-item-list {
+.array-container {
     display: flex;
-    font-size: 40px;
-    font-weight: bolder;
-    list-style: none;
+    width: 100%;
 
-    .array-item {
+    .array-item-list {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 2px black solid;
+        font-size: 40px;
         height: 50px;
-        width: 50px;
+        font-weight: bolder;
+        list-style: none;
+        width: auto;
+    
+        .array-item {
+            display: flex;
+            box-shadow: 0 0 10px var(--brand-gray);
+            background-color: white;
+            justify-content: center;
+            align-items: center;
+            border: 2px black solid;
+            height: 50px;
+            width: 50px;
+        }
     }
 }

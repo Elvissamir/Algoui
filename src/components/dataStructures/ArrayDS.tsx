@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import { motion, AnimatePresence, Variants, useAnimationControls } from 'framer-motion'
+import { motion, AnimatePresence, Variants, useAnimationControls, Transition } from 'framer-motion'
 
-type ArrayOperation = 'add-start' | 'add-end' | 'remove-start' | 'remove-end' | null
+type ArrayOperation = 'add-start' | 'add-end' | 'remove-start' | 'remove-end' | 'add-to' | 'remove-from' | null
 
 const ArrayDS = () => {
     const [dataArray, setDataArray] = useState([
@@ -9,7 +9,8 @@ const ArrayDS = () => {
         { id: Math.random(), val: 2 },
         { id: Math.random(), val: 3 },
         { id: Math.random(), val: 4 },
-        { id: Math.random(), val: 5 }
+        { id: Math.random(), val: 5 },
+        { id: Math.random(), val: 100 },
     ])
 
     const arrayItemVariants: Variants = {
@@ -30,37 +31,58 @@ const ArrayDS = () => {
         }
     }
 
-    const listVariants = {
-        hidden: { opacity: 0 },
-        show: {
-          opacity: 1,
-          transition:{
-            type: 'spring',
-            staggerChildren: 0.5
-          }
-        }
-      }
-
-    const item = {
-        show: {
-            opacity: 1
-        },
-        hidden: {
-            opacity: 0
-        },
-        new: { 
-            opacity: [0, 1],
-        },
-        removed: {
-            opacity: 0
-        }
-    }
-
     const [operation, setOperation] = useState<ArrayOperation>(null)
     const [nid, setnId] = useState(0)
     const [nindex, setnIndex] = useState(0)
+    
+    // Form Data
+    const [ inputIndex, setInputIndex ] = useState(1)
+    const [ inputItemVal, setInputItemVal ] = useState(100)
 
     const controls = useAnimationControls()
+
+    const addItemToPositionVariants = () => {
+        const color = (index: number) => {
+            return index === nindex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000'
+        }
+
+        const backgroundColor = (index: number): string | string[] => {
+            return index === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : 'transparent'
+        }
+
+        const opacity = (index: number): number | number[] => {
+            return index === nindex? 1 : 1
+        }
+
+        const y = (index: number): number | number[] => {
+            if (index < nindex) return 0
+
+            if (index > nindex) return 0
+
+            return [70, 0]
+        }
+        
+        const x = (index: number): number | number[] => {
+            if (index < nindex) return [-10, 0]
+
+            if (index > nindex) return [10, 0]
+
+            return 0
+        }
+
+        const transition = (index: number): Transition => {
+            return { delay: index === 0? 0.05 : index * 0.025 }
+        }
+
+        return (i: number) => ({
+            color: color(i),
+            backgroundColor: backgroundColor(i),
+            opacity: opacity(i),
+            x: x(i),
+            y: y(i),
+            transition: transition(i),
+        })
+    }
 
     useEffect(() => {
         if (operation === null) {
@@ -73,15 +95,17 @@ const ArrayDS = () => {
 
         if (operation === 'add-start') {
             controls.start(i => ({
-               color: i === 0? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
-               backgroundColor: i === 0? ['#312e81', '#312e81', '#312e81', '#ffff'] : 'transparent',
-               opacity: i === 0? [1, 1, 1, 1] : 1,
-               x: i === 0? [-50, 0] : [5, 0],
-               transition: { delay: i === 0? 0.05 : i * 0.025 },
+               color: i === nindex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
+               backgroundColor: i === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : 'transparent',
+               opacity: i === nindex? [1, 1, 1, 1] : 1,
+               x: i === nindex? [-50, 0] : [5, 0],
+               transition: { delay: i === nindex? 0.05 : i * 0.025 },
             }))
         }
 
-        if (operation === 'remove-start') controls.start('hidden')
+        if (operation === 'add-to') {
+            controls.start(addItemToPositionVariants())
+        }
     }, [ dataArray ])
 
     const handleAddToStart = () => {
@@ -93,8 +117,19 @@ const ArrayDS = () => {
 
         ndataArray.unshift({ id: Math.random(), val: nid})
         setDataArray(ndataArray)
-
         setOperation('add-start')
+    }
+
+    const handleAddToPosition = () => {
+        const ndataArray = [...dataArray]
+        const nid = Math.floor(Math.random() * 10)
+
+        setnId(nid)
+        setnIndex(inputIndex)
+        
+        ndataArray.splice(inputIndex, 0, { id: Math.random(), val: nid})
+        setDataArray(ndataArray)
+        setOperation('add-to')
     }
 
     const handleAddToEnd = () => {
@@ -109,12 +144,16 @@ const ArrayDS = () => {
         const ndataArray = [...dataArray]
         ndataArray.shift()
         setDataArray(ndataArray)
+
+        setOperation('remove-start')
     }
 
     const handleRemoveFromEnd = () => {
         const ndataArray = [...dataArray]
         ndataArray.pop()
         setDataArray(ndataArray)
+
+        setOperation('remove-end')
     }
 
     return (
@@ -138,6 +177,7 @@ const ArrayDS = () => {
                         </div>
                         <button onClick={handleAddToStart} type="button">Add First</button>
                         <button onClick={handleAddToEnd} type="button">Add Last</button>
+                        <button onClick={handleAddToPosition} type="button">Add To</button>
                     </div>
                     <div className="remove-item-controls">
                         <div className="input-field">

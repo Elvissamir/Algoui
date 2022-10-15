@@ -90,7 +90,7 @@ const ArrayDS = () => {
                 opacity: [0, 1],
                 x: [-50, 0],
                 transition: { delay: i * 0.5 },
-             }))
+            }))
         }
 
         if (operation === 'add-start') {
@@ -98,13 +98,21 @@ const ArrayDS = () => {
                color: i === nindex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
                backgroundColor: i === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : 'transparent',
                opacity: i === nindex? [1, 1, 1, 1] : 1,
-               x: i === nindex? [-50, 0] : [5, 0],
+               x: i === nindex? [-50, 0] : [10, 0],
                transition: { delay: i === nindex? 0.05 : i * 0.025 },
             }))
         }
 
-        if (operation === 'add-to') {
-            controls.start(addItemToPositionVariants())
+        if (operation === 'add-to') controls.start(addItemToPositionVariants())
+
+        if (operation === 'add-end') {
+            controls.start(i => ({
+                color: i === nindex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
+                backgroundColor: i === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : 'transparent',
+                opacity: i === nindex? [0, 1] : 1,
+                x: i === nindex? [50, 50,  0] : [-25, 0],
+                transition: { delay: i === nindex? 0.05 : i * 0.025, repeatType: 'reverse' },
+            }))
         }
     }, [ dataArray ])
 
@@ -134,7 +142,12 @@ const ArrayDS = () => {
 
     const handleAddToEnd = () => {
         const ndataArray = [...dataArray]
-        ndataArray.push({ id: Math.random(), val: Math.floor(Math.random() * 10) })
+        const nid = Math.floor(Math.random() * 10)
+
+        setnId(nid)
+        setnIndex(ndataArray.length)
+
+        ndataArray.push({ id: Math.random(), val: nid})
         setDataArray(ndataArray)
 
         setOperation('add-end')

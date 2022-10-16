@@ -7,14 +7,12 @@ interface MobileMenuProps {
 
 const MobileMenu = ({ showMenu }: MobileMenuProps) => {
     return (
-        <div className={showMenu? "mobile-menu-container open" : 'mobile-menu-container'}>
-            <div className="mobile-menu"> 
-                <div className="top">
-                    <Logo />
-                </div>
-                <div className="nav-list-container">
-                    <NavList />
-                </div>
+        <div className="mobile-menu"> 
+            <div className="top">
+                <Logo />
+            </div>
+            <div className="nav-list-container">
+                <NavList />
             </div>
         </div>
     )

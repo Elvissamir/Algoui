@@ -1,11 +1,7 @@
 import Logo from "../components/Logo"
 import NavList from "../components/NavList"
 
-interface MobileMenuProps {
-    showMenu: boolean
-}
-
-const MobileMenu = ({ showMenu }: MobileMenuProps) => {
+const MobileMenu = () => {
     return (
         <div className="mobile-menu"> 
             <div className="top">

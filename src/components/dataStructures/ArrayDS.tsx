@@ -33,7 +33,7 @@ const ArrayDS = () => {
 
     const [operation, setOperation] = useState<ArrayOperation>(null)
     const [nid, setnId] = useState(0)
-    const [nindex, setnIndex] = useState(0)
+    const [nindex, setnIndex] = useState(1)
     
     // Form Data
     const [ inputIndex, setInputIndex ] = useState(1)
@@ -99,6 +99,38 @@ const ArrayDS = () => {
         })
     }
 
+    const removeItemFromPositionVariants = () => {
+        const color = (index: number) => {
+            return index === nindex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000'
+        }
+
+        const backgroundColor = (index: number): string | string[] => {
+            return index === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff'
+        }
+
+        const opacity = (index: number): number | number[] => {
+            return index === nindex? [1, 1, 0, 1, 0] : 1
+        }
+
+        const y = (index: number): number | number[] => {
+            if (index === nindex) return [0, 70]
+
+            else return 0
+        }
+
+        const transition = (index: number): Transition => {
+            return { delay: index === nindex? 0.05 : index * 0.025 }
+        }
+
+        return (i: number) => ({
+            color: color(i),
+            backgroundColor: backgroundColor(i),
+            opacity: opacity(i),
+            y: y(i),
+            transition: transition(i),
+        })
+    }
+
     useEffect(() => {
         if (operation === null) {
             controls.start(i => ({
@@ -114,7 +146,7 @@ const ArrayDS = () => {
                backgroundColor: i === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
                opacity: i === nindex? [0, 1, 1, 1] : 1,
                x: i === nindex? [-50, 0] : [10, 0],
-               transition: { delay: i === nindex? 0.05 : i * 0.025 },
+               transition: { delay: i === nindex? 0.05 : i * 0.025, bounce: 0 },
             }))
         }
 
@@ -210,6 +242,20 @@ const ArrayDS = () => {
         setDataArray(ndataArray)
     }
 
+    const handleRemoveFromPosition = async () => {
+        await controls.start(removeItemFromPositionVariants())
+
+        setOperation('remove-from')
+        handleRemoveFromPositionAction()
+    }
+
+    const handleRemoveFromPositionAction = () => {
+        const ndataArray = [...dataArray]
+        ndataArray.splice(inputIndex, 1)
+
+        setDataArray(ndataArray)
+    }
+
     return (
         <section className="content-section">
             <div className="section-top">
@@ -238,7 +284,7 @@ const ArrayDS = () => {
                             <label htmlFor="index-val">Value of the index</label>
                             <input className="input-text" id='index-val' type="text" />
                         </div>
-                        <button type="button">Remove From</button>
+                        <button onClick={handleRemoveFromPosition} type="button">Remove From</button>
                         <button onClick={handleRemoveFromStart} type="button">Remove First</button>
                         <button onClick={handleRemoveFromEnd} type="button">Remove Last</button>
                     </div>

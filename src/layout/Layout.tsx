@@ -27,7 +27,7 @@ const Layout = () => {
                             exit={{ translateX: '-100%' }}
                             transition={{ duration: 0.5, bounce: 0 }}
                             className="mobile-menu-container">
-                                <MobileMenu showMenu={showMenu} /> 
+                                <MobileMenu /> 
                         </motion.div>}
                 </AnimatePresence>}
             { windowSize.width < 1024 && <Mobilebar showMenu={showMenu} toggleMenu={handleToggleMenu} />}

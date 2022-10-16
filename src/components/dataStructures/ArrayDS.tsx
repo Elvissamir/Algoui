@@ -1,11 +1,11 @@
 import { useEffect, useState, ChangeEvent } from 'react'
-import { motion, AnimatePresence, Variants, useAnimationControls, Transition, Reorder, useCycle } from 'framer-motion'
+import { motion, AnimatePresence, Variants, useAnimationControls, Transition } from 'framer-motion'
 
 type ArrayOperation = 
     'add-start' | 'add-end' | 'add-to' |
     'remove-start' | 'remove-end' | 'remove-from' |
     'sort-increasing' | 'sort-decreasing' | 
-    'multipy' | 'multiply-finished' | 'filter' | null
+    'multipy' | 'filter' | null
 
 const ArrayDS = () => {
 
@@ -46,9 +46,9 @@ const ArrayDS = () => {
     const [ inputIndex, setInputIndex ] = useState(1)
     const [ inputItemVal, setInputItemVal ] = useState(100)
     const [ factorVal, setFactorVal ] = useState(2)
-    const [ lowVal, setLowVal ] = useState(0)
+    const [ lowVal, setLowVal ] = useState(5)
     const [ highVal, setHighVal ] = useState(5)
-    const [ multiplyIndex, setMultiplyIndex ] = useState(0)
+    const [ actionIndex, setActionIndex ] = useState(0)
 
     const controls = useAnimationControls()
 
@@ -135,24 +135,52 @@ const ArrayDS = () => {
 
     const multiplyByItemVariants = () => {
         return (i: number) => ({
-            opacity: i === multiplyIndex ? 1 : 1,
-            backgroundColor: i === multiplyIndex? ['#312e81', '#fff'] : '#fff',
-            color: i === multiplyIndex? [ '#fff', '#000000'] : '#000000',
+            opacity: i === actionIndex ? 1 : 1,
+            backgroundColor: i === actionIndex? ['#312e81', '#fff'] : '#fff',
+            color: i === actionIndex? [ '#fff', '#000000'] : '#000000',
             transition: { duration: 0.2 }
         })
     }
 
+    const filterItemVariants = () => {
+        return (i: number) => ({
+            opacity: i === actionIndex ? 1 : 1,
+            backgroundColor: i === actionIndex? ['#312e81', '#fff'] : '#fff',
+            color: i === actionIndex? [ '#fff', '#000000'] : '#000000',
+            transition: { duration: 0.2 }
+        })
+    }    
+
     const multiplyAction = async () => {
         const ndataArray = [...dataArray]
 
-        ndataArray[multiplyIndex].val = ndataArray[multiplyIndex].val * factorVal
+        ndataArray[actionIndex].val = ndataArray[actionIndex].val * factorVal
         
         await controls.start(multiplyByItemVariants())
 
-        setMultiplyIndex(multiplyIndex + 1)
-        setOperation('multipy')
+        setActionIndex(actionIndex + 1)
 
         return setDataArray(ndataArray)
+    }
+
+    const filterItemsAction = async () => {
+        const ndataArray = [...dataArray]
+
+        if (dataArray[actionIndex].val > highVal || dataArray[actionIndex].val < lowVal) {
+            const ndataArray = [...dataArray]
+            ndataArray.splice(actionIndex, 1)
+
+            await controls.start(filterItemVariants())
+            console.log('action delete', actionIndex)
+
+            return setDataArray(ndataArray)
+        }
+
+        await controls.start(filterItemVariants())
+
+        console.log('action no delete', actionIndex + 1)
+        setActionIndex(actionIndex + 1)
+        setDataArray(ndataArray)
     }
 
     useEffect(() => {
@@ -187,7 +215,7 @@ const ArrayDS = () => {
         }
 
         if (operation === 'multipy') {
-            if (multiplyIndex < dataArray.length) {
+            if (actionIndex < dataArray.length) {
                 const timer = setInterval(() => {
                     multiplyAction()
                 }, 650)
@@ -195,10 +223,22 @@ const ArrayDS = () => {
                 return () => clearInterval(timer)
             }
 
-            setMultiplyIndex(0)
-            setOperation('multiply-finished')
+            setActionIndex(0)
+            setExecutingOperation(false)
         }
 
+        if (operation === 'filter') {
+            if (actionIndex < dataArray.length) {
+                const timer = setInterval(() => {
+                    filterItemsAction()
+                }, 650)
+
+                return () => clearInterval(timer)
+            }
+
+            setActionIndex(0)
+            setExecutingOperation(false)
+        }
     }, [ dataArray ])
 
     const handleAddToStart = () => {
@@ -301,10 +341,14 @@ const ArrayDS = () => {
 
     const multiplyByFactor = async () => {
         multiplyAction()
+
+        setOperation('multipy')
+        setExecutingOperation(true)
     }
 
     const filterItems = async () => {
-       
+        filterItemsAction()
+        setOperation('filter')
     }
 
     const sortIncreasing = () => {

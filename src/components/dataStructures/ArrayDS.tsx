@@ -41,13 +41,28 @@ const ArrayDS = () => {
 
     const controls = useAnimationControls()
 
+    const createRange = (start: number, end: number) => {
+        const range = []
+
+        if (start < end) {
+            for (let i = start; i <= end; i++)
+                range.push(i)
+        }
+        else {
+            for (let i = start; i >= end; i--)
+            range.push(i)
+        }
+
+        return range
+    }
+
     const addItemToPositionVariants = () => {
         const color = (index: number) => {
             return index === nindex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000'
         }
 
         const backgroundColor = (index: number): string | string[] => {
-            return index === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : 'transparent'
+            return index === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff'
         }
 
         const opacity = (index: number): number | number[] => {
@@ -96,8 +111,8 @@ const ArrayDS = () => {
         if (operation === 'add-start') {
             controls.start(i => ({
                color: i === nindex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
-               backgroundColor: i === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : 'transparent',
-               opacity: i === nindex? [1, 1, 1, 1] : 1,
+               backgroundColor: i === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
+               opacity: i === nindex? [0, 1, 1, 1] : 1,
                x: i === nindex? [-50, 0] : [10, 0],
                transition: { delay: i === nindex? 0.05 : i * 0.025 },
             }))
@@ -108,10 +123,17 @@ const ArrayDS = () => {
         if (operation === 'add-end') {
             controls.start(i => ({
                 color: i === nindex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
-                backgroundColor: i === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : 'transparent',
+                backgroundColor: i === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
                 opacity: i === nindex? [0, 1] : 1,
                 x: i === nindex? [50, 50,  0] : [-25, 0],
                 transition: { delay: i === nindex? 0.05 : i * 0.025, repeatType: 'reverse' },
+            }))
+        }
+
+        if (operation === 'remove-start') {
+            controls.start(i => ({
+                x: createRange(25, 0),
+                transition: { delay: i === 0? 0.05 : i * 0.025 },
             }))
         }
     }, [ dataArray ])
@@ -153,13 +175,26 @@ const ArrayDS = () => {
         setOperation('add-end')
     }
 
-    const handleRemoveFromStart = () => {
+    const handleRemoveFromStart = async () => {
+        await controls.start(i => ({
+            color: i === 0? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
+            backgroundColor: i === 0? '#312e81' : '#ffff',
+            opacity: i === 0? [1,0,1,0] : 1,
+            x: i === 0? -50 : 25,
+            transition: { delay: i === 0? 0.05 : i * 0.025, type: 'spring' },
+        }))
+
+        setOperation('remove-start')
+        handleRemoveFromStartAction()
+    }
+
+    const handleRemoveFromStartAction = () => {
         const ndataArray = [...dataArray]
         ndataArray.shift()
         setDataArray(ndataArray)
 
-        setOperation('remove-start')
-    }
+        setnIndex(0)
+    }   
 
     const handleRemoveFromEnd = () => {
         const ndataArray = [...dataArray]

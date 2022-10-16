@@ -1,17 +1,22 @@
 import { useEffect, useState, ChangeEvent } from 'react'
-import { motion, AnimatePresence, Variants, useAnimationControls, Transition, Reorder } from 'framer-motion'
-import { isTemplateExpression } from 'typescript'
+import { motion, AnimatePresence, Variants, useAnimationControls, Transition, Reorder, useCycle } from 'framer-motion'
 
-type ArrayOperation = 'add-start' | 'add-end' | 'remove-start' | 'remove-end' | 'add-to' | 'remove-from' | null
+type ArrayOperation = 
+    'add-start' | 'add-end' | 'add-to' |
+    'remove-start' | 'remove-end' | 'remove-from' |
+    'sort-increasing' | 'sort-decreasing' | 
+    'multipy' | 'filter' | null
 
 const ArrayDS = () => {
+
     const [dataArray, setDataArray] = useState([
+        { id: Math.random(), val: 7 },
         { id: Math.random(), val: 1 },
         { id: Math.random(), val: 2 },
         { id: Math.random(), val: 3 },
         { id: Math.random(), val: 4 },
         { id: Math.random(), val: 5 },
-        { id: Math.random(), val: 100 },
+        { id: Math.random(), val: 6 },
     ])
 
     const arrayItemVariants: Variants = {
@@ -80,14 +85,6 @@ const ArrayDS = () => {
 
             return [70, 0]
         }
-        
-        const x = (index: number): number | number[] => {
-            if (index < nindex) return [-10, 0]
-
-            if (index > nindex) return [10, 0]
-
-            return 0
-        }
 
         const transition = (index: number): Transition => {
             return { delay: index === 0? 0.05 : index * 0.025 }
@@ -97,7 +94,6 @@ const ArrayDS = () => {
             color: color(i),
             backgroundColor: backgroundColor(i),
             opacity: opacity(i),
-            x: x(i),
             y: y(i),
             transition: transition(i),
         })
@@ -149,7 +145,7 @@ const ArrayDS = () => {
                color: i === nindex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
                backgroundColor: i === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
                opacity: i === nindex? [0, 1, 1, 1] : 1,
-               x: i === nindex? [-50, 0] : [10, 0],
+               x: i === nindex? [-50, 0] : 0,
                transition: { delay: i === nindex? 0.05 : i * 0.025, bounce: 0 },
             }))
         }
@@ -398,6 +394,8 @@ const ArrayDS = () => {
                                     <motion.li 
                                         className='array-item' 
                                         variants={arrayItemVariants}
+                                        layout
+                                        transition={{ type: "spring", stiffness: 350, damping: 25 }}
                                         animate={controls}
                                         custom={index}
                                         key={item.id}>

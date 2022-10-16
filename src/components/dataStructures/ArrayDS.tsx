@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
-import { motion, AnimatePresence, Variants, useAnimationControls, Transition } from 'framer-motion'
+import { useEffect, useState, ChangeEvent } from 'react'
+import { motion, AnimatePresence, Variants, useAnimationControls, Transition, Reorder } from 'framer-motion'
+import { isTemplateExpression } from 'typescript'
 
 type ArrayOperation = 'add-start' | 'add-end' | 'remove-start' | 'remove-end' | 'add-to' | 'remove-from' | null
 
@@ -38,6 +39,9 @@ const ArrayDS = () => {
     // Form Data
     const [ inputIndex, setInputIndex ] = useState(1)
     const [ inputItemVal, setInputItemVal ] = useState(100)
+    const [ factorVal, setFactorVal ] = useState(2)
+    const [ lowVal, setLowVal ] = useState(0)
+    const [ highVal, setHighVal ] = useState(5)
 
     const controls = useAnimationControls()
 
@@ -256,6 +260,38 @@ const ArrayDS = () => {
         setDataArray(ndataArray)
     }
 
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.id === 'item-val') setInputItemVal(parseInt(e.target.value))
+
+        if (e.target.id === 'item-position') setInputIndex(parseInt(e.target.value))
+    }
+
+    const multiplyByFactor = () => {
+        const ndataArray = dataArray.map(item => { 
+            return { id: item.id, val: item.val * factorVal}
+        })
+
+        setDataArray(ndataArray)
+    }
+
+    const filterItems = () => {
+
+    }
+
+    const sortIncreasing = () => {
+        const ndataArray = [...dataArray]
+        ndataArray.sort((a, b) => a.val - b.val)
+
+        setDataArray(ndataArray)
+    }
+
+    const sortDecreasing = () => {
+        const ndataArray = [...dataArray]
+        ndataArray.sort((a, b) => b.val - a.val)
+
+        setDataArray(ndataArray)
+    }
+
     return (
         <section className="content-section">
             <div className="section-top">
@@ -272,69 +308,102 @@ const ArrayDS = () => {
                 <div className="section-controls">
                     <div className="add-item-controls">
                         <div className="input-field">
-                            <label htmlFor="number-val">Value of the new item</label>
-                            <input className="input-text" id="number-val" type='text'/>
+                            <label htmlFor="item-val">Value: </label>
+                            <input 
+                                onChange={handleInputChange}
+                                className="input-text" 
+                                id="item-val" 
+                                value={inputItemVal} 
+                                type='text'/>
+                        </div>
+                        <div className="input-field">
+                            <label htmlFor="item-position">Position: </label>
+                            <input 
+                                onChange={handleInputChange}
+                                className="input-text" 
+                                id="item-position" 
+                                value={inputIndex} 
+                                type='text'/>
                         </div>
                         <button onClick={handleAddToStart} type="button">Add First</button>
                         <button onClick={handleAddToEnd} type="button">Add Last</button>
                         <button onClick={handleAddToPosition} type="button">Add To</button>
                     </div>
                     <div className="remove-item-controls">
-                        <div className="input-field">
-                            <label htmlFor="index-val">Value of the index</label>
-                            <input className="input-text" id='index-val' type="text" />
-                        </div>
                         <button onClick={handleRemoveFromPosition} type="button">Remove From</button>
                         <button onClick={handleRemoveFromStart} type="button">Remove First</button>
                         <button onClick={handleRemoveFromEnd} type="button">Remove Last</button>
                     </div>
                     <div className="sort-items-controls">
-                        <button type="button">Sort (increasing)</button>
-                        <button type="button">Sort (decreasing)</button>
+                        <button onClick={sortIncreasing} type="button">Sort (increasing)</button>
+                        <button onClick={sortDecreasing} type="button">Sort (decreasing)</button>
                     </div>
                     <div className="create-new-array-controls">
                         <div className="input-field">
-                            <label htmlFor="multiple-val">Value to add</label>
-                            <input className="input-text" id="multiple-val" type="text" />
+                            <label htmlFor="factor-val">Multiply by: </label>
+                            <input 
+                                onChange={handleInputChange}
+                                className="input-text" 
+                                id="factor-val" 
+                                type="text" 
+                                value={factorVal} />
                         </div>
-                        <button type="button">Multiply all items</button>
+                        <button onClick={multiplyByFactor} type="button">Multiply</button>
                     </div>
                     <div className="filter-array-controls">
                         <div className="lower-input-container">
                             <div className="input-field">
-                                <label htmlFor="low-val">Lower than: </label>
+                                <label htmlFor="low-val">Filter lower than:</label>
                                 <div className="input-pack-container">
-                                    <input className="input-text" id="low-val" type="text" />
-                                    <input className="input-check" type="checkbox" name="" id="low-check" />
+                                    <input 
+                                        onChange={handleInputChange}
+                                        className="input-text" 
+                                        id="low-val" 
+                                        type="text"
+                                        value={lowVal} />
+                                    <input 
+                                        className="input-check" 
+                                        type="checkbox" 
+                                        name="low-val" 
+                                        id="low-check" />
                                 </div>
                             </div>
                         </div>
                         <div className="higher-input-container">
                             <div className="input-field">
-                                <label htmlFor="high-val">Higher than: </label>
+                                <label htmlFor="high-val">Filter higher than:</label>
                                 <div className="input-pack-container">
-                                    <input className="input-text" id="high-val" type="text" />
-                                    <input className="input-check" type="checkbox" name="" id="high-check" />
+                                    <input 
+                                        onChange={handleInputChange}
+                                        className="input-text" 
+                                        id="high-val" 
+                                        type="text"
+                                        value={highVal} />
+                                    <input 
+                                        className="input-check" 
+                                        type="checkbox" 
+                                        name="high-val" 
+                                        id="high-check" />
                                 </div>
                             </div>
                         </div>
-                        <button type="button">Filter items</button>
+                        <button onClick={filterItems} type="button">Filter items</button>
                     </div>
                 </div>
                 <div className='section-action'>
                     <div className='array-container'>
                         <ul className='array-item-list'>
-                            <AnimatePresence>     
+                            <AnimatePresence> 
                                 {dataArray.map((item, index) => 
-                                        <motion.li 
-                                            className='array-item' 
-                                            variants={arrayItemVariants}
-                                            animate={controls}
-                                            custom={index}
-                                            key={item.id}>
-                                                {item.val}
-                                        </motion.li> 
-                                    )}
+                                    <motion.li 
+                                        className='array-item' 
+                                        variants={arrayItemVariants}
+                                        animate={controls}
+                                        custom={index}
+                                        key={item.id}>
+                                            {item.val}
+                                    </motion.li> 
+                                )}  
                             </AnimatePresence>
                         </ul>
                     </div>

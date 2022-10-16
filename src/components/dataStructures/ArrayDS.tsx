@@ -125,14 +125,11 @@ const ArrayDS = () => {
                 color: i === nindex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
                 backgroundColor: i === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
                 opacity: i === nindex? [0, 1] : 1,
-                x: i === nindex? [50, 50,  0] : [-25, 0],
+                x: i === nindex? [50, 50,  0] : 0,
                 transition: { delay: i === nindex? 0.05 : i * 0.025, repeatType: 'reverse' },
             }))
         }
 
-        if (operation === 'remove-start') {
-           
-        }
     }, [ dataArray ])
 
     const handleAddToStart = () => {
@@ -189,17 +186,28 @@ const ArrayDS = () => {
     const handleRemoveFromStartAction = () => {
         const ndataArray = [...dataArray]
         ndataArray.shift()
-        setDataArray(ndataArray)
 
-        setnIndex(0)
+        setDataArray(ndataArray)
     }   
 
-    const handleRemoveFromEnd = () => {
-        const ndataArray = [...dataArray]
-        ndataArray.pop()
-        setDataArray(ndataArray)
+    const handleRemoveFromEnd = async () => {
+        await controls.start(i => ({
+            color: i === dataArray.length - 1? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
+            backgroundColor: i === dataArray.length - 1? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
+            opacity: i === dataArray.length - 1? [0, 1, 0, 1] : 1,
+            x: i === dataArray.length - 1? 50 : 0,
+            transition: { delay: i === dataArray.length - 1? 0.05 : i * 0.025 },
+        }))
 
         setOperation('remove-end')
+        handleRemoveFromEndAction()
+    }
+
+    const handleRemoveFromEndAction = () => {
+        const ndataArray = [...dataArray]
+        ndataArray.pop()
+
+        setDataArray(ndataArray)
     }
 
     return (

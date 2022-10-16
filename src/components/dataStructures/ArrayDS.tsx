@@ -131,10 +131,7 @@ const ArrayDS = () => {
         }
 
         if (operation === 'remove-start') {
-            controls.start(i => ({
-                x: createRange(25, 0),
-                transition: { delay: i === 0? 0.05 : i * 0.025 },
-            }))
+           
         }
     }, [ dataArray ])
 
@@ -180,8 +177,9 @@ const ArrayDS = () => {
             color: i === 0? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
             backgroundColor: i === 0? '#312e81' : '#ffff',
             opacity: i === 0? [1,0,1,0] : 1,
-            x: i === 0? -50 : 25,
-            transition: { delay: i === 0? 0.05 : i * 0.025, type: 'spring' },
+            position: i === 0? 'absolute' : 'static',
+            x: i === 0? -50 : 0,
+            transition: { delay: i === 0? 0.05 : i * 0.025 },
         }))
 
         setOperation('remove-start')

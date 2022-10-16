@@ -1,5 +1,6 @@
 import { useEffect, useState, ChangeEvent } from 'react'
 import { motion, AnimatePresence, Variants, useAnimationControls, Transition } from 'framer-motion'
+import { act } from '@testing-library/react'
 
 type ArrayOperation = 
     'add-start' | 'add-end' | 'add-to' |
@@ -39,33 +40,20 @@ const ArrayDS = () => {
 
     const [operation, setOperation] = useState<ArrayOperation>(null)
     const [executingOperation, setExecutingOperation] = useState(false)
-    const [nid, setnId] = useState(0)
     const [nindex, setnIndex] = useState(1)
+    const [ actionIndex, setActionIndex ] = useState(0)
+    const [ factorVal, setFactorVal ] = useState(2)
+    const [ lowVal, setLowVal ] = useState(0)
+    const [ highVal, setHighVal ] = useState(5)
     
     // Form Data
-    const [ inputIndex, setInputIndex ] = useState(1)
-    const [ inputItemVal, setInputItemVal ] = useState(100)
-    const [ factorVal, setFactorVal ] = useState(2)
-    const [ lowVal, setLowVal ] = useState(5)
-    const [ highVal, setHighVal ] = useState(5)
-    const [ actionIndex, setActionIndex ] = useState(0)
+    const [ inputIndex, setInputIndex ] = useState('')
+    const [ inputItemVal, setInputItemVal ] = useState('')
+    const [ factorValInput, setFactorValInput ] = useState('')
+    const [ lowValInput, setLowValInput ] = useState('')
+    const [ highValInput, setHighValInput ] = useState('')
 
     const controls = useAnimationControls()
-
-    const createRange = (start: number, end: number) => {
-        const range = []
-
-        if (start < end) {
-            for (let i = start; i <= end; i++)
-                range.push(i)
-        }
-        else {
-            for (let i = start; i >= end; i--)
-            range.push(i)
-        }
-
-        return range
-    }
 
     const addItemToPositionVariants = () => {
         const color = (index: number) => {
@@ -245,7 +233,6 @@ const ArrayDS = () => {
         const ndataArray = [...dataArray]
         const nid = Math.floor(Math.random() * 10)
     
-        setnId(nid)
         setnIndex(0)
 
         ndataArray.unshift({ id: Math.random(), val: nid})
@@ -257,10 +244,9 @@ const ArrayDS = () => {
         const ndataArray = [...dataArray]
         const nid = Math.floor(Math.random() * 10)
 
-        setnId(nid)
-        setnIndex(inputIndex)
+        setnIndex(actionIndex)
         
-        ndataArray.splice(inputIndex, 0, { id: Math.random(), val: nid})
+        ndataArray.splice(actionIndex, 0, { id: Math.random(), val: nid})
         setDataArray(ndataArray)
         setOperation('add-to')
     }
@@ -269,7 +255,6 @@ const ArrayDS = () => {
         const ndataArray = [...dataArray]
         const nid = Math.floor(Math.random() * 10)
 
-        setnId(nid)
         setnIndex(ndataArray.length)
 
         ndataArray.push({ id: Math.random(), val: nid})
@@ -328,15 +313,9 @@ const ArrayDS = () => {
 
     const handleRemoveFromPositionAction = () => {
         const ndataArray = [...dataArray]
-        ndataArray.splice(inputIndex, 1)
+        ndataArray.splice(actionIndex, 1)
 
         setDataArray(ndataArray)
-    }
-
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.id === 'item-val') setInputItemVal(parseInt(e.target.value))
-
-        if (e.target.id === 'item-position') setInputIndex(parseInt(e.target.value))
     }
 
     const multiplyByFactor = async () => {
@@ -367,6 +346,12 @@ const ArrayDS = () => {
         setOperation('sort-decreasing')
     }
 
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.id === 'item-val') setInputItemVal(e.target.value)
+
+        if (e.target.id === 'item-position') setInputIndex(e.target.value)
+    }
+
     return (
         <section className="content-section">
             <div className="section-top">
@@ -389,7 +374,7 @@ const ArrayDS = () => {
                                 className="input-text" 
                                 id="item-val" 
                                 value={inputItemVal} 
-                                type='text'/>
+                                type='number' />
                         </div>
                         <div className="input-field">
                             <label htmlFor="item-position">Position: </label>

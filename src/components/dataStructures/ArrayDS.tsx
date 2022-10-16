@@ -5,7 +5,7 @@ type ArrayOperation =
     'add-start' | 'add-end' | 'add-to' |
     'remove-start' | 'remove-end' | 'remove-from' |
     'sort-increasing' | 'sort-decreasing' | 
-    'multipy' | 'filter' | null
+    'multipy' | 'multiply-finished' | 'filter' | null
 
 const ArrayDS = () => {
 
@@ -38,6 +38,7 @@ const ArrayDS = () => {
     }
 
     const [operation, setOperation] = useState<ArrayOperation>(null)
+    const [executingOperation, setExecutingOperation] = useState(false)
     const [nid, setnId] = useState(0)
     const [nindex, setnIndex] = useState(1)
     
@@ -47,6 +48,7 @@ const ArrayDS = () => {
     const [ factorVal, setFactorVal ] = useState(2)
     const [ lowVal, setLowVal ] = useState(0)
     const [ highVal, setHighVal ] = useState(5)
+    const [ multiplyIndex, setMultiplyIndex ] = useState(0)
 
     const controls = useAnimationControls()
 
@@ -131,6 +133,28 @@ const ArrayDS = () => {
         })
     }
 
+    const multiplyByItemVariants = () => {
+        return (i: number) => ({
+            opacity: i === multiplyIndex ? 1 : 1,
+            backgroundColor: i === multiplyIndex? ['#312e81', '#fff'] : '#fff',
+            color: i === multiplyIndex? [ '#fff', '#000000'] : '#000000',
+            transition: { duration: 0.2 }
+        })
+    }
+
+    const multiplyAction = async () => {
+        const ndataArray = [...dataArray]
+
+        ndataArray[multiplyIndex].val = ndataArray[multiplyIndex].val * factorVal
+        
+        await controls.start(multiplyByItemVariants())
+
+        setMultiplyIndex(multiplyIndex + 1)
+        setOperation('multipy')
+
+        return setDataArray(ndataArray)
+    }
+
     useEffect(() => {
         if (operation === null) {
             controls.start(i => ({
@@ -160,6 +184,19 @@ const ArrayDS = () => {
                 x: i === nindex? [50, 50,  0] : 0,
                 transition: { delay: i === nindex? 0.05 : i * 0.025, repeatType: 'reverse' },
             }))
+        }
+
+        if (operation === 'multipy') {
+            if (multiplyIndex < dataArray.length) {
+                const timer = setInterval(() => {
+                    multiplyAction()
+                }, 650)
+
+                return () => clearInterval(timer)
+            }
+
+            setMultiplyIndex(0)
+            setOperation('multiply-finished')
         }
 
     }, [ dataArray ])
@@ -262,16 +299,12 @@ const ArrayDS = () => {
         if (e.target.id === 'item-position') setInputIndex(parseInt(e.target.value))
     }
 
-    const multiplyByFactor = () => {
-        const ndataArray = dataArray.map(item => { 
-            return { id: item.id, val: item.val * factorVal}
-        })
-
-        setDataArray(ndataArray)
+    const multiplyByFactor = async () => {
+        multiplyAction()
     }
 
-    const filterItems = () => {
-
+    const filterItems = async () => {
+       
     }
 
     const sortIncreasing = () => {
@@ -279,6 +312,7 @@ const ArrayDS = () => {
         ndataArray.sort((a, b) => a.val - b.val)
 
         setDataArray(ndataArray)
+        setOperation('sort-increasing')
     }
 
     const sortDecreasing = () => {
@@ -286,6 +320,7 @@ const ArrayDS = () => {
         ndataArray.sort((a, b) => b.val - a.val)
 
         setDataArray(ndataArray)
+        setOperation('sort-decreasing')
     }
 
     return (

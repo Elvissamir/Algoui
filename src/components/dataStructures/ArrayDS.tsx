@@ -245,6 +245,10 @@ const ArrayDS = () => {
     }
 
     const handleAddToPosition = () => {
+        if (actionIndex === 0) return handleAddToStart()
+        
+        if (actionIndex >= dataArray.length - 1) return handleAddToEnd()
+
         const ndataArray = [...dataArray]
 
         setActionIndex(actionIndex)

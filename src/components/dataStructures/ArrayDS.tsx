@@ -236,33 +236,30 @@ const ArrayDS = () => {
 
     const handleAddToStart = () => {
         const ndataArray = [...dataArray]
-        const nid = Math.floor(Math.random() * 10)
     
         setActionIndex(0)
 
-        ndataArray.unshift({ id: Math.random(), val: nid})
+        ndataArray.unshift({ id: Math.random(), val: nval})
         setDataArray(ndataArray)
         setOperation('add-start')
     }
 
     const handleAddToPosition = () => {
         const ndataArray = [...dataArray]
-        const nid = Math.floor(Math.random() * 10)
 
         setActionIndex(actionIndex)
         
-        ndataArray.splice(actionIndex, 0, { id: Math.random(), val: nid})
+        ndataArray.splice(actionIndex, 0, { id: Math.random(), val: nval})
         setDataArray(ndataArray)
         setOperation('add-to')
     }
 
     const handleAddToEnd = () => {
         const ndataArray = [...dataArray]
-        const nid = Math.floor(Math.random() * 10)
 
         setActionIndex(ndataArray.length)
 
-        ndataArray.push({ id: Math.random(), val: nid})
+        ndataArray.push({ id: Math.random(), val: nval})
         setDataArray(ndataArray)
 
         setOperation('add-end')

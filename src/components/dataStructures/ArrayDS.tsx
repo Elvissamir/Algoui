@@ -50,12 +50,12 @@ const ArrayDS = () => {
     const [ highVal, setHighVal ] = useState(5)
     
     // Form Data
-    const [ inputIndex, setInputIndex ] = useState('')
-    const [ inputItemVal, setInputItemVal ] = useState('')
-    const [ factorValInput, setFactorValInput ] = useState('')
-    const [ lowValInput, setLowValInput ] = useState('')
+    const [ inputIndex, setInputIndex ] = useState('0')
+    const [ inputItemVal, setInputItemVal ] = useState('0')
+    const [ factorValInput, setFactorValInput ] = useState('2')
+    const [ lowValInput, setLowValInput ] = useState('0')
     const [ includeLow, setIncludeLow ] = useState(true)
-    const [ highValInput, setHighValInput ] = useState('')
+    const [ highValInput, setHighValInput ] = useState('5')
     const [ includeHigh, setIncludeHigh ] = useState(true)
     const [ errors, setErrors ] = useState<FormDataError>({})
     const { handleSingleError } = useFormErrorsHandler({ errors, setErrors })
@@ -161,19 +161,17 @@ const ArrayDS = () => {
     const filterItemsAction = async () => {
         const ndataArray = [...dataArray]
 
-        if (dataArray[actionIndex].val > highVal || dataArray[actionIndex].val < lowVal) {
+        if ((dataArray[actionIndex].val > highVal && includeHigh) || (includeLow && dataArray[actionIndex].val < lowVal)) {
             const ndataArray = [...dataArray]
             ndataArray.splice(actionIndex, 1)
 
             await controls.start(filterItemVariants())
-            console.log('action delete', actionIndex)
 
             return setDataArray(ndataArray)
         }
 
         await controls.start(filterItemVariants())
 
-        console.log('action no delete', actionIndex + 1)
         setActionIndex(actionIndex + 1)
         setDataArray(ndataArray)
     }
@@ -392,9 +390,9 @@ const ArrayDS = () => {
             handleSingleError({ field: e.target.id, error })
         }
 
-        if (e.target.id === 'low-check') {
-            console.log('e', e.target.name)
-        }
+        if (e.target.id === 'low-check') setIncludeLow(e.target.checked)
+
+        if (e.target.id === 'high-check') setIncludeHigh(e.target.checked)
     }
 
     return (
@@ -480,6 +478,7 @@ const ArrayDS = () => {
                                             onChange={handleInputChange}
                                             className="input-check" 
                                             type="checkbox" 
+                                            checked={includeLow}
                                             name="low-val" 
                                             id="low-check" />
                                     </div>
@@ -499,8 +498,10 @@ const ArrayDS = () => {
                                             type='number'
                                             value={highValInput} />
                                         <input 
+                                            onChange={handleInputChange}
                                             className="input-check" 
                                             type="checkbox" 
+                                            checked={includeHigh}
                                             name="high-val" 
                                             id="high-check" />
                                     </div>

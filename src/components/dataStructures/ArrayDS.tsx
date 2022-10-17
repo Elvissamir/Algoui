@@ -1,6 +1,8 @@
 import { useEffect, useState, ChangeEvent } from 'react'
 import { motion, AnimatePresence, Variants, useAnimationControls, Transition } from 'framer-motion'
-import { act } from '@testing-library/react'
+import { FormDataError } from '../../core/generalTypes'
+import InputValidator from '../../validators/InputValidator'
+import useFormErrorsHandler from '../../hooks/useFormErrorsHandler'
 
 type ArrayOperation = 
     'add-start' | 'add-end' | 'add-to' |
@@ -38,9 +40,9 @@ const ArrayDS = () => {
         }
     }
 
-    const [operation, setOperation] = useState<ArrayOperation>(null)
-    const [executingOperation, setExecutingOperation] = useState(false)
-    const [nindex, setnIndex] = useState(1)
+    const [ operation, setOperation ] = useState<ArrayOperation>(null)
+    const [ executingOperation, setExecutingOperation ] = useState(false)
+    const [ nval, setnval ] = useState(0)
     const [ actionIndex, setActionIndex ] = useState(0)
     const [ factorVal, setFactorVal ] = useState(2)
     const [ lowVal, setLowVal ] = useState(0)
@@ -52,26 +54,28 @@ const ArrayDS = () => {
     const [ factorValInput, setFactorValInput ] = useState('')
     const [ lowValInput, setLowValInput ] = useState('')
     const [ highValInput, setHighValInput ] = useState('')
+    const [ errors, setErrors ] = useState<FormDataError>({})
+    const { handleSingleError } = useFormErrorsHandler({ errors, setErrors })
 
     const controls = useAnimationControls()
 
     const addItemToPositionVariants = () => {
         const color = (index: number) => {
-            return index === nindex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000'
+            return index === actionIndex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000'
         }
 
         const backgroundColor = (index: number): string | string[] => {
-            return index === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff'
+            return index === actionIndex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff'
         }
 
         const opacity = (index: number): number | number[] => {
-            return index === nindex? 1 : 1
+            return index === actionIndex? 1 : 1
         }
 
         const y = (index: number): number | number[] => {
-            if (index < nindex) return 0
+            if (index < actionIndex) return 0
 
-            if (index > nindex) return 0
+            if (index > actionIndex) return 0
 
             return [70, 0]
         }
@@ -91,25 +95,25 @@ const ArrayDS = () => {
 
     const removeItemFromPositionVariants = () => {
         const color = (index: number) => {
-            return index === nindex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000'
+            return index === actionIndex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000'
         }
 
         const backgroundColor = (index: number): string | string[] => {
-            return index === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff'
+            return index === actionIndex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff'
         }
 
         const opacity = (index: number): number | number[] => {
-            return index === nindex? [1, 1, 0, 1, 0] : 1
+            return index === actionIndex? [1, 1, 0, 1, 0] : 1
         }
 
         const y = (index: number): number | number[] => {
-            if (index === nindex) return [0, 70]
+            if (index === actionIndex) return [0, 70]
 
             else return 0
         }
 
         const transition = (index: number): Transition => {
-            return { delay: index === nindex? 0.05 : index * 0.025 }
+            return { delay: index === actionIndex? 0.05 : index * 0.025 }
         }
 
         return (i: number) => ({
@@ -182,11 +186,11 @@ const ArrayDS = () => {
 
         if (operation === 'add-start') {
             controls.start(i => ({
-               color: i === nindex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
-               backgroundColor: i === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
-               opacity: i === nindex? [0, 1, 1, 1] : 1,
-               x: i === nindex? [-50, 0] : 0,
-               transition: { delay: i === nindex? 0.05 : i * 0.025, bounce: 0 },
+               color: i === actionIndex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
+               backgroundColor: i === actionIndex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
+               opacity: i === actionIndex? [0, 1, 1, 1] : 1,
+               x: i === actionIndex? [-50, 0] : 0,
+               transition: { delay: i === actionIndex? 0.05 : i * 0.025, bounce: 0 },
             }))
         }
 
@@ -194,11 +198,11 @@ const ArrayDS = () => {
 
         if (operation === 'add-end') {
             controls.start(i => ({
-                color: i === nindex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
-                backgroundColor: i === nindex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
-                opacity: i === nindex? [0, 1] : 1,
-                x: i === nindex? [50, 50,  0] : 0,
-                transition: { delay: i === nindex? 0.05 : i * 0.025, repeatType: 'reverse' },
+                color: i === actionIndex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
+                backgroundColor: i === actionIndex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
+                opacity: i === actionIndex? [0, 1] : 1,
+                x: i === actionIndex? [50, 50,  0] : 0,
+                transition: { delay: i === actionIndex? 0.05 : i * 0.025, repeatType: 'reverse' },
             }))
         }
 
@@ -233,7 +237,7 @@ const ArrayDS = () => {
         const ndataArray = [...dataArray]
         const nid = Math.floor(Math.random() * 10)
     
-        setnIndex(0)
+        setActionIndex(0)
 
         ndataArray.unshift({ id: Math.random(), val: nid})
         setDataArray(ndataArray)
@@ -244,7 +248,7 @@ const ArrayDS = () => {
         const ndataArray = [...dataArray]
         const nid = Math.floor(Math.random() * 10)
 
-        setnIndex(actionIndex)
+        setActionIndex(actionIndex)
         
         ndataArray.splice(actionIndex, 0, { id: Math.random(), val: nid})
         setDataArray(ndataArray)
@@ -255,7 +259,7 @@ const ArrayDS = () => {
         const ndataArray = [...dataArray]
         const nid = Math.floor(Math.random() * 10)
 
-        setnIndex(ndataArray.length)
+        setActionIndex(ndataArray.length)
 
         ndataArray.push({ id: Math.random(), val: nid})
         setDataArray(ndataArray)
@@ -347,9 +351,32 @@ const ArrayDS = () => {
     }
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.id === 'item-val') setInputItemVal(e.target.value)
+        if (e.target.id === 'item-val') {
+            setInputItemVal(e.target.value)
 
-        if (e.target.id === 'item-position') setInputIndex(e.target.value)
+            const isValidInput = InputValidator.isValidNumber(e.target.value)
+            const error = isValidInput? null : { message: 'Only numbers are allowed.'}
+            
+            if (!error) setnval(parseInt(e.target.value))
+
+            handleSingleError({ field: 'item-val', error })
+        }
+
+        if (e.target.id === 'item-position') {
+            setInputIndex(e.target.value)
+        }
+
+        if (e.target.id === 'factor-val') {
+            setFactorValInput(e.target.value)
+        }
+
+        if (e.target.id === 'low-val') {
+            setLowValInput(e.target.value)
+        }
+
+        if (e.target.id === 'high-val') {
+            setHighValInput(e.target.value)
+        }
     }
 
     return (
@@ -367,23 +394,27 @@ const ArrayDS = () => {
             <div className="section-action-wrapper">
                 <div className="section-controls">
                     <div className="add-item-controls">
-                        <div className="input-field">
-                            <label htmlFor="item-val">Value: </label>
-                            <input 
-                                onChange={handleInputChange}
-                                className="input-text" 
-                                id="item-val" 
-                                value={inputItemVal} 
-                                type='number' />
+                        <div className='input-field-container'>
+                            <div className="input-field">
+                                <label htmlFor="item-val">Value: </label>
+                                <input 
+                                    onChange={handleInputChange}
+                                    className="input-text" 
+                                    id="item-val" 
+                                    value={inputItemVal} 
+                                    type='number' />
+                            </div>
                         </div>
-                        <div className="input-field">
-                            <label htmlFor="item-position">Position: </label>
-                            <input 
-                                onChange={handleInputChange}
-                                className="input-text" 
-                                id="item-position" 
-                                value={inputIndex} 
-                                type='text'/>
+                        <div className="input-field-container">
+                            <div className="input-field">
+                                <label htmlFor="item-position">Position: </label>
+                                <input 
+                                    onChange={handleInputChange}
+                                    className="input-text" 
+                                    id="item-position" 
+                                    value={inputIndex} 
+                                    type='text'/>
+                            </div>
                         </div>
                         <button onClick={handleAddToStart} type="button">Add First</button>
                         <button onClick={handleAddToEnd} type="button">Add Last</button>
@@ -399,51 +430,57 @@ const ArrayDS = () => {
                         <button onClick={sortDecreasing} type="button">Sort (decreasing)</button>
                     </div>
                     <div className="create-new-array-controls">
-                        <div className="input-field">
-                            <label htmlFor="factor-val">Multiply by: </label>
-                            <input 
-                                onChange={handleInputChange}
-                                className="input-text" 
-                                id="factor-val" 
-                                type="text" 
-                                value={factorVal} />
+                        <div className="input-field-container">
+                            <div className="input-field">
+                                <label htmlFor="factor-val">Multiply by: </label>
+                                <input 
+                                    onChange={handleInputChange}
+                                    className="input-text" 
+                                    id="factor-val" 
+                                    type="text" 
+                                    value={factorVal} />
+                            </div>
                         </div>
                         <button onClick={multiplyByFactor} type="button">Multiply</button>
                     </div>
                     <div className="filter-array-controls">
                         <div className="lower-input-container">
-                            <div className="input-field">
-                                <label htmlFor="low-val">Filter lower than:</label>
-                                <div className="input-pack-container">
-                                    <input 
-                                        onChange={handleInputChange}
-                                        className="input-text" 
-                                        id="low-val" 
-                                        type="text"
-                                        value={lowVal} />
-                                    <input 
-                                        className="input-check" 
-                                        type="checkbox" 
-                                        name="low-val" 
-                                        id="low-check" />
+                            <div className="input-field-container">
+                                <div className="input-field">
+                                    <label htmlFor="low-val">Filter lower than:</label>
+                                    <div className="input-pack-container">
+                                        <input 
+                                            onChange={handleInputChange}
+                                            className="input-text" 
+                                            id="low-val" 
+                                            type="text"
+                                            value={lowVal} />
+                                        <input 
+                                            className="input-check" 
+                                            type="checkbox" 
+                                            name="low-val" 
+                                            id="low-check" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div className="higher-input-container">
-                            <div className="input-field">
-                                <label htmlFor="high-val">Filter higher than:</label>
-                                <div className="input-pack-container">
-                                    <input 
-                                        onChange={handleInputChange}
-                                        className="input-text" 
-                                        id="high-val" 
-                                        type="text"
-                                        value={highVal} />
-                                    <input 
-                                        className="input-check" 
-                                        type="checkbox" 
-                                        name="high-val" 
-                                        id="high-check" />
+                            <div className="input-field-container">
+                                <div className="input-field">
+                                    <label className='input-label' htmlFor="high-val">Filter higher than:</label>
+                                    <div className="input-pack-container">
+                                        <input 
+                                            onChange={handleInputChange}
+                                            className="input-text" 
+                                            id="high-val" 
+                                            type="text"
+                                            value={highVal} />
+                                        <input 
+                                            className="input-check" 
+                                            type="checkbox" 
+                                            name="high-val" 
+                                            id="high-check" />
+                                    </div>
                                 </div>
                             </div>
                         </div>

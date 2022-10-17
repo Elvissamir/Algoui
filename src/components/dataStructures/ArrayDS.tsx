@@ -3,6 +3,7 @@ import { motion, AnimatePresence, Variants, useAnimationControls, Transition } f
 import { FormDataError } from '../../core/generalTypes'
 import InputValidator from '../../validators/InputValidator'
 import useFormErrorsHandler from '../../hooks/useFormErrorsHandler'
+import FieldErrorInfo from '../FieldErrorInfo'
 
 type ArrayOperation = 
     'add-start' | 'add-end' | 'add-to' |
@@ -53,7 +54,9 @@ const ArrayDS = () => {
     const [ inputItemVal, setInputItemVal ] = useState('')
     const [ factorValInput, setFactorValInput ] = useState('')
     const [ lowValInput, setLowValInput ] = useState('')
+    const [ includeLow, setIncludeLow ] = useState(true)
     const [ highValInput, setHighValInput ] = useState('')
+    const [ includeHigh, setIncludeHigh ] = useState(true)
     const [ errors, setErrors ] = useState<FormDataError>({})
     const { handleSingleError } = useFormErrorsHandler({ errors, setErrors })
 
@@ -351,31 +354,46 @@ const ArrayDS = () => {
     }
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const isValidInput = InputValidator.isValidNumber(e.target.value)
+        const error = isValidInput? null : { message: 'Only numbers are allowed.'}
+
         if (e.target.id === 'item-val') {
-            setInputItemVal(e.target.value)
-
-            const isValidInput = InputValidator.isValidNumber(e.target.value)
-            const error = isValidInput? null : { message: 'Only numbers are allowed.'}
-            
             if (!error) setnval(parseInt(e.target.value))
-
-            handleSingleError({ field: 'item-val', error })
+            
+            setInputItemVal(e.target.value)
+            handleSingleError({ field: e.target.id, error })
         }
 
         if (e.target.id === 'item-position') {
+            if (!error) setActionIndex(parseInt(e.target.value))
+            
             setInputIndex(e.target.value)
+            handleSingleError({ field: e.target.id, error })
         }
-
+        
         if (e.target.id === 'factor-val') {
+            if (!error) setFactorVal(parseInt(e.target.value))
+
             setFactorValInput(e.target.value)
+            handleSingleError({ field: e.target.id, error })
         }
-
+        
         if (e.target.id === 'low-val') {
+            if (!error) setLowVal(parseInt(e.target.value))
+
             setLowValInput(e.target.value)
+            handleSingleError({ field: e.target.id, error })
+        }
+        
+        if (e.target.id === 'high-val') {
+            if (!error) setHighVal(parseInt(e.target.value))
+
+            setHighValInput(e.target.value)
+            handleSingleError({ field: e.target.id, error })
         }
 
-        if (e.target.id === 'high-val') {
-            setHighValInput(e.target.value)
+        if (e.target.id === 'low-check') {
+            console.log('e', e.target.name)
         }
     }
 
@@ -399,22 +417,24 @@ const ArrayDS = () => {
                                 <label htmlFor="item-val">Value: </label>
                                 <input 
                                     onChange={handleInputChange}
-                                    className="input-text" 
+                                    className="input-number" 
                                     id="item-val" 
                                     value={inputItemVal} 
                                     type='number' />
                             </div>
+                            <FieldErrorInfo error={errors['item-val']} />
                         </div>
                         <div className="input-field-container">
                             <div className="input-field">
                                 <label htmlFor="item-position">Position: </label>
                                 <input 
                                     onChange={handleInputChange}
-                                    className="input-text" 
+                                    className="input-number" 
                                     id="item-position" 
                                     value={inputIndex} 
-                                    type='text'/>
+                                    type='number' />
                             </div>
+                            <FieldErrorInfo error={errors['item-position']} />
                         </div>
                         <button onClick={handleAddToStart} type="button">Add First</button>
                         <button onClick={handleAddToEnd} type="button">Add Last</button>
@@ -435,11 +455,12 @@ const ArrayDS = () => {
                                 <label htmlFor="factor-val">Multiply by: </label>
                                 <input 
                                     onChange={handleInputChange}
-                                    className="input-text" 
+                                    className="input-number" 
                                     id="factor-val" 
-                                    type="text" 
-                                    value={factorVal} />
+                                    value={factorValInput} 
+                                    type='number' />
                             </div>
+                            <FieldErrorInfo error={errors['factor-val']} />
                         </div>
                         <button onClick={multiplyByFactor} type="button">Multiply</button>
                     </div>
@@ -453,15 +474,17 @@ const ArrayDS = () => {
                                             onChange={handleInputChange}
                                             className="input-text" 
                                             id="low-val" 
-                                            type="text"
-                                            value={lowVal} />
+                                            type='number'
+                                            value={lowValInput} />
                                         <input 
+                                            onChange={handleInputChange}
                                             className="input-check" 
                                             type="checkbox" 
                                             name="low-val" 
                                             id="low-check" />
                                     </div>
                                 </div>
+                                <FieldErrorInfo error={errors['low-val']} />
                             </div>
                         </div>
                         <div className="higher-input-container">
@@ -473,8 +496,8 @@ const ArrayDS = () => {
                                             onChange={handleInputChange}
                                             className="input-text" 
                                             id="high-val" 
-                                            type="text"
-                                            value={highVal} />
+                                            type='number'
+                                            value={highValInput} />
                                         <input 
                                             className="input-check" 
                                             type="checkbox" 
@@ -482,6 +505,7 @@ const ArrayDS = () => {
                                             id="high-check" />
                                     </div>
                                 </div>
+                                <FieldErrorInfo error={errors['high-val']} />
                             </div>
                         </div>
                         <button onClick={filterItems} type="button">Filter items</button>

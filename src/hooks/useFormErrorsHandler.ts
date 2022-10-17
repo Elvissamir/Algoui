@@ -12,10 +12,12 @@ interface FormErrorsHandlerProps {
 
 const useFormErrorsHandler = ({ errors, setErrors }: FormErrorsHandlerProps) => {
     const handleSingleError = ({ field, error }: ErrorData) => {
-        if (error) errors[field] = error
-        else delete errors[field]
+        const nerrors: FormDataError = {...errors}
 
-        setErrors(errors)
+        if (error) nerrors[field] = error
+        else delete nerrors[field]
+
+        setErrors(nerrors)
     }
 
     return {

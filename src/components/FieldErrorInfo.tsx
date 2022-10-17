@@ -1,3 +1,4 @@
+import FieldErrorIcon from "../assets/icons/FieldErrorIcon"
 import { FieldError } from "../core/generalTypes"
 
 interface FieldErrorInfoProps {
@@ -7,7 +8,10 @@ interface FieldErrorInfoProps {
 const FieldErrorInfo = ({ error }: FieldErrorInfoProps) => {
     return (
         <div className="error-info-container">
-            <p className="error-info"></p>
+            { error && <>
+                <FieldErrorIcon />
+                <p className="error-info">{error.message}</p>
+            </>}
         </div>
     )
 }

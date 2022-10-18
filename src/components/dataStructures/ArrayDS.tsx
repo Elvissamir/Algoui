@@ -49,24 +49,6 @@ const ArrayDS = () => {
 
     const [dataArray, setDataArray] = useState([...initialState.data])
 
-    const arrayItemVariants: Variants = {
-        show: {
-            opacity: [0, 1]
-        },
-        hidden: {
-            opacity: 0
-        },
-        new: { 
-            opacity: [0, 1],
-        },
-        removed: {
-            opacity: 0
-        },
-        exit: {
-            opacity: 0
-        }
-    }
-
     const [ operation, setOperation ] = useState<ArrayOperation>(initialState.operation)
     const [ executingOperation, setExecutingOperation ] = useState(false)
     const [ actionValue, setActionValue ] = useState(initialState.value)
@@ -564,7 +546,6 @@ const ArrayDS = () => {
                                 {dataArray.map((item, index) => 
                                     <motion.li 
                                         className='array-item' 
-                                        variants={arrayItemVariants}
                                         layout
                                         transition={{ type: "spring", stiffness: 350, damping: 25 }}
                                         animate={controls}

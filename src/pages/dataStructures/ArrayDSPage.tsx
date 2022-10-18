@@ -170,7 +170,17 @@ const ArrayDSPage = () => {
             color: i === actionIndex? [ '#fff', '#000000'] : '#000000',
             transition: { duration: 0.2 }
         })
-    }    
+    }
+    
+    const addItemToEndVariants = () => {
+        return (i: number) => ({
+            color: i === actionIndex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
+            backgroundColor: i === actionIndex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
+            opacity: i === actionIndex? [0, 1] : 1,
+            x: i === actionIndex? [50, 50,  0] : 0,
+            transition: { delay: i === actionIndex? 0.05 : i * 0.025 }
+        })
+    }
 
     const displayArrayAction = async () => {
         await controls.start(displayArrayVariants())
@@ -226,6 +236,12 @@ const ArrayDSPage = () => {
         restoreAfterAction()
     }
 
+    const addItemToEndAction = async () => {
+        await controls.start(addItemToEndVariants())
+
+        restoreAfterAction()
+    }
+
     useEffect(() => {
         if (operation === null) displayArrayAction()
 
@@ -233,15 +249,7 @@ const ArrayDSPage = () => {
 
         if (operation === 'add-to') addItemToPositionAction()
 
-        if (operation === 'add-end') {
-            controls.start(i => ({
-                color: i === actionIndex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
-                backgroundColor: i === actionIndex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
-                opacity: i === actionIndex? [0, 1] : 1,
-                x: i === actionIndex? [50, 50,  0] : 0,
-                transition: { delay: i === actionIndex? 0.05 : i * 0.025, repeatType: 'reverse' },
-            }))
-        }
+        if (operation === 'add-end') addItemToEndAction()
 
         if (operation === 'multipy') {
             if (actionIndex < dataArray.length) {

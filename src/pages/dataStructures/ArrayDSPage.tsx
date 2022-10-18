@@ -249,6 +249,14 @@ const ArrayDSPage = () => {
         return timer
     }
 
+    const filterStepAction = () => {
+        const timer = setInterval(async () => {
+            await filterItemsAction()
+        }, 650)
+
+        return timer
+    }
+
     useEffect(() => {
         if (operation === null) displayArrayAction()
 
@@ -270,11 +278,9 @@ const ArrayDSPage = () => {
 
         if (operation === 'filter') {
             if (actionIndex < dataArray.length) {
-                const timer = setInterval(() => {
-                    filterItemsAction()
-                }, 650)
+                const stepTimer = filterStepAction()
 
-                return () => clearInterval(timer)
+                return () => clearInterval(stepTimer)
             }
 
             restoreAfterAction()

@@ -220,12 +220,18 @@ const ArrayDSPage = () => {
         restoreAfterAction()
     }
 
+    const addItemToPositionAction = async () => {
+        await controls.start(addItemToPositionVariants())
+
+        restoreAfterAction()
+    }
+
     useEffect(() => {
         if (operation === null) displayArrayAction()
 
         if (operation === 'add-start') addToStartAction()
 
-        if (operation === 'add-to') controls.start(addItemToPositionVariants())
+        if (operation === 'add-to') addItemToPositionAction()
 
         if (operation === 'add-end') {
             controls.start(i => ({

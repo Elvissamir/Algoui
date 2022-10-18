@@ -70,6 +70,24 @@ const ArrayDSPage = () => {
 
     const controls = useAnimationControls()
 
+    const displayArrayVariants = () => {
+        return (i: number) => ({
+            opacity: [0, 1],
+            x: [-50, 0],
+            transition: { delay: i * 0.5 },
+        })
+    }
+
+    const addItemToStartVariants = () => {
+        return (i: number) => ({
+            color: i === actionIndex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
+            backgroundColor: i === actionIndex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
+            opacity: i === actionIndex? [0, 1, 1, 1] : 1,
+            x: i === actionIndex? [-50, 0] : 0,
+            transition: { delay: i === actionIndex? 0.05 : i * 0.025, bounce: 0 },
+        })
+    }
+
     const addItemToPositionVariants = () => {
         const color = (index: number) => {
             return index === actionIndex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000'
@@ -154,6 +172,12 @@ const ArrayDSPage = () => {
         })
     }    
 
+    const displayArrayAction = async () => {
+        await controls.start(displayArrayVariants())
+
+        restoreAfterAction()
+    }
+
     const multiplyAction = async () => {
         const ndataArray = [...dataArray]
 
@@ -191,25 +215,13 @@ const ArrayDSPage = () => {
     }
 
     const addToStartAction = async () => {
-        await controls.start(i => ({
-            color: i === actionIndex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
-            backgroundColor: i === actionIndex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
-            opacity: i === actionIndex? [0, 1, 1, 1] : 1,
-            x: i === actionIndex? [-50, 0] : 0,
-            transition: { delay: i === actionIndex? 0.05 : i * 0.025, bounce: 0 },
-        }))
+        await controls.start(addItemToStartVariants())
 
         restoreAfterAction()
     }
 
     useEffect(() => {
-        if (operation === null) {
-            controls.start(i => ({
-                opacity: [0, 1],
-                x: [-50, 0],
-                transition: { delay: i * 0.5 },
-            }))
-        }
+        if (operation === null) displayArrayAction()
 
         if (operation === 'add-start') addToStartAction()
 

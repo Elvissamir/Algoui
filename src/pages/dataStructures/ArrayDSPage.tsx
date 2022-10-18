@@ -196,8 +196,7 @@ const ArrayDSPage = () => {
         await controls.start(multiplyByItemVariants())
 
         setActionIndex(actionIndex + 1)
-
-        return setDataArray(ndataArray)
+        setDataArray(ndataArray)
     }
 
     const filterItemsAction = async () => {
@@ -242,6 +241,14 @@ const ArrayDSPage = () => {
         restoreAfterAction()
     }
 
+    const multiplyStepAction = () => {
+        const timer = setInterval(async () => {
+            await multiplyAction()
+        }, 650)
+
+        return timer
+    }
+
     useEffect(() => {
         if (operation === null) displayArrayAction()
 
@@ -253,15 +260,12 @@ const ArrayDSPage = () => {
 
         if (operation === 'multipy') {
             if (actionIndex < dataArray.length) {
-                const timer = setInterval(() => {
-                    multiplyAction()
-                }, 650)
+                const stepTimer = multiplyStepAction()
 
-                return () => clearInterval(timer)
+                return () => clearInterval(stepTimer)
             }
 
-            setActionIndex(0)
-            setExecutingOperation(false)
+            restoreAfterAction()
         }
 
         if (operation === 'filter') {
@@ -273,8 +277,7 @@ const ArrayDSPage = () => {
                 return () => clearInterval(timer)
             }
 
-            setActionIndex(0)
-            setExecutingOperation(false)
+            restoreAfterAction()
         }
     }, [ dataArray ])
 

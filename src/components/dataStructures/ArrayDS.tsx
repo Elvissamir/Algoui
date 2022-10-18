@@ -202,6 +202,11 @@ const ArrayDS = () => {
         setDataArray(ndataArray)
     }
 
+    const restoreAfterAction = () => {
+        if (InputValidator.isValidNumber(inputIndex)) setActionIndex(parseInt(inputIndex))
+        setExecutingOperation(false)
+    }
+
     useEffect(() => {
         if (operation === null) {
             controls.start(i => ({

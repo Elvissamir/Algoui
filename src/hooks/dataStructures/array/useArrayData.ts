@@ -1,13 +1,10 @@
-import { ArrayItem, ArrayOperation } from "../../../core/dataStructures/ArrayDS"
+import { useState } from 'react'
+import { ArrayItem } from "../../../core/dataStructures/ArrayDS"
 
 interface InitialArrayState {
     data: ArrayItem[],
-    operation: ArrayOperation,
     value: number,
     index: number,
-    factor: number,
-    lowVal: number,
-    highVal: number
 }
 
 const initialArrayData = [
@@ -22,19 +19,21 @@ const initialArrayData = [
 
 const initialState: InitialArrayState = {
     data: initialArrayData,
-    operation: null,
     value: 0,
     index: 0,
-    factor: 2,
-    lowVal: 0,
-    highVal: 5
 }
 
 const useArrayData = () => {
+    const [ dataArray, setDataArray ] = useState(initialState.data.map(item => { return {...item} }))
+    const [ actionValue, setActionValue ] = useState(initialState.value)
+    const [ actionIndex, setActionIndex ] = useState(initialState.index)
 
     return {
         initialState,
-        initialArrayData
+        initialArrayData,
+        dataArray, setDataArray,
+        actionValue, setActionValue,
+        actionIndex, setActionIndex
     }
 }
 

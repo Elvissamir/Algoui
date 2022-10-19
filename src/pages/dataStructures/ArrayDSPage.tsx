@@ -8,25 +8,6 @@ import ArrayControls from '../../components/dataStructures/array/ArrayControls'
 import ArrayAction from '../../components/dataStructures/array/ArrayAction'
 
 const ArrayDSPage = () => {
-
-    const [dataArray, setDataArray] = useState(initialState.data.map(item => { return {...item} }))
-
-    const [ operation, setOperation ] = useState<ArrayOperation>(initialState.operation)
-    const [ executingOperation, setExecutingOperation ] = useState(false)
-    const [ actionValue, setActionValue ] = useState(initialState.value)
-    const [ actionIndex, setActionIndex ] = useState(initialState.index)
-    const [ factor, setFactor ] = useState(initialState.factor)
-    const [ lowLimit, setLowLimit ] = useState(initialState.lowVal)
-    const [ highLimit, setHighLimit ] = useState(initialState.highVal)
-    
-    // Form Data
-    const [ inputIndex, setInputIndex ] = useState('0')
-    const [ inputItemVal, setInputItemVal ] = useState('0')
-    const [ factorValInput, setFactorValInput ] = useState('2')
-    const [ lowValInput, setLowValInput ] = useState('0')
-    const [ includeLow, setIncludeLow ] = useState(true)
-    const [ highValInput, setHighValInput ] = useState('5')
-    const [ includeHigh, setIncludeHigh ] = useState(true)
     const [ errors, setErrors ] = useState<FormDataError>({})
     const { handleSingleError } = useFormErrorsHandler({ errors, setErrors })
 

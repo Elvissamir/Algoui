@@ -47,7 +47,7 @@ const initialState: InitialArrayState = {
 
 const ArrayDSPage = () => {
 
-    const [dataArray, setDataArray] = useState([...initialState.data])
+    const [dataArray, setDataArray] = useState(initialState.data.map(item => { return {...item} }))
 
     const [ operation, setOperation ] = useState<ArrayOperation>(initialState.operation)
     const [ executingOperation, setExecutingOperation ] = useState(false)
@@ -258,14 +258,6 @@ const ArrayDSPage = () => {
     }
 
     useEffect(() => {
-        if (operation === null) displayArrayAction()
-
-        if (operation === 'add-start') addToStartAction()
-
-        if (operation === 'add-to') addItemToPositionAction()
-
-        if (operation === 'add-end') addItemToEndAction()
-
         if (operation === 'multipy') {
             if (actionIndex < dataArray.length) {
                 const stepTimer = multiplyStepAction()
@@ -275,7 +267,9 @@ const ArrayDSPage = () => {
 
             restoreAfterAction()
         }
+    }, [dataArray, operation])
 
+    useEffect(() => {
         if (operation === 'filter') {
             if (actionIndex < dataArray.length) {
                 const stepTimer = filterStepAction()
@@ -285,10 +279,26 @@ const ArrayDSPage = () => {
 
             restoreAfterAction()
         }
-    }, [ dataArray ])
+    }, [dataArray, operation])
+
+    useEffect(() => {
+        if (operation === null) displayArrayAction()
+    }, [dataArray, operation])
+
+    useEffect(() => {
+        if (operation === 'add-start') addToStartAction()
+    }, [dataArray, operation])
+
+    useEffect(() => {
+        if (operation === 'add-to') addItemToPositionAction()
+    }, [dataArray, operation])
+
+    useEffect(() => {
+        if (operation === 'add-end') addItemToEndAction()
+    }, [ dataArray, operation ])
 
     const handleReset = () => {
-        setDataArray([...initialState.data])
+        setDataArray(initialState.data.map(item => { return {...item} }))
         setActionValue(initialState.value)
         setLowLimit(initialState.lowVal)
         setHighLimit(initialState.highVal)
@@ -386,14 +396,14 @@ const ArrayDSPage = () => {
         setDataArray(ndataArray)
     }
 
-    const multiplyByFactor = async () => {
+    const handleMultiply = async () => {
         multiplyAction()
 
         setOperation('multipy')
         setExecutingOperation(true)
     }
 
-    const filterItems = async () => {
+    const handleFilterItems = async () => {
         filterItemsAction()
         setOperation('filter')
     }
@@ -480,7 +490,8 @@ const ArrayDSPage = () => {
                                     onChange={handleInputChange}
                                     className="input-number" 
                                     id="item-val" 
-                                    value={inputItemVal} 
+                                    value={inputItemVal}
+                                    disabled={executingOperation} 
                                     type='number' />
                             </div>
                             <FieldErrorInfo error={errors['item-val']} />
@@ -523,7 +534,7 @@ const ArrayDSPage = () => {
                             </div>
                             <FieldErrorInfo error={errors['factor-val']} />
                         </div>
-                        <button onClick={multiplyByFactor} type="button">Multiply</button>
+                        <button onClick={handleMultiply} type="button">Multiply</button>
                     </div>
                     <div className="filter-array-controls">
                         <div className="lower-input-container">
@@ -572,7 +583,7 @@ const ArrayDSPage = () => {
                                 <FieldErrorInfo error={errors['high-val']} />
                             </div>
                         </div>
-                        <button onClick={filterItems} type="button">Filter items</button>
+                        <button onClick={handleFilterItems} type="button">Filter items</button>
                     </div>
                     <div className='reset-container'>
                         <button onClick={handleReset} className='reset-btn'>Reset</button>

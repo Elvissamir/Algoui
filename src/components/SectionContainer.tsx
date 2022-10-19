@@ -1,9 +1,9 @@
 interface SectionContainerProps {
     title: string
     description: string
-    action: JSX.Element
-    controls: JSX.Element
-    bottom: JSX.Element
+    action: JSX.Element | JSX.Element[]
+    controls: JSX.Element | JSX.Element[]
+    bottom?: JSX.Element
 }
 
 const SectionContainer = ({ title, description, action, controls, bottom }: SectionContainerProps) => {

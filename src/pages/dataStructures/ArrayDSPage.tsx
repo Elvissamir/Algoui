@@ -1,4 +1,3 @@
-import InputValidator from '../../validators/InputValidator'
 import SectionContainer from '../../components/SectionContainer'
 import ArrayControls from '../../components/dataStructures/array/ArrayControls'
 import ArrayAction from '../../components/dataStructures/array/ArrayAction'
@@ -6,12 +5,6 @@ import { useAnimationControls } from 'framer-motion'
 
 const ArrayDSPage = () => {
     const controls = useAnimationControls()
-
-    const restoreAfterAction = () => {
-        if (InputValidator.isValidNumber(inputIndex)) setActionIndex(parseInt(inputIndex))
-        
-        setExecutingOperation(false)
-    } 
 
     return (
         <SectionContainer 

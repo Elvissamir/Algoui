@@ -43,18 +43,6 @@ const ArrayDSPage = () => {
         setExecutingOperation(false)
     }
 
-    const addItemToPositionAction = async () => {
-        await controls.start(addItemToPositionVariants())
-
-        restoreAfterAction()
-    }
-
-    const addItemToEndAction = async () => {
-        await controls.start(addItemToEndVariants())
-
-        restoreAfterAction()
-    }
-
     const multiplyStepAction = () => {
         const timer = setInterval(async () => {
             await multiplyAction()
@@ -95,39 +83,6 @@ const ArrayDSPage = () => {
         }
     }, [dataArray, operation])
 
-    useEffect(() => {
-        if (operation === 'add-to') addItemToPositionAction()
-    }, [dataArray, operation])
-
-    useEffect(() => {
-        if (operation === 'add-end') addItemToEndAction()
-    }, [ dataArray, operation ])
-
-
-    const handleAddToPosition = () => {
-        if (actionIndex === 0) return handleAddToStart()
-        
-        if (actionIndex >= dataArray.length - 1) return handleAddToEnd()
-
-        const ndataArray = [...dataArray]
-
-        setActionIndex(actionIndex)
-        
-        ndataArray.splice(actionIndex, 0, { id: Math.random(), val: actionValue})
-        setDataArray(ndataArray)
-        setOperation('add-to')
-    }
-
-    const handleAddToEnd = () => {
-        const ndataArray = [...dataArray]
-
-        setActionIndex(ndataArray.length)
-
-        ndataArray.push({ id: Math.random(), val: actionValue})
-        setDataArray(ndataArray)
-
-        setOperation('add-end')
-    }
 
     const handleRemoveFromStart = async () => {
         await controls.start()

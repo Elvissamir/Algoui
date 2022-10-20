@@ -1,25 +1,13 @@
-import { useEffect, useState, ChangeEvent } from 'react'
-import { useAnimationControls, Transition } from 'framer-motion'
-import { FormDataError } from '../../core/generalTypes'
+import { useEffect } from 'react'
+import { useAnimationControls } from 'framer-motion'
 import InputValidator from '../../validators/InputValidator'
-import useFormErrorsHandler from '../../hooks/useFormErrorsHandler'
 import SectionContainer from '../../components/SectionContainer'
 import ArrayControls from '../../components/dataStructures/array/ArrayControls'
 import ArrayAction from '../../components/dataStructures/array/ArrayAction'
 
 const ArrayDSPage = () => {
-    const [ errors, setErrors ] = useState<FormDataError>({})
-    const { handleSingleError } = useFormErrorsHandler({ errors, setErrors })
-
     const controls = useAnimationControls()
-
-
-    const displayArrayAction = async () => {
-        await controls.start(displayArrayVariants())
-
-        restoreAfterAction()
-    }
-
+  
     const multiplyAction = async () => {
         const ndataArray = [...dataArray]
 
@@ -53,12 +41,6 @@ const ArrayDSPage = () => {
         if (InputValidator.isValidNumber(inputIndex)) setActionIndex(parseInt(inputIndex))
         
         setExecutingOperation(false)
-    }
-
-    const addToStartAction = async () => {
-        await controls.start(addItemToStartVariants())
-
-        restoreAfterAction()
     }
 
     const addItemToPositionAction = async () => {
@@ -114,14 +96,6 @@ const ArrayDSPage = () => {
     }, [dataArray, operation])
 
     useEffect(() => {
-        if (operation === null) displayArrayAction()
-    }, [dataArray, operation])
-
-    useEffect(() => {
-        if (operation === 'add-start') addToStartAction()
-    }, [dataArray, operation])
-
-    useEffect(() => {
         if (operation === 'add-to') addItemToPositionAction()
     }, [dataArray, operation])
 
@@ -129,24 +103,6 @@ const ArrayDSPage = () => {
         if (operation === 'add-end') addItemToEndAction()
     }, [ dataArray, operation ])
 
-    const handleReset = () => {
-        setDataArray(initialState.data.map(item => { return {...item} }))
-        setActionValue(initialState.value)
-        setLowLimit(initialState.lowVal)
-        setHighLimit(initialState.highVal)
-        setOperation(initialState.operation)
-        setFactor(initialState.factor)
-        setActionIndex(initialState.index)
-    }
-
-    const handleAddToStart = () => {
-        const ndataArray = [...dataArray]
-        ndataArray.unshift({ id: Math.random(), val: actionValue})
-
-        setActionIndex(0)
-        setDataArray(ndataArray)
-        setOperation('add-start')
-    }
 
     const handleAddToPosition = () => {
         if (actionIndex === 0) return handleAddToStart()
@@ -222,12 +178,12 @@ const ArrayDSPage = () => {
         setExecutingOperation(true)
     }
 
-    const handleFilterItems = async () => {
+    const handleFilter = async () => {
         filterItemsAction()
         setOperation('filter')
     }
 
-    const sortIncreasing = () => {
+    const handleSortIncreasing = () => {
         const ndataArray = [...dataArray]
         ndataArray.sort((a, b) => a.val - b.val)
 
@@ -235,56 +191,12 @@ const ArrayDSPage = () => {
         setOperation('sort-increasing')
     }
 
-    const sortDecreasing = () => {
+    const handleSortDecreasing = () => {
         const ndataArray = [...dataArray]
         ndataArray.sort((a, b) => b.val - a.val)
 
         setDataArray(ndataArray)
         setOperation('sort-decreasing')
-    }
-
-    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const isValidInput = InputValidator.isValidNumber(e.target.value)
-        const error = isValidInput? null : { message: 'Only numbers are allowed.'}
-
-        if (e.target.id === 'item-val') {
-            if (!error) setActionValue(parseInt(e.target.value))
-            
-            setInputItemVal(e.target.value)
-            handleSingleError({ field: e.target.id, error })
-        }
-
-        if (e.target.id === 'item-position') {
-            if (!error) setActionIndex(parseInt(e.target.value))
-            
-            setInputIndex(e.target.value)
-            handleSingleError({ field: e.target.id, error })
-        }
-        
-        if (e.target.id === 'factor-val') {
-            if (!error) setFactor(parseInt(e.target.value))
-
-            setFactorValInput(e.target.value)
-            handleSingleError({ field: e.target.id, error })
-        }
-        
-        if (e.target.id === 'low-val') {
-            if (!error) setLowLimit(parseInt(e.target.value))
-
-            setLowValInput(e.target.value)
-            handleSingleError({ field: e.target.id, error })
-        }
-        
-        if (e.target.id === 'high-val') {
-            if (!error) setHighLimit(parseInt(e.target.value))
-
-            setHighValInput(e.target.value)
-            handleSingleError({ field: e.target.id, error })
-        }
-
-        if (e.target.id === 'low-check') setIncludeLow(e.target.checked)
-
-        if (e.target.id === 'high-check') setIncludeHigh(e.target.checked)
     }
 
     return (

@@ -1,5 +1,5 @@
 import { Transition } from "framer-motion"
-import { ArrayItem } from "../../../core/dataStructures/ArrayDS"
+import { ArrayItem } from "../../../../core/dataStructures/ArrayDS"
 
 interface UseArrayVariantsProps {
     dataArray: ArrayItem[]

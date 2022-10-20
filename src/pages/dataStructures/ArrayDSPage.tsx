@@ -8,17 +8,6 @@ import ArrayAction from '../../components/dataStructures/array/ArrayAction'
 const ArrayDSPage = () => {
     const controls = useAnimationControls()
   
-    const multiplyAction = async () => {
-        const ndataArray = [...dataArray]
-
-        ndataArray[actionIndex].val = ndataArray[actionIndex].val * factor
-        
-        await controls.start(multiplyByItemVariants())
-
-        setActionIndex(actionIndex + 1)
-        setDataArray(ndataArray)
-    }
-
     const filterItemsAction = async () => {
         const ndataArray = [...dataArray]
 
@@ -43,14 +32,6 @@ const ArrayDSPage = () => {
         setExecutingOperation(false)
     }
 
-    const multiplyStepAction = () => {
-        const timer = setInterval(async () => {
-            await multiplyAction()
-        }, 650)
-
-        return timer
-    }
-
     const filterStepAction = () => {
         const timer = setInterval(async () => {
             await filterItemsAction()
@@ -58,18 +39,6 @@ const ArrayDSPage = () => {
 
         return timer
     }
-
-    useEffect(() => {
-        if (operation === 'multipy') {
-            if (actionIndex < dataArray.length) {
-                const stepTimer = multiplyStepAction()
-
-                return () => clearInterval(stepTimer)
-            }
-
-            restoreAfterAction()
-        }
-    }, [dataArray, operation])
 
     useEffect(() => {
         if (operation === 'filter') {
@@ -124,13 +93,6 @@ const ArrayDSPage = () => {
         ndataArray.splice(actionIndex, 1)
 
         setDataArray(ndataArray)
-    }
-
-    const handleMultiply = async () => {
-        multiplyAction()
-
-        setOperation('multipy')
-        setExecutingOperation(true)
     }
 
     const handleFilter = async () => {

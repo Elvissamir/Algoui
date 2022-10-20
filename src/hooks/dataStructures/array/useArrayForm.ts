@@ -32,6 +32,7 @@ const initialFormData: InitialArrayFormData = {
 }
 
 const useArrayForm = () => {
+    // DATA
     const {
         dataArray, setDataArray,
         actionValue, setActionValue,
@@ -52,9 +53,11 @@ const useArrayForm = () => {
     const [ includeLowLimit, setIncludeLowLimit ] = useState(initialFormData.includeLowLimit)
     const [ highLimitInput, setHighLimitInput ] = useState(initialFormData.highLimitInput)
     const [ includeHighLimit, setIncludeHighLimit ] = useState(initialFormData.includeHighLimit)
-
     const { handleSingleError } = useFormErrorsHandler({ errors, setErrors })
-
+    
+    // Actions
+    
+    // Handlers
     const handleReset = () => {
         setDataArray(initialState.data.map(item => { return {...item} }))
         setActionValue(initialState.value)

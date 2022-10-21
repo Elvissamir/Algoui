@@ -7,15 +7,6 @@ interface UseArrayVariantsProps {
 
 const useArrayVariants = ({ dataArray, actionIndex }: UseArrayVariantsProps) => {
 
-    const multiplyByVariants = () => {
-        return (i: number) => ({
-            opacity: i === actionIndex ? 1 : 1,
-            backgroundColor: i === actionIndex? ['#312e81', '#fff'] : '#fff',
-            color: i === actionIndex? [ '#fff', '#000000'] : '#000000',
-            transition: { duration: 0.2 }
-        })
-    }
-
     const filterVariants = () => {
         return (i: number) => ({
             opacity: i === actionIndex ? 1 : 1,

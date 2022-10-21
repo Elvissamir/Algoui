@@ -8,38 +8,6 @@ interface UseArrayVariantsProps {
 
 const useArrayVariants = ({ dataArray, actionIndex }: UseArrayVariantsProps) => {
 
-    const removeFromPositionVariants = () => {
-        const color = (index: number) => {
-            return index === actionIndex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000'
-        }
-
-        const backgroundColor = (index: number): string | string[] => {
-            return index === actionIndex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff'
-        }
-
-        const opacity = (index: number): number | number[] => {
-            return index === actionIndex? [1, 1, 0, 1, 0] : 1
-        }
-
-        const y = (index: number): number | number[] => {
-            if (index === actionIndex) return [0, 70]
-
-            else return 0
-        }
-
-        const transition = (index: number): Transition => {
-            return { delay: index === actionIndex? 0.05 : index * 0.025 }
-        }
-
-        return (i: number) => ({
-            color: color(i),
-            backgroundColor: backgroundColor(i),
-            opacity: opacity(i),
-            y: y(i),
-            transition: transition(i),
-        })
-    }
-
     const removeFromStartVariants = () => {
         return (i: number) => ({
             color: i === 0? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
@@ -80,9 +48,6 @@ const useArrayVariants = ({ dataArray, actionIndex }: UseArrayVariantsProps) => 
     }
 
     return {
-        displayArrayVariants,
-        addToStartVariants,
-        addToPositionVariants,
         removeFromStartVariants,
         removeFromPositionVariants,
         removeFromEndVariants,

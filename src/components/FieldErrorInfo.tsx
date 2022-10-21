@@ -8,10 +8,8 @@ interface FieldErrorInfoProps {
 const FieldErrorInfo = ({ error }: FieldErrorInfoProps) => {
     return (
         <div className="error-info-container">
-            { error && <>
-                <FieldErrorIcon />
-                <p className="error-info">{error.message}</p>
-            </>}
+            <FieldErrorIcon />
+            <p className="error-info">{error.message}</p>
         </div>
     )
 }

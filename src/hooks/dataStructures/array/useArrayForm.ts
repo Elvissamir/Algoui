@@ -54,9 +54,7 @@ const useArrayForm = () => {
     const [ highLimitInput, setHighLimitInput ] = useState(initialFormData.highLimitInput)
     const [ includeHighLimit, setIncludeHighLimit ] = useState(initialFormData.includeHighLimit)
     const { handleSingleError } = useFormErrorsHandler({ errors, setErrors })
-    
-    // Actions
-    
+ 
     // Handlers
     const handleReset = () => {
         setDataArray(initialState.data.map(item => { return {...item} }))

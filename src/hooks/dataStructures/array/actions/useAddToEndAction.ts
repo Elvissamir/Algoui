@@ -50,7 +50,7 @@ const useAddToEndAction = ({
     }
 
     return {
-        
+        handleAddToEnd
     }
 }
 

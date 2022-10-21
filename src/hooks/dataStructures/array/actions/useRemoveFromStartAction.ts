@@ -1,10 +1,20 @@
-import { ArrayItem } from "../../../../core/dataStructures/ArrayDS"
+import { AnimationControls } from "framer-motion"
+import { ArrayItem, ArrayOperation } from "../../../../core/dataStructures/ArrayDS"
+import useRemoveFromStartVariant from "../variants/useRemoveFromStartVariant"
 
 interface UseRemoveFromStartProps {
     dataArray: ArrayItem[]
+    setDataArray: React.Dispatch<React.SetStateAction<ArrayItem[]>>
+    controls: AnimationControls
+    setOperation: React.Dispatch<React.SetStateAction<ArrayOperation>>
 }
 
-const useRemoveFromStart = ({ dataArray }: UseRemoveFromStartProps) => {
+const useRemoveFromStartAction = ({ 
+        dataArray, setDataArray, 
+        controls, setOperation 
+    }: UseRemoveFromStartProps) => {
+
+    const removeFromStartVariant = useRemoveFromStartVariant()
 
     const removeFromStartAction = () => {
         const ndataArray = [...dataArray]
@@ -14,7 +24,7 @@ const useRemoveFromStart = ({ dataArray }: UseRemoveFromStartProps) => {
     }  
 
     const handleRemoveFromStart = async () => {
-        await controls.start()
+        await controls.start(removeFromStartVariant())
 
         setOperation('remove-start')
         removeFromStartAction()
@@ -26,4 +36,4 @@ const useRemoveFromStart = ({ dataArray }: UseRemoveFromStartProps) => {
     }
 }
 
-export default useRemoveFromStart
+export default useRemoveFromStartAction

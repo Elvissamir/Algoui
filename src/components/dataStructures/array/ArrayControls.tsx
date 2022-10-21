@@ -1,21 +1,9 @@
 import { ChangeEvent } from "react"
 import { FormDataError } from "../../../core/generalTypes"
+import { ArrayFormControlHandlers } from "../../../hooks/dataStructures/array/useArrayForm"
 import ActionBtn from "../../ActionBtn"
 import InputField from "../../InputField"
 import InputPackField from "../../InputPackField"
-
-interface ControlHandlers {
-    handleAddToStart: () => void
-    handleAddToEnd: () => void
-    handleAddToPosition: () => void
-    handleRemoveFromPosition: () => void 
-    handleRemoveFromStart: () => void
-    handleRemoveFromEnd: () => void
-    handleSortIncreasing: () => void
-    handleSortDecreasing: () => void
-    handleFilter: () => void
-    handleMultiply: () => void
-}
 
 interface ArrayControlsProps {
     indexInput: string
@@ -26,7 +14,7 @@ interface ArrayControlsProps {
     includeHighLimit: boolean
     highLimitInput: string
     executingOperation: boolean
-    handlers: ControlHandlers
+    handlers: ArrayFormControlHandlers
     errors: FormDataError
     handleReset: () => void
     handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void
@@ -110,7 +98,7 @@ const ArrayControls = ({
                     text="Sort Decreasing"
                     disabled={executingOperation} />
             </div>
-            <div className="create-new-array-controls">
+            <div className="multiply-controls">
                 <InputField 
                     id="factor-val" 
                     value={factorInput} 

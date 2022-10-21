@@ -4,7 +4,7 @@ interface UseSimpleSortProps {
     dataArray: ArrayItem[]
 }
 
-const useSimpleSort = ({ dataArray }: UseSimpleSortProps) => {
+const useSimpleSortAction = ({ dataArray }: UseSimpleSortProps) => {
     const handleSortIncreasing = () => {
         const ndataArray = [...dataArray]
         ndataArray.sort((a, b) => a.val - b.val)
@@ -27,4 +27,4 @@ const useSimpleSort = ({ dataArray }: UseSimpleSortProps) => {
     }
 }
 
-export default useSimpleSort
+export default useSimpleSortAction

@@ -1,8 +1,32 @@
+import { useAnimationControls } from "framer-motion"
 import { ChangeEvent } from "react"
 import InputValidator from "../../../validators/InputValidator"
 import useFormErrorsHandler from "../../useFormErrorsHandler"
+import useAddToEndAction from "./actions/useAddToEndAction"
+import useAddToPositionAction from "./actions/useAddToPositionAction"
+import useAddToStartAction from "./actions/useAddToStartAction"
+import useFilterAction from "./actions/useFilterAction"
+import useIntroAction from "./actions/useIntroAction"
+import useMultiplyAction from "./actions/useMultiplyAction"
+import useRemoveFromEndAction from "./actions/useRemoveFromEndAction"
+import useRemoveFromPositionAction from "./actions/useRemoveFromPositionAction"
+import useRemoveFromStartAction from "./actions/useRemoveFromStartAction"
+import useSimpleSortAction from "./actions/useSimpleSortAction"
 import useArrayData from "./useArrayData"
 import useArrayFormData from "./useArrayFormData"
+
+export interface ArrayFormControlHandlers {
+    handleAddToStart: () => void
+    handleAddToEnd: () => void
+    handleAddToPosition: () => void
+    handleRemoveFromPosition: () => void 
+    handleRemoveFromStart: () => void
+    handleRemoveFromEnd: () => void
+    handleSortIncreasing: () => void
+    handleSortDecreasing: () => void
+    handleFilter: () => void
+    handleMultiply: () => void
+}
 
 const useArrayForm = () => {
     const {
@@ -29,6 +53,83 @@ const useArrayForm = () => {
     } = useArrayFormData()
 
     const { handleSingleError } = useFormErrorsHandler({ errors, setErrors })
+    const controls = useAnimationControls()
+
+    const afterAction = () => {
+        if (InputValidator.isValidNumber(indexInput)) setActionIndex(parseInt(indexInput))
+        
+        setExecutingOperation(false)
+    } 
+
+    // ACTIONS 
+    const { introAction } = useIntroAction({ dataArray, afterAction, operation, controls })
+
+    const { handleAddToStart } = useAddToStartAction({ 
+        dataArray, setDataArray, 
+        actionValue, 
+        actionIndex, setActionIndex, 
+        controls, 
+        afterAction 
+    })
+
+    const { handleAddToEnd } = useAddToEndAction({ 
+        dataArray, setDataArray, 
+        actionIndex, setActionIndex, 
+        actionValue, 
+        controls, 
+        operation, setOperation, 
+        afterAction, 
+    })
+
+    const { handleAddToPosition } = useAddToPositionAction({
+        dataArray, setDataArray,
+        actionIndex, setActionIndex,
+        actionValue,
+        operation, setOperation,
+        handleAddToStart, handleAddToEnd,
+        controls, afterAction
+    })
+
+    const { handleFilter } = useFilterAction({ 
+        dataArray, setDataArray, 
+        operation, setOperation,
+        actionIndex, setActionIndex,
+        lowLimit, highLimit,
+        includeLowLimit, includeHighLimit,
+        afterAction, controls, 
+    })
+    const { handleMultiply } = useMultiplyAction({
+        dataArray, setDataArray,
+        actionIndex, setActionIndex, 
+        operation, setOperation,
+        executingOperation, setExecutingOperation,
+        controls, factor, afterAction
+    })
+
+    const { handleRemoveFromStart } = useRemoveFromStartAction({ 
+        dataArray, setDataArray, 
+        setOperation, controls
+    })
+
+    const { handleRemoveFromPosition } = useRemoveFromPositionAction({ 
+        dataArray, setDataArray, 
+        controls, actionIndex, 
+        setOperation, afterAction 
+    })
+
+    const { handleRemoveFromEnd } = useRemoveFromEndAction({ 
+        dataArray, setDataArray, 
+        setOperation, controls 
+    })
+
+    const { handleSortDecreasing, handleSortIncreasing } = useSimpleSortAction({ dataArray })
+    
+    const controlHandlers: ArrayFormControlHandlers = {
+        handleAddToStart, handleAddToEnd, handleAddToPosition,
+        handleRemoveFromStart, handleRemoveFromPosition, handleRemoveFromEnd,
+        handleFilter, handleMultiply,
+        handleSortDecreasing, handleSortIncreasing
+    }
  
     // Handlers
     const handleReset = () => {
@@ -40,12 +141,6 @@ const useArrayForm = () => {
         setFactor(initialFormData.factor)
         setActionIndex(initialState.index)
     }
-
-    const restoreAfterAction = () => {
-        if (InputValidator.isValidNumber(indexInput)) setActionIndex(parseInt(indexInput))
-        
-        setExecutingOperation(false)
-    } 
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
         const isValidInput = InputValidator.isValidNumber(e.target.value)
@@ -93,16 +188,19 @@ const useArrayForm = () => {
 
     return {
         dataArray,
-        actionIndex, 
-        actionValue,
+        controls,
+        indexInput,
+        valueInput,
         executingOperation,
         lowLimitInput,
         highLimitInput,
-        valueInput,
         includeHighLimit,
         includeLowLimit,
         factorInput,
-        handleInputChange
+        errors,
+        controlHandlers,
+        handleInputChange,
+        handleReset,
     }
 }
 

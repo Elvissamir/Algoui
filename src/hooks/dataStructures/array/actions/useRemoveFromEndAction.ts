@@ -1,12 +1,23 @@
-import { ArrayItem } from "../../../../core/dataStructures/ArrayDS"
+import { AnimationControls } from "framer-motion"
+import { ArrayItem, ArrayOperation } from "../../../../core/dataStructures/ArrayDS"
+import useRemoveFromEndVariant from "../variants/useRemoveFromEndVariant"
 
 interface UseRemoveFromEndAction {
     dataArray: ArrayItem[]
+    setDataArray: React.Dispatch<React.SetStateAction<ArrayItem[]>>
+    controls: AnimationControls
+    setOperation: React.Dispatch<React.SetStateAction<ArrayOperation>>
 }
 
-const useRemoveFromEndAction = ({ dataArray }: UseRemoveFromEndAction) => {
+const useRemoveFromEndAction = ({ 
+        dataArray, setDataArray,
+        setOperation, controls
+    }: UseRemoveFromEndAction) => {
+    
+    const removeFromEndVariant = useRemoveFromEndVariant({ dataArray })
+
     const handleRemoveFromEnd = async () => {
-        await controls.start()
+        await controls.start(removeFromEndVariant())
 
         setOperation('remove-end')
         handleRemoveFromEndAction()
@@ -20,7 +31,7 @@ const useRemoveFromEndAction = ({ dataArray }: UseRemoveFromEndAction) => {
     }
 
     return {
-
+        handleRemoveFromEnd
     }
 }
 

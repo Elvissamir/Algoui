@@ -1,12 +1,24 @@
 import SectionContainer from '../../components/SectionContainer'
 import ArrayControls from '../../components/dataStructures/array/ArrayControls'
 import ArrayAction from '../../components/dataStructures/array/ArrayAction'
-import { useAnimationControls } from 'framer-motion'
 import useArrayForm from '../../hooks/dataStructures/array/useArrayForm'
 
 const ArrayDSPage = () => {
-    const {} = useArrayForm()
-    const controls = useAnimationControls()
+    const {
+        dataArray,
+        indexInput,
+        valueInput,
+        factorInput,
+        controls,
+        includeHighLimit,
+        includeLowLimit,
+        highLimitInput,
+        errors,
+        lowLimitInput,
+        executingOperation,
+        handleReset,
+        handleInputChange,
+    } = useArrayForm()
 
     return (
         <SectionContainer 
@@ -14,8 +26,21 @@ const ArrayDSPage = () => {
             description='Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                 Aliquid dolores aliquam, laboriosam magnam amet ducimus illo. Officia, cumque distinctio illum est consequuntur similique alias exercitationem eos consequatur voluptatem molestias. 
                 Veniam?'
-            controls={<ArrayControls />}
-            action={<ArrayAction data={} controls={controls} />} />
+            controls={
+                <ArrayControls
+                    indexInput={indexInput} 
+                    valueInput={valueInput} 
+                    factorInput={factorInput}
+                    lowLimitInput={lowLimitInput}
+                    includeLowLimit={includeLowLimit}
+                    highLimitInput={highLimitInput}
+                    includeHighLimit={includeHighLimit}
+                    executingOperation={executingOperation} 
+                    errors={errors}
+                    handlers={}
+                    handleReset={handleReset}
+                    handleInputChange={handleInputChange} />}
+            action={<ArrayAction data={dataArray} controls={controls} />} />
     )
 }
 

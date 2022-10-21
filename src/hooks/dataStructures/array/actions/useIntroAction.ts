@@ -1,25 +1,27 @@
 import { useState, useEffect } from 'react'
 import { AnimationControls } from "framer-motion"
-import { ArrayItem } from '../../../../core/dataStructures/ArrayDS'
+import { ArrayItem, ArrayOperation } from '../../../../core/dataStructures/ArrayDS'
+import useIntroArrayVariant from '../variants/useIntroArrayVariant'
 
 interface UseIntroActionProps {
     dataArray: ArrayItem[]
+    operation: ArrayOperation
     controls: AnimationControls
     afterAction: () => void
 }
 
-const useIntroAction = ({ dataArray, controls, afterAction }: UseIntroActionProps) => {
-    const [introOperation, setIntroOperation] = useState()
+const useIntroAction = ({ dataArray, operation, controls, afterAction }: UseIntroActionProps) => {
+    const introArrayVariant = useIntroArrayVariant()
 
     const introAction = async () => {
-        // await controls.start(displayArrayVariants())
+        await controls.start(introArrayVariant())
 
         afterAction()
     }
 
     useEffect(() => {
-        if (introOperation) introAction()
-    }, [dataArray, introOperation])
+        if (operation === 'intro') introAction()
+    }, [dataArray, operation])
 
     return {
         introAction

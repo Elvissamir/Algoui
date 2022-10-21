@@ -1,7 +1,6 @@
 import { ChangeEvent } from "react"
 import { FormDataError } from "../../../core/generalTypes"
 import ActionBtn from "../../ActionBtn"
-import FieldErrorInfo from "../../FieldErrorInfo"
 import InputField from "../../InputField"
 import InputPackField from "../../InputPackField"
 
@@ -53,12 +52,16 @@ const ArrayControls = ({
                 <InputField 
                     id="item-val"
                     value={valueInput} 
+                    label='Value'
+                    disabled={false}
                     type="number"
                     handleChange={handleInputChange} 
                     error={errors['item-val']}/>
                 <InputField 
                     id="item-position"
                     value={indexInput}
+                    label='Position'
+                    disabled={false}
                     type="number"
                     handleChange={handleInputChange}
                     error={errors['item-position']} />
@@ -111,6 +114,7 @@ const ArrayControls = ({
                 <InputField 
                     id="factor-val" 
                     value={factorInput} 
+                    disabled={false}
                     label='Factor'
                     type="number" 
                     handleChange={handleInputChange} 
@@ -130,6 +134,7 @@ const ArrayControls = ({
                         label="Filter lower than:" 
                         checkId="low-check" 
                         checkName="low-val"
+                        disabled={false}
                         checked={includeLowLimit} 
                         handleChange={handleInputChange}
                         error={errors['low-val']} />  
@@ -139,6 +144,7 @@ const ArrayControls = ({
                         inputId="high-val"
                         inputValue={highLimitInput}
                         inputType='number'
+                        disabled={false}
                         label="Filter higher than:" 
                         checkId="high-check" 
                         checkName="high-val"

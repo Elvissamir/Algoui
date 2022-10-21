@@ -71,6 +71,7 @@ const useArrayForm = () => {
         actionIndex, setActionIndex, 
         operation, setOperation,
         controls, 
+        setExecutingOperation,
         afterAction 
     })
 
@@ -78,7 +79,7 @@ const useArrayForm = () => {
         dataArray, setDataArray, 
         actionIndex, setActionIndex, 
         actionValue, 
-        controls, 
+        controls, setExecutingOperation,
         operation, setOperation, 
         afterAction, 
     })
@@ -86,7 +87,7 @@ const useArrayForm = () => {
     const { handleAddToPosition } = useAddToPositionAction({
         dataArray, setDataArray,
         actionIndex, setActionIndex,
-        actionValue,
+        actionValue, setExecutingOperation,
         operation, setOperation,
         handleAddToStart, handleAddToEnd,
         controls, afterAction
@@ -99,6 +100,7 @@ const useArrayForm = () => {
         lowLimit, highLimit,
         includeLowLimit, includeHighLimit,
         afterAction, controls, 
+        setExecutingOperation
     })
     const { handleMultiply } = useMultiplyAction({
         dataArray, setDataArray,
@@ -110,21 +112,25 @@ const useArrayForm = () => {
 
     const { handleRemoveFromStart } = useRemoveFromStartAction({ 
         dataArray, setDataArray, 
-        setOperation, controls, afterAction
+        setOperation, controls, afterAction,
+        setExecutingOperation
     })
 
     const { handleRemoveFromPosition } = useRemoveFromPositionAction({ 
         dataArray, setDataArray, 
         controls, actionIndex, 
-        setOperation, afterAction 
+        setOperation, afterAction,
     })
 
     const { handleRemoveFromEnd } = useRemoveFromEndAction({ 
         dataArray, setDataArray, 
-        setOperation, controls, afterAction
+        setOperation, controls, afterAction,
     })
 
-    const { handleSortDecreasing, handleSortIncreasing } = useSimpleSortAction({ dataArray, setDataArray, setOperation })
+    const { handleSortDecreasing, handleSortIncreasing } = useSimpleSortAction({ 
+        dataArray, setDataArray, 
+        setOperation, afterAction
+    })
     
     const controlHandlers: ArrayFormControlHandlers = {
         handleAddToStart, handleAddToEnd, handleAddToPosition,
@@ -133,7 +139,6 @@ const useArrayForm = () => {
         handleSortDecreasing, handleSortIncreasing
     }
  
-    // Handlers
     const handleReset = async () => {
         await controls.stop()
 
@@ -200,6 +205,7 @@ const useArrayForm = () => {
         controls,
         indexInput,
         valueInput,
+        operation,
         executingOperation,
         lowLimitInput,
         highLimitInput,

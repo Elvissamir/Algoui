@@ -12,6 +12,7 @@ interface UseAddToStartActionProps {
     actionIndex: number
     setActionIndex: React.Dispatch<React.SetStateAction<number>>
     setDataArray: React.Dispatch<React.SetStateAction<ArrayItem[]>>
+    setExecutingOperation: React.Dispatch<React.SetStateAction<boolean>>
     afterAction: () => void
 }
 
@@ -23,6 +24,7 @@ const useAddToStartAction = ({
         setOperation, 
         afterAction, 
         actionIndex, setActionIndex, 
+        setExecutingOperation
     }: UseAddToStartActionProps) => {
 
     const addToStartVariant = useAddToStartVariant({ actionIndex })
@@ -38,6 +40,7 @@ const useAddToStartAction = ({
         setActionIndex(0)
         setDataArray(ndataArray)
         setOperation('add-start')
+        setExecutingOperation(true)
     }
 
     const addToStartAction = async () => {

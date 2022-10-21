@@ -18,19 +18,19 @@ const useRemoveFromEndAction = ({
     
     const removeFromEndVariant = useRemoveFromEndVariant({ dataArray })
 
-    const handleRemoveFromEnd = async () => {
-        await controls.start(removeFromEndVariant())
-
-        setOperation('remove-end')
-        handleRemoveFromEndAction()
-    }
-
     const handleRemoveFromEndAction = () => {
         const ndataArray = [...dataArray]
         ndataArray.pop()
 
         setDataArray(ndataArray)
         afterAction()
+    }
+
+    const handleRemoveFromEnd = async () => {
+        await controls.start(removeFromEndVariant())
+
+        setOperation('remove-end')
+        handleRemoveFromEndAction()
     }
 
     return {

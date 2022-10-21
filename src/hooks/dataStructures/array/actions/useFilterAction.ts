@@ -15,6 +15,7 @@ interface UseFilterActionProps {
     setActionIndex: React.Dispatch<React.SetStateAction<number>>
     operation: ArrayOperation
     setOperation:  React.Dispatch<React.SetStateAction<ArrayOperation>>
+    setExecutingOperation: React.Dispatch<React.SetStateAction<boolean>>
     afterAction: () => void
 }
 
@@ -24,7 +25,8 @@ const useFilterAction = ({
         lowLimit, highLimit,
         operation, setOperation,
         includeHighLimit, includeLowLimit,
-        controls, afterAction
+        controls, afterAction,
+        setExecutingOperation
     }: UseFilterActionProps) => {
 
     const filterVariant = useFilterVariant({ actionIndex })
@@ -70,6 +72,7 @@ const useFilterAction = ({
     const handleFilter = async () => {
         filterItemsAction()
         setOperation('filter')
+        setExecutingOperation(true)
     }
 
     return {

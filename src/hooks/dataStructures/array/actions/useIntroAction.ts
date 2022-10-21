@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { AnimationControls } from "framer-motion"
 import { ArrayItem, ArrayOperation } from '../../../../core/dataStructures/ArrayDS'
 import useIntroArrayVariant from '../variants/useIntroArrayVariant'

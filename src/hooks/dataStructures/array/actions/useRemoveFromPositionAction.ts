@@ -15,17 +15,10 @@ const useRemoveFromPositionAction = ({
         dataArray, setDataArray, 
         actionIndex,
         afterAction,
-        setOperation, controls
+        setOperation, controls,
     }: UseRemoveFromPositionActionProps) => {
 
     const removeFromPositionVariant = useRemoveFromPositionVariant({ actionIndex })
-
-    const handleRemoveFromPosition = async () => {
-        await controls.start(removeFromPositionVariant())
-
-        setOperation('remove-from')
-        handleRemoveFromPositionAction()
-    }
 
     const handleRemoveFromPositionAction = () => {
         const ndataArray = [...dataArray]
@@ -33,6 +26,13 @@ const useRemoveFromPositionAction = ({
 
         setDataArray(ndataArray)
         afterAction()
+    }
+
+    const handleRemoveFromPosition = async () => {
+        await controls.start(removeFromPositionVariant())
+
+        setOperation('remove-from')
+        handleRemoveFromPositionAction()
     }
 
     return {

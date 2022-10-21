@@ -11,6 +11,7 @@ interface UseAddToPositionAtionProps {
     operation: ArrayOperation
     setDataArray: React.Dispatch<React.SetStateAction<ArrayItem[]>>
     setOperation: React.Dispatch<React.SetStateAction<ArrayOperation>>
+    setExecutingOperation: React.Dispatch<React.SetStateAction<boolean>>
     setActionIndex: React.Dispatch<React.SetStateAction<number>>
     afterAction: () => void
     handleAddToStart: () => void
@@ -26,6 +27,7 @@ const useAddToPositionAction = ({
         operation, 
         setDataArray,
         setOperation,
+        setExecutingOperation,
         setActionIndex,
         handleAddToStart,
         handleAddToEnd,
@@ -55,6 +57,7 @@ const useAddToPositionAction = ({
         ndataArray.splice(actionIndex, 0, { id: Math.random(), val: actionValue})
         setDataArray(ndataArray)
         setOperation('add-to')
+        setExecutingOperation(true)
     }
 
     return {

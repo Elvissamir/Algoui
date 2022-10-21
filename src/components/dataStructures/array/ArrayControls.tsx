@@ -2,6 +2,7 @@ import { ChangeEvent } from "react"
 import { FormDataError } from "../../../core/generalTypes"
 import ActionBtn from "../../ActionBtn"
 import FieldErrorInfo from "../../FieldErrorInfo"
+import InputField from "../../InputField"
 
 interface ControlHandlers {
     handleAddToStart: () => void
@@ -48,31 +49,18 @@ const ArrayControls = ({
     return (
         <>
             <div className="add-item-controls">
-                <div className='input-field-container'>
-                    <div className="input-field">
-                        <label htmlFor="item-val">Value: </label>
-                        <input 
-                            onChange={handleInputChange}
-                            className="input-number" 
-                            id="item-val" 
-                            value={valueInput}
-                            disabled={executingOperation} 
-                            type='number' />
-                    </div>
-                    { errors['item-val'] && <FieldErrorInfo error={errors['item-val']} />}
-                </div>
-                <div className="input-field-container">
-                    <div className="input-field">
-                        <label htmlFor="item-position">Position: </label>
-                        <input 
-                            onChange={handleInputChange}
-                            className="input-number" 
-                            id="item-position" 
-                            value={indexInput} 
-                            type='number' />
-                    </div>
-                    { errors['item-position'] && <FieldErrorInfo error={errors['item-position']} />}
-                </div>
+                <InputField 
+                    id="item-val"
+                    value={valueInput} 
+                    type="number"
+                    handleChange={handleInputChange} 
+                    error={errors['item-val']}/>
+                <InputField 
+                    id="item-position"
+                    value={indexInput}
+                    type="number"
+                    handleChange={handleInputChange}
+                    error={errors['item-position']} />
                 <ActionBtn 
                     action={handlers.handleAddToStart} 
                     wrapperCssClass="add-start-btn-container"
@@ -119,18 +107,13 @@ const ArrayControls = ({
                     disabled={executingOperation} />
             </div>
             <div className="create-new-array-controls">
-                <div className="input-field-container">
-                    <div className="input-field">
-                        <label htmlFor="factor-val">Multiply by: </label>
-                        <input 
-                            onChange={handleInputChange}
-                            className="input-number" 
-                            id="factor-val" 
-                            value={factorInput} 
-                            type='number' />
-                    </div>
-                    { errors['factor-val'] && <FieldErrorInfo error={errors['factor-val']} />}
-                </div>
+                <InputField 
+                    id="factor-val" 
+                    value={factorInput} 
+                    label='Factor'
+                    type="number" 
+                    handleChange={handleInputChange} 
+                    error={errors['factor-val']} />
                 <ActionBtn 
                     action={handlers.handleMultiply}
                     wrapperCssClass='multiply-btn-container'
@@ -161,28 +144,8 @@ const ArrayControls = ({
                         { errors['low-val'] && <FieldErrorInfo error={errors['low-val']} />}
                     </div>
                 </div>
-                <div className="higher-input-container">
-                    <div className="input-field-container">
-                        <div className="input-field">
-                            <label className='input-label' htmlFor="high-val">Filter higher than:</label>
-                            <div className="input-pack-container">
-                                <input 
-                                    onChange={handleInputChange}
-                                    className="input-text" 
-                                    id="high-val" 
-                                    type='number'
-                                    value={highLimitInput} />
-                                <input 
-                                    onChange={handleInputChange}
-                                    className="input-check" 
-                                    type="checkbox" 
-                                    checked={includeHighLimit}
-                                    name="high-val" 
-                                    id="high-check" />
-                            </div>
-                        </div>
-                        { errors['high-val'] && <FieldErrorInfo error={errors['high-val']} />}
-                    </div>
+                <div className="higher-input-container">    
+                
                 </div>
                 <ActionBtn 
                     action={handlers.handleFilter}
@@ -192,10 +155,10 @@ const ArrayControls = ({
             </div>
             <div className='reset-container'>
                 <ActionBtn 
-                        action={handleReset}
-                        wrapperCssClass='reset-btn-container'
-                        text="Reset"
-                        disabled={false} />
+                    action={handleReset}
+                    wrapperCssClass='reset-btn-container'
+                    text="Reset"
+                    disabled={false} />
             </div>
         </>
     )  

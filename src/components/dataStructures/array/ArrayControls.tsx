@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react"
 import { FormDataError } from "../../../core/generalTypes"
+import ActionBtn from "../../ActionBtn"
 import FieldErrorInfo from "../../FieldErrorInfo"
 
 interface ControlHandlers {
@@ -72,18 +73,50 @@ const ArrayControls = ({
                     </div>
                     { errors['item-position'] && <FieldErrorInfo error={errors['item-position']} />}
                 </div>
-                <button onClick={handlers.handleAddToStart} type="button">Add First</button>
-                <button onClick={handlers.handleAddToEnd} type="button">Add Last</button>
-                <button onClick={handlers.handleAddToPosition} type="button">Add To</button>
+                <ActionBtn 
+                    action={handlers.handleAddToStart} 
+                    wrapperCssClass="add-start-btn-container"
+                    text="Add Start"
+                    disabled={executingOperation} />
+                <ActionBtn 
+                    action={handlers.handleAddToEnd} 
+                    wrapperCssClass="add-end-btn-container"
+                    text="Add End"
+                    disabled={executingOperation} />
+                <ActionBtn 
+                    action={handlers.handleAddToPosition} 
+                    wrapperCssClass="add-position-btn-container"
+                    text="Add Position"
+                    disabled={executingOperation} />
             </div>
             <div className="remove-item-controls">
-                <button onClick={handlers.handleRemoveFromPosition} type="button">Remove From</button>
-                <button onClick={handlers.handleRemoveFromStart} type="button">Remove First</button>
-                <button onClick={handlers.handleRemoveFromEnd} type="button">Remove Last</button>
+                <ActionBtn 
+                    action={handlers.handleRemoveFromStart} 
+                    wrapperCssClass="remove-start-btn-container"
+                    text="Remove Start"
+                    disabled={executingOperation} />
+                <ActionBtn 
+                    action={handlers.handleRemoveFromEnd} 
+                    wrapperCssClass="remove-end-btn-container"
+                    text="Remove End"
+                    disabled={executingOperation} />
+                <ActionBtn 
+                    action={handlers.handleRemoveFromPosition} 
+                    wrapperCssClass="remove-position-btn-container"
+                    text="Remove Position"
+                    disabled={executingOperation} />
             </div>
             <div className="sort-items-controls">
-                <button onClick={handlers.handleSortIncreasing} type="button">Sort (increasing)</button>
-                <button onClick={handlers.handleSortDecreasing} type="button">Sort (decreasing)</button>
+                <ActionBtn 
+                    action={handlers.handleSortIncreasing}
+                    wrapperCssClass='sort-increasing-btn-container'
+                    text="Sort Increasing"
+                    disabled={executingOperation} />
+                <ActionBtn 
+                    action={handlers.handleSortDecreasing}
+                    wrapperCssClass='sort-decreasing-btn-container'
+                    text="Sort Decreasing"
+                    disabled={executingOperation} />
             </div>
             <div className="create-new-array-controls">
                 <div className="input-field-container">
@@ -98,7 +131,11 @@ const ArrayControls = ({
                     </div>
                     { errors['factor-val'] && <FieldErrorInfo error={errors['factor-val']} />}
                 </div>
-                <button onClick={handlers.handleMultiply} type="button">Multiply</button>
+                <ActionBtn 
+                    action={handlers.handleMultiply}
+                    wrapperCssClass='multiply-btn-container'
+                    text="Multiply By"
+                    disabled={executingOperation} />
             </div>
             <div className="filter-array-controls">
                 <div className="lower-input-container">
@@ -147,10 +184,18 @@ const ArrayControls = ({
                         { errors['high-val'] && <FieldErrorInfo error={errors['high-val']} />}
                     </div>
                 </div>
-                <button onClick={handlers.handleFilter} type="button">Filter items</button>
+                <ActionBtn 
+                    action={handlers.handleFilter}
+                    wrapperCssClass='filter-btn-container'
+                    text="Filter"
+                    disabled={executingOperation} />
             </div>
             <div className='reset-container'>
-                <button onClick={handleReset} className='reset-btn'>Reset</button>
+                <ActionBtn 
+                        action={handleReset}
+                        wrapperCssClass='reset-btn-container'
+                        text="Reset"
+                        disabled={false} />
             </div>
         </>
     )  

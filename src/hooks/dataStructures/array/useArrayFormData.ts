@@ -23,7 +23,7 @@ const initialFormData: InitialArrayFormData = {
     valueInput: '0',
     factorInput: '2',
     lowLimitInput: '0',
-    highLimitInput: '10',
+    highLimitInput: '5',
     includeLowLimit: true,
     includeHighLimit: true
 }

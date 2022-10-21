@@ -7,11 +7,13 @@ interface UseRemoveFromEndAction {
     setDataArray: React.Dispatch<React.SetStateAction<ArrayItem[]>>
     controls: AnimationControls
     setOperation: React.Dispatch<React.SetStateAction<ArrayOperation>>
+    afterAction: () => void
 }
 
 const useRemoveFromEndAction = ({ 
         dataArray, setDataArray,
-        setOperation, controls
+        setOperation, controls,
+        afterAction
     }: UseRemoveFromEndAction) => {
     
     const removeFromEndVariant = useRemoveFromEndVariant({ dataArray })
@@ -28,6 +30,7 @@ const useRemoveFromEndAction = ({
         ndataArray.pop()
 
         setDataArray(ndataArray)
+        afterAction()
     }
 
     return {

@@ -17,6 +17,7 @@ const ArrayDSPage = () => {
         lowLimitInput,
         executingOperation,
         handleReset,
+        controlHandlers,
         handleInputChange,
     } = useArrayForm()
 
@@ -37,7 +38,7 @@ const ArrayDSPage = () => {
                     includeHighLimit={includeHighLimit}
                     executingOperation={executingOperation} 
                     errors={errors}
-                    handlers={}
+                    handlers={controlHandlers}
                     handleReset={handleReset}
                     handleInputChange={handleInputChange} />}
             action={<ArrayAction data={dataArray} controls={controls} />} />

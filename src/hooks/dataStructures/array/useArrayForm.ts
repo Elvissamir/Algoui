@@ -59,15 +59,17 @@ const useArrayForm = () => {
         if (InputValidator.isValidNumber(indexInput)) setActionIndex(parseInt(indexInput))
         
         setExecutingOperation(false)
+        setOperation(null)
     } 
 
     // ACTIONS 
-    const { introAction } = useIntroAction({ dataArray, afterAction, operation, controls })
+    useIntroAction({ dataArray, afterAction, operation, controls })
 
     const { handleAddToStart } = useAddToStartAction({ 
         dataArray, setDataArray, 
         actionValue, 
         actionIndex, setActionIndex, 
+        operation, setOperation,
         controls, 
         afterAction 
     })
@@ -108,7 +110,7 @@ const useArrayForm = () => {
 
     const { handleRemoveFromStart } = useRemoveFromStartAction({ 
         dataArray, setDataArray, 
-        setOperation, controls
+        setOperation, controls, afterAction
     })
 
     const { handleRemoveFromPosition } = useRemoveFromPositionAction({ 
@@ -119,10 +121,10 @@ const useArrayForm = () => {
 
     const { handleRemoveFromEnd } = useRemoveFromEndAction({ 
         dataArray, setDataArray, 
-        setOperation, controls 
+        setOperation, controls, afterAction
     })
 
-    const { handleSortDecreasing, handleSortIncreasing } = useSimpleSortAction({ dataArray })
+    const { handleSortDecreasing, handleSortIncreasing } = useSimpleSortAction({ dataArray, setDataArray, setOperation })
     
     const controlHandlers: ArrayFormControlHandlers = {
         handleAddToStart, handleAddToEnd, handleAddToPosition,
@@ -132,14 +134,21 @@ const useArrayForm = () => {
     }
  
     // Handlers
-    const handleReset = () => {
+    const handleReset = async () => {
+        await controls.stop()
+
         setDataArray(initialState.data.map(item => { return {...item} }))
-        setActionValue(initialState.value)
-        setLowLimit(initialFormData.lowLimit)
-        setHighLimit(initialFormData.highLimit)
-        setOperation('intro')
-        setFactor(initialFormData.factor)
         setActionIndex(initialState.index)
+        setIndexInput(initialFormData.indexInput)
+        setActionValue(initialState.value)
+        setValueInput(initialFormData.valueInput)
+        setLowLimit(initialFormData.lowLimit)
+        setLowLimitInput(initialFormData.lowLimitInput)
+        setHighLimit(initialFormData.highLimit)
+        setHighLimitInput(initialFormData.highLimitInput)
+        setFactor(initialFormData.factor)
+        setFactorInput(initialFormData.factorInput)
+        setOperation('intro')
     }
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

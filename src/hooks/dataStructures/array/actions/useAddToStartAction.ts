@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { AnimationControls } from 'framer-motion'
-import { ArrayItem } from "../../../../core/dataStructures/ArrayDS"
+import { ArrayItem, ArrayOperation } from "../../../../core/dataStructures/ArrayDS"
 import useAddToStartVariant from '../variants/useAddToStartVariant'
 
 interface UseAddToStartActionProps {
     dataArray: ArrayItem[]
     actionValue: number 
     controls: AnimationControls
+    operation: ArrayOperation
+    setOperation: React.Dispatch<React.SetStateAction<ArrayOperation>>
     actionIndex: number
     setActionIndex: React.Dispatch<React.SetStateAction<number>>
     setDataArray: React.Dispatch<React.SetStateAction<ArrayItem[]>>
@@ -17,16 +19,17 @@ const useAddToStartAction = ({
         dataArray, setDataArray ,
         actionValue, 
         controls, 
+        operation,
+        setOperation, 
         afterAction, 
         actionIndex, setActionIndex, 
     }: UseAddToStartActionProps) => {
 
-    const [addToStartOperation, setAddToStartOperation] = useState(false)
     const addToStartVariant = useAddToStartVariant({ actionIndex })
 
     useEffect(() => {
-        if (addToStartOperation) addToStartAction()
-    }, [dataArray, addToStartOperation])
+        if (operation === 'add-start') addToStartAction()
+    }, [dataArray, operation])
 
     const handleAddToStart = () => {
         const ndataArray = [...dataArray]
@@ -34,7 +37,7 @@ const useAddToStartAction = ({
 
         setActionIndex(0)
         setDataArray(ndataArray)
-        setAddToStartOperation(true)
+        setOperation('add-start')
     }
 
     const addToStartAction = async () => {

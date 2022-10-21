@@ -1,10 +1,12 @@
-import { ArrayItem } from "../../../../core/dataStructures/ArrayDS"
+import { ArrayItem, ArrayOperation } from "../../../../core/dataStructures/ArrayDS"
 
 interface UseSimpleSortProps {
     dataArray: ArrayItem[]
+    setDataArray: React.Dispatch<React.SetStateAction<ArrayItem[]>>
+    setOperation: React.Dispatch<React.SetStateAction<ArrayOperation>>
 }
 
-const useSimpleSortAction = ({ dataArray }: UseSimpleSortProps) => {
+const useSimpleSortAction = ({ dataArray, setDataArray, setOperation }: UseSimpleSortProps) => {
     const handleSortIncreasing = () => {
         const ndataArray = [...dataArray]
         ndataArray.sort((a, b) => a.val - b.val)

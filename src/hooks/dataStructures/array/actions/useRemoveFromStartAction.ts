@@ -7,11 +7,13 @@ interface UseRemoveFromStartProps {
     setDataArray: React.Dispatch<React.SetStateAction<ArrayItem[]>>
     controls: AnimationControls
     setOperation: React.Dispatch<React.SetStateAction<ArrayOperation>>
+    afterAction: () => void
 }
 
 const useRemoveFromStartAction = ({ 
         dataArray, setDataArray, 
-        controls, setOperation 
+        controls, setOperation,
+        afterAction
     }: UseRemoveFromStartProps) => {
 
     const removeFromStartVariant = useRemoveFromStartVariant()
@@ -21,6 +23,7 @@ const useRemoveFromStartAction = ({
         ndataArray.shift()
 
         setDataArray(ndataArray)
+        afterAction()
     }  
 
     const handleRemoveFromStart = async () => {

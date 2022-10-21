@@ -8,17 +8,18 @@ interface InputFieldProps {
     id: string 
     value: string
     label: string
+    disabled: boolean
     type: 'number' | 'text'
     error: FieldError
     handleChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-const InputField = ({id, value, label, type, error, handleChange }: InputFieldProps) => {
+const InputField = ({id, value, disabled, label, type, error, handleChange }: InputFieldProps) => {
     return (
         <div className="input-field-container">
             <div className="input-field">
                 <Label inputId={id} text={label} />
-                <Input id={id} value={value} type={type} handleChange={handleChange} />
+                <Input id={id} value={value} disabled={disabled} type={type} handleChange={handleChange} />
             </div>
             { error && <FieldErrorInfo error={error} />}
         </div>

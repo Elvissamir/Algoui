@@ -3,6 +3,7 @@ import { FormDataError } from "../../../core/generalTypes"
 import ActionBtn from "../../ActionBtn"
 import FieldErrorInfo from "../../FieldErrorInfo"
 import InputField from "../../InputField"
+import InputPackField from "../../InputPackField"
 
 interface ControlHandlers {
     handleAddToStart: () => void
@@ -122,30 +123,28 @@ const ArrayControls = ({
             </div>
             <div className="filter-array-controls">
                 <div className="lower-input-container">
-                    <div className="input-field-container">
-                        <div className="input-field">
-                            <label htmlFor="low-val">Filter lower than:</label>
-                            <div className="input-pack-container">
-                                <input 
-                                    onChange={handleInputChange}
-                                    className="input-text" 
-                                    id="low-val" 
-                                    type='number'
-                                    value={lowLimitInput} />
-                                <input 
-                                    onChange={handleInputChange}
-                                    className="input-check" 
-                                    type="checkbox" 
-                                    checked={includeLowLimit}
-                                    name="low-val" 
-                                    id="low-check" />
-                            </div>
-                        </div>
-                        { errors['low-val'] && <FieldErrorInfo error={errors['low-val']} />}
+                    <InputPackField 
+                        inputId="low-val"
+                        inputValue={lowLimitInput}
+                        inputType='number'
+                        label="Filter lower than:" 
+                        checkId="low-check" 
+                        checkName="low-val"
+                        checked={includeLowLimit} 
+                        handleChange={handleInputChange}
+                        error={errors['low-val']} />  
                     </div>
-                </div>
                 <div className="higher-input-container">    
-                
+                    <InputPackField 
+                        inputId="high-val"
+                        inputValue={highLimitInput}
+                        inputType='number'
+                        label="Filter higher than:" 
+                        checkId="high-check" 
+                        checkName="high-val"
+                        checked={includeHighLimit} 
+                        handleChange={handleInputChange}
+                        error={errors['high-val']} />
                 </div>
                 <ActionBtn 
                     action={handlers.handleFilter}

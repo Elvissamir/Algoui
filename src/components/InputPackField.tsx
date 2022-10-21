@@ -9,6 +9,7 @@ interface InputPackFieldProps {
     inputId: string 
     label : string 
     inputValue: string
+    disabled: boolean
     inputType: 'text' | 'number'
     checkId: string
     checkName: string 
@@ -17,13 +18,13 @@ interface InputPackFieldProps {
     error: FieldError
 }
 
-const InputPackField = ({ inputId, inputValue, inputType, label, checkId, checkName, checked, error, handleChange }: InputPackFieldProps) => {
+const InputPackField = ({ inputId, inputValue, disabled, inputType, label, checkId, checkName, checked, error, handleChange }: InputPackFieldProps) => {
     return (
         <div className="input-field-container">
             <div className="input-field">
                 <Label text={label} inputId={inputId} />
                 <div className="input-pack-container">
-                    <Input id={inputId} value={inputValue} type={inputType} handleChange={handleChange} />
+                    <Input id={inputId} value={inputValue} disabled={disabled} type={inputType} handleChange={handleChange} />
                     <InputCheck id={checkId} name={checkName} checked={checked} handleChange={handleChange} />
                 </div>
             </div>

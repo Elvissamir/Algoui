@@ -1,0 +1,18 @@
+.error-info-container {
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+
+    .error-info {
+        color: var(--brand-error);
+        font-size: 16px;
+        // font-weight: bolder;
+        margin-left: 3px;
+    }
+
+    .error-icon {
+        fill: var(--brand-error);
+        height: 20px;
+        width: 20px;
+    }
+}

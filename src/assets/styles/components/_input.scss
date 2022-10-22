@@ -1,0 +1,18 @@
+.input-text, .input-number {
+    border: 2px lightgray solid;
+    box-shadow: 0 0 5px lightgray;
+    color: var(--brand-purple);
+    font-size: 16px;
+    font-weight: bolder;
+    margin-left: 5px;
+    max-width: 70px;
+    padding: 0 0 0 5px;
+}   
+
+.input-text:hover, .input-number:hover {
+    box-shadow: 0 0 10px var(--brand-purple);
+}
+
+.input-text:focus, .input-number:focus {
+    outline: 2px var(--brand-purple) solid;
+}

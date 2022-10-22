@@ -10,11 +10,12 @@ interface InputProps {
 
 const Input = ({ id, value, type, disabled, handleChange }: InputProps) => {
     const selectCss = () => {
-        const css = ''
-        if (type === 'number') css+'input-number'
-        else css+'input-text'
+        let css = ''
+        if (type === 'number') css =  css+'input-number'
+        else css = css+'input-text'
+        console.log(css)
 
-        return disabled? css+' input-disabled' : ''
+        return disabled? css+' input-disabled' : css
     }
 
     return (

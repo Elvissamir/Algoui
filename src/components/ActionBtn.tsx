@@ -10,7 +10,7 @@ const ActionBtn = ({ action, wrapperCssClass, disabled, text }: ActionBtnProps) 
         <div className={wrapperCssClass}>
             <button 
                 onClick={action} 
-                className={ disabled? 'action-btn' : 'action-btn disabled-btn'}
+                className={ disabled? 'action-btn disabled-btn' : 'action-btn' }
                 disabled={disabled}
                 type="button">{text}</button>
         </div>

@@ -13,7 +13,6 @@ const ArrayDSPage = () => {
         includeHighLimit,
         includeLowLimit,
         highLimitInput,
-        operation,
         errors,
         lowLimitInput,
         executingOperation,
@@ -37,7 +36,7 @@ const ArrayDSPage = () => {
                     includeLowLimit={includeLowLimit}
                     highLimitInput={highLimitInput}
                     includeHighLimit={includeHighLimit}
-                    executingOperation={executingOperation || operation !== null} 
+                    executingOperation={executingOperation} 
                     errors={errors}
                     handlers={controlHandlers}
                     handleReset={handleReset}

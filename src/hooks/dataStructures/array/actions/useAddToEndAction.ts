@@ -12,7 +12,6 @@ interface UseAddToEndActionProps {
     operation: ArrayOperation
     setOperation: React.Dispatch<React.SetStateAction<ArrayOperation>>
     controls: AnimationControls
-    setExecutingOperation: React.Dispatch<React.SetStateAction<boolean>>
     afterAction: () => void
 }
 
@@ -22,7 +21,6 @@ const useAddToEndAction = ({
     actionValue, 
     actionIndex, 
     setActionIndex, 
-    setExecutingOperation,
     operation, 
     setOperation,
     controls, 
@@ -49,7 +47,6 @@ const useAddToEndAction = ({
         setDataArray(ndataArray)
 
         setOperation('add-end')
-        setExecutingOperation(true)
     }
 
     return {

@@ -7,7 +7,6 @@ interface UseRemoveFromStartProps {
     setDataArray: React.Dispatch<React.SetStateAction<ArrayItem[]>>
     controls: AnimationControls
     setOperation: React.Dispatch<React.SetStateAction<ArrayOperation>>
-    setExecutingOperation: React.Dispatch<React.SetStateAction<boolean>>
     afterAction: () => void
 }
 

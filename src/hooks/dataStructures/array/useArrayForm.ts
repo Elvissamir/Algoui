@@ -71,7 +71,6 @@ const useArrayForm = () => {
         actionIndex, setActionIndex, 
         operation, setOperation,
         controls, 
-        setExecutingOperation,
         afterAction 
     })
 
@@ -79,7 +78,7 @@ const useArrayForm = () => {
         dataArray, setDataArray, 
         actionIndex, setActionIndex, 
         actionValue, 
-        controls, setExecutingOperation,
+        controls,
         operation, setOperation, 
         afterAction, 
     })
@@ -87,7 +86,7 @@ const useArrayForm = () => {
     const { handleAddToPosition } = useAddToPositionAction({
         dataArray, setDataArray,
         actionIndex, setActionIndex,
-        actionValue, setExecutingOperation,
+        actionValue, 
         operation, setOperation,
         handleAddToStart, handleAddToEnd,
         controls, afterAction
@@ -112,8 +111,8 @@ const useArrayForm = () => {
 
     const { handleRemoveFromStart } = useRemoveFromStartAction({ 
         dataArray, setDataArray, 
-        setOperation, controls, afterAction,
-        setExecutingOperation
+        setOperation, controls, 
+        afterAction,
     })
 
     const { handleRemoveFromPosition } = useRemoveFromPositionAction({ 

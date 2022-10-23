@@ -40,21 +40,23 @@ const AddItemControls = ({
                 type="number"
                 handleChange={handleInputChange}
                 error={errors['item-position']} />
-            <ActionBtn 
-                action={handlers.handleAddToStart} 
-                wrapperCssClass="add-start-btn-container"
-                text="Add Start"
-                disabled={executingOperation} />
-            <ActionBtn 
-                action={handlers.handleAddToEnd} 
-                wrapperCssClass="add-end-btn-container"
-                text="Add End"
-                disabled={executingOperation} />
-            <ActionBtn 
-                action={handlers.handleAddToPosition} 
-                wrapperCssClass="add-position-btn-container"
-                text="Add Position"
-                disabled={executingOperation} />
+            <div className="add-item-btns">
+                <ActionBtn 
+                    action={handlers.handleAddToStart} 
+                    wrapperCssClass="add-start-btn-container"
+                    text="Add Start"
+                    disabled={executingOperation} />
+                <ActionBtn 
+                    action={handlers.handleAddToEnd} 
+                    wrapperCssClass="add-end-btn-container"
+                    text="Add End"
+                    disabled={executingOperation} />
+                <ActionBtn 
+                    action={handlers.handleAddToPosition} 
+                    wrapperCssClass="add-position-btn-container"
+                    text="Add Position"
+                    disabled={executingOperation} />
+            </div>
         </div>
     )
 }

@@ -1,0 +1,22 @@
+.add-item-controls {
+    display: flex;
+    flex-direction: column;
+
+    .input-field {
+        justify-content: space-between;
+
+        .input-number {
+            width: 100%;
+            max-width: 150px;
+        }
+    }
+
+    .add-item-btns {
+        display: flex;
+        flex-wrap: wrap;
+
+        .action-btn {
+            margin-right: 5px;
+        }
+    }
+}

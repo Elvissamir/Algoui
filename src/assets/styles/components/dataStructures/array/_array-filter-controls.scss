@@ -1,0 +1,20 @@
+.filter-array-controls {
+    display: flex;
+    flex-direction: column;
+
+    .input-field {
+        justify-content: space-between;
+
+        .input-pack-container {
+            width: auto;
+
+            .input-number {
+                max-width: 110px;
+            }
+
+            .input-check {
+                height: 100%;
+            }
+        }
+    }
+}

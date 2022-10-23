@@ -2,10 +2,11 @@ import ControlsIcon from "../assets/icons/ControlsIcon"
 
 interface MobilebarProps {
     showMenu: boolean
+    toggleControls: () => void
     toggleMenu: () => void
 }
 
-const Mobilebar = ({showMenu, toggleMenu}: MobilebarProps) => {
+const Mobilebar = ({showMenu, toggleMenu, toggleControls}: MobilebarProps) => {
     return (
         <div className="mobilebar-container">
             <div className="mobilebar">
@@ -22,8 +23,8 @@ const Mobilebar = ({showMenu, toggleMenu}: MobilebarProps) => {
                 </div>
                 <div className="vertical-line"></div>
                 <div className="right">
-                    <button className="controls-btn">
-                        <p>Controls</p>
+                    <button onClick={toggleControls} className="controls-btn">
+                        <p className="text">Controls</p>
                         <ControlsIcon />
                     </button>
                 </div>

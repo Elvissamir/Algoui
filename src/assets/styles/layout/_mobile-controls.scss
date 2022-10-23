@@ -1,0 +1,10 @@
+.mobile-controls-container {
+    display: flex;
+    position: fixed;
+    background-color: lightblue;
+    bottom: 0;
+    margin-bottom: var(--mobile-bar);
+    flex-direction: column;
+    height: 250px;
+    width: 100%;
+}

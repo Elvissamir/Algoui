@@ -1,5 +1,4 @@
-import GithubIcon from "../assets/icons/GithubIcon"
-import externalLinks from "../core/externalLinks"
+import ControlsIcon from "../assets/icons/ControlsIcon"
 
 interface MobilebarProps {
     showMenu: boolean
@@ -23,10 +22,10 @@ const Mobilebar = ({showMenu, toggleMenu}: MobilebarProps) => {
                 </div>
                 <div className="vertical-line"></div>
                 <div className="right">
-                    <a className="my-github" href={externalLinks.github}>
-                        <p className="text">My Github</p>
-                        <GithubIcon />
-                    </a>
+                    <button className="controls-btn">
+                        <p>Controls</p>
+                        <ControlsIcon />
+                    </button>
                 </div>
             </div>
         </div>

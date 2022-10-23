@@ -5,7 +5,7 @@
     background-color: var(--brand-white);
     border-top: var(--brand-purple) 2px solid;
     padding: 10px;
-    height: 60px;
+    height: var(--mobile-bar);
     width: 100%;
     z-index: 1000;
 
@@ -36,8 +36,8 @@
 
                 .icon {
                     margin-left: 5px;
-                    height: 25px;
-                    width: 25px;
+                    height: 20px;
+                    width: 20px;
 
                     path {
                         fill: var(--brand-purple);
@@ -48,8 +48,8 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    width: 30px;
-                    height: 25px;
+                    width: 25px;
+                    height: 20px;
                     margin-left: 5px;
                     position: relative;
                     -webkit-transform: rotate(0deg);
@@ -87,15 +87,15 @@
                   }
                   
                   .menu-x-icon span:nth-child(2),.menu-x-icon span:nth-child(3) {
-                    top: 10px;
+                    top: 8px;
                   }
                   
                   .menu-x-icon span:nth-child(4) {
-                    top: 20px;
+                    top: 16px;
                   }
                   
                   .menu-x-icon.open span:nth-child(1) {
-                    top: 16px;
+                    top: 14px;
                     width: 0%;
                     left: 50%;
                   }
@@ -115,7 +115,7 @@
                   }
                   
                   .menu-x-icon.open span:nth-child(4) {
-                    top: 12px;
+                    top: 10px;
                     width: 0%;
                     left: 50%;
                   }
@@ -125,21 +125,26 @@
         }
 
         .right {
-            .my-github {
+            .controls-btn {
                 display: flex;
-                color: var(--brand-purple);
+                justify-content: center;
                 align-items: center;
-                font-size: 16px;
+                cursor: pointer;
+                border: none;
+                color: var(--brand-purple);
                 font-weight: bolder;
-                text-decoration: none;
+                background-color: transparent;
+                font-size: 16px;
+            }
 
-                .icon {
-                    margin-left: 5px;
-
-                    path {
-                        fill: var(--brand-purple);
-                    }
-                }
+            .controls-icon {
+                display: flex;
+                align-items: center;
+                margin-left: 5px;
+                justify-content: center;
+                fill: var(--brand-purple);
+                height: 32px;
+                width: 30px;
             }
         }
 

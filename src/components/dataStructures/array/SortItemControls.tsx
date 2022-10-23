@@ -8,15 +8,15 @@ interface SortItemControlsProps {
 
 const SortItemControls = ({ executingOperation, handlers }: SortItemControlsProps) => {
     return (
-        <div className="sort-items-controls">
+        <div className="sort-item-controls">
             <ActionBtn 
                 action={handlers.handleSortIncreasing}
-                wrapperCssClass='sort-increasing-btn-container'
+                wrapperCssClass='sort-increasing-container'
                 text="Sort Increasing"
                 disabled={executingOperation} />
             <ActionBtn 
                 action={handlers.handleSortDecreasing}
-                wrapperCssClass='sort-decreasing-btn-container'
+                wrapperCssClass='sort-decreasing-container'
                 text="Sort Decreasing"
                 disabled={executingOperation} />
         </div>

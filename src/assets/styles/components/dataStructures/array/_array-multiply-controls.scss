@@ -1,0 +1,13 @@
+.multiply-controls {
+    display: flex;
+    flex-direction: column;
+
+    .input-field {
+        justify-content: space-between;
+
+        .input-number {
+            width: 150px;
+            max-width: 150px;
+        }
+    }
+}

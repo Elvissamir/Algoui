@@ -1,0 +1,14 @@
+.sort-item-controls {
+    display: flex;
+
+    .sort-increasing-container {
+        display: flex;
+        margin-right: 5px;
+        width: auto;
+    }
+
+    .sort-decreasing-container {
+        display: flex;
+        width: auto;
+    }
+}

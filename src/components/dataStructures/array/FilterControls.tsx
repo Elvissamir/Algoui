@@ -3,6 +3,7 @@ import { FormDataError } from "../../../core/generalTypes"
 import { ArrayFormControlHandlers } from "../../../hooks/dataStructures/array/useArrayForm"
 import ActionBtn from "../../ActionBtn"
 import InputPackField from "../../InputPackField"
+import FilterFields from "./FilterFields"
 
 interface FilterControlsProps {
     lowLimitInput: string 
@@ -24,32 +25,14 @@ const FilterControls = ({
 
     return (
         <div className="filter-array-controls">
-            <div className="lower-input-container">
-                <InputPackField 
-                    inputId="low-val"
-                    inputValue={lowLimitInput}
-                    inputType='number'
-                    label="Filter lower:" 
-                    checkId="low-check" 
-                    checkName="low-val"
-                    disabled={executingOperation}
-                    checked={includeLowLimit} 
-                    handleChange={handleInputChange}
-                    error={errors['low-val']} />  
-                </div>
-            <div className="higher-input-container">    
-                <InputPackField 
-                    inputId="high-val"
-                    inputValue={highLimitInput}
-                    inputType='number'
-                    disabled={executingOperation}
-                    label="Filter higher:" 
-                    checkId="high-check" 
-                    checkName="high-val"
-                    checked={includeHighLimit} 
-                    handleChange={handleInputChange}
-                    error={errors['high-val']} />
-            </div>
+            <FilterFields
+                lowLimitInput={lowLimitInput}
+                includeLowLimit={includeLowLimit}
+                highLimitInput={highLimitInput}
+                includeHighLimit={includeHighLimit}
+                executingOperation={executingOperation}
+                errors={errors}
+                handleInputChange={handleInputChange}/>
             <ActionBtn 
                 action={handlers.handleFilter}
                 wrapperCssClass='filter-btn-container'

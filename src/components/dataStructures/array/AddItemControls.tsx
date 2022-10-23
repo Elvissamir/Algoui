@@ -2,7 +2,7 @@ import { ChangeEvent } from "react"
 import { FormDataError } from "../../../core/generalTypes"
 import { ArrayFormControlHandlers } from "../../../hooks/dataStructures/array/useArrayForm"
 import ActionBtn from "../../ActionBtn"
-import InputField from "../../InputField"
+import AddItemFields from "./AddItemFields"
 
 interface AddItemControlsProps {
     valueInput: string 
@@ -24,22 +24,12 @@ const AddItemControls = ({
 
     return (
         <div className="add-item-controls">
-            <InputField 
-                id="item-val"
-                value={valueInput} 
-                label='Value'
-                disabled={executingOperation}
-                type="number"
-                handleChange={handleInputChange} 
-                error={errors['item-val']}/>
-            <InputField 
-                id="item-position"
-                value={indexInput}
-                label='Position'
-                disabled={executingOperation}
-                type="number"
-                handleChange={handleInputChange}
-                error={errors['item-position']} />
+            <AddItemFields 
+                valueInput={valueInput}
+                indexInput={indexInput}
+                executingOperation={executingOperation}
+                errors={errors}
+                handleInputChange={handleInputChange} />
             <div className="add-item-btns">
                 <ActionBtn 
                     action={handlers.handleAddToStart} 

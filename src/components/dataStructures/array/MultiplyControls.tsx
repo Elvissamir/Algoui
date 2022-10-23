@@ -2,7 +2,7 @@ import { ChangeEvent } from "react"
 import { FormDataError } from "../../../core/generalTypes"
 import { ArrayFormControlHandlers } from "../../../hooks/dataStructures/array/useArrayForm"
 import ActionBtn from "../../ActionBtn"
-import InputField from "../../InputField"
+import MultiplyFields from "./MultiplyFields"
 
 interface MultiplyControlsProps {
     factorInput: string 
@@ -22,14 +22,11 @@ const MultiplyControls = ({
         
     return (
         <div className="multiply-controls">
-            <InputField 
-                id="factor-val" 
-                value={factorInput} 
-                disabled={executingOperation}
-                label='Factor'
-                type="number" 
-                handleChange={handleInputChange} 
-                error={errors['factor-val']} />
+           <MultiplyFields
+                factorInput={factorInput}
+                executingOperation={executingOperation}
+                handleInputChange={handleInputChange}
+                errors={errors} />
             <ActionBtn 
                 action={handlers.handleMultiply}
                 wrapperCssClass='multiply-btn-container'

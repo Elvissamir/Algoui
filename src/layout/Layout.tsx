@@ -12,6 +12,7 @@ import MobileControlsContext from "../context/MobileControlsContext"
 import ShowMobileMenu from "./ShowMobileMenu"
 import ShowNavbar from "./ShowNavbar"
 import ShowMobilebar from "./ShowMobilebar"
+import ShowMobileControls from "./ShowMobileControls"
 
 const Layout = () => {
     const [showMenu, setShowMenu] = useState(false)
@@ -35,7 +36,8 @@ const Layout = () => {
             <ShowMobileMenu showMenu={showMenu} />
             <ShowNavbar />
             <MobileControlsContext.Provider value={{ mobileControls, setMobileControls }}>
-                
+                <ShowMobileControls 
+                    showControls={showControls} />
                 <ShowMobilebar 
                     showMenu={showMenu} 
                     toggleMenu={handleToggleMenu}

@@ -18,6 +18,7 @@ const FilterFields = ({
         executingOperation, errors,
         handleInputChange
     }: FilterFieldsProps) => {
+        
     return (
         <>
             <div className="lower-input-container">
@@ -25,7 +26,7 @@ const FilterFields = ({
                     inputId="low-val"
                     inputValue={lowLimitInput}
                     inputType='number'
-                    label="Filter lower than:" 
+                    label="Filter lower:" 
                     checkId="low-check" 
                     checkName="low-val"
                     disabled={executingOperation}
@@ -39,7 +40,7 @@ const FilterFields = ({
                     inputValue={highLimitInput}
                     inputType='number'
                     disabled={executingOperation}
-                    label="Filter higher than:" 
+                    label="Filter higher:" 
                     checkId="high-check" 
                     checkName="high-val"
                     checked={includeHighLimit} 

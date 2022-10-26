@@ -2,10 +2,12 @@
     display: flex;
     position: fixed;
     background-color: var(--brand-white);
-    border-top: 2px var(--brand-purple) solid;
     bottom: 0;
+    overflow-y: scroll;
     margin-bottom: var(--mobile-bar);
+    padding: 20px 0;
     flex-direction: column;
-    height: 200px;
+    height: calc(100vh - var(--mobile-bar));
     width: 100%;
+    z-index: 1000;
 }

@@ -1,3 +1,26 @@
+.scroll {
+    scrollbar-color: var(--brand-purple) var(--brand-white);
+    scrollbar-width: thin;
+    overflow-x: none;
+}
+
+.scroll::-webkit-scrollbar {
+    height: 5px;
+    width: 10px;
+    overflow-x: none;
+}
+
+.scroll::-webkit-scrollbar-track {
+    background-color: var(--brand-white);
+    margin-block: 0.25em;
+    border-radius:  0.3em;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    background: var(--brand-purple);
+    border-radius: 0.3em;
+}
+
 .x-container {
     margin-left: auto;
     margin-right: auto;

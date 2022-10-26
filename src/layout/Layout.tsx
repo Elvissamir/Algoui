@@ -1,13 +1,7 @@
+import { useState } from "react"
 import AppRouter from "../components/AppRouter"
 import Content from "./Content"
 import Footer from "./Footer"
-import MobileMenu from "./MobileMenu"
-import { useState } from "react"
-import Mobilebar from "./Mobilebar"
-import Navbar from "./Navbar"
-import useWindowResize from "../hooks/useWindowResize"
-import { AnimatePresence, motion } from "framer-motion"
-import MobileControls from "./MobileControls"
 import MobileControlsContext from "../context/MobileControlsContext"
 import ShowMobileMenu from "./ShowMobileMenu"
 import ShowNavbar from "./ShowNavbar"
@@ -17,7 +11,6 @@ import ShowMobileControls from "./ShowMobileControls"
 const Layout = () => {
     const [showMenu, setShowMenu] = useState(false)
     const [showControls, setShowControls] = useState(false)
-    const {windowSize} = useWindowResize()
     const [mobileControls, setMobileControls] = useState<JSX.Element | null>(null)
 
     const handleToggleMenu = () => {

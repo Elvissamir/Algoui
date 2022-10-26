@@ -11,6 +11,7 @@ import MobileControls from "./MobileControls"
 import MobileControlsContext from "../context/MobileControlsContext"
 import ShowMobileMenu from "./ShowMobileMenu"
 import ShowNavbar from "./ShowNavbar"
+import ShowMobilebar from "./ShowMobilebar"
 
 const Layout = () => {
     const [showMenu, setShowMenu] = useState(false)
@@ -34,19 +35,11 @@ const Layout = () => {
             <ShowMobileMenu showMenu={showMenu} />
             <ShowNavbar />
             <MobileControlsContext.Provider value={{ mobileControls, setMobileControls }}>
-                { windowSize.width < 1024 &&
-                    <AnimatePresence>
-                        { showControls && 
-                            <motion.div
-                                initial={{ translateX: '100%' }}
-                                animate={{ translateX: '0%' }}
-                                exit={{ translateX: '100%' }}
-                                transition={{ duration: 0.5, bounce: 0 }}
-                                className="mobile-controls-container">
-                                    <MobileControls />
-                            </motion.div> }
-                    </AnimatePresence>}
                 
+                <ShowMobilebar 
+                    showMenu={showMenu} 
+                    toggleMenu={handleToggleMenu}
+                    toggleControls={handleToggleControls} />
                 <Content>
                     <AppRouter />
                 </Content>

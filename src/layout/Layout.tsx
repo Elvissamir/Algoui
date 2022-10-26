@@ -10,6 +10,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import MobileControls from "./MobileControls"
 import MobileControlsContext from "../context/MobileControlsContext"
 import ShowMobileMenu from "./ShowMobileMenu"
+import ShowNavbar from "./ShowNavbar"
 
 const Layout = () => {
     const [showMenu, setShowMenu] = useState(false)
@@ -31,6 +32,7 @@ const Layout = () => {
     return (
         <div className="layout-container">
             <ShowMobileMenu showMenu={showMenu} />
+            <ShowNavbar />
             <MobileControlsContext.Provider value={{ mobileControls, setMobileControls }}>
                 { windowSize.width < 1024 &&
                     <AnimatePresence>
@@ -44,12 +46,7 @@ const Layout = () => {
                                     <MobileControls />
                             </motion.div> }
                     </AnimatePresence>}
-                { windowSize.width < 1024 && 
-                    <Mobilebar 
-                        showMenu={showMenu} 
-                        toggleMenu={handleToggleMenu} 
-                        toggleControls={handleToggleControls} />}
-                { windowSize.width > 1024 && <Navbar />}
+                
                 <Content>
                     <AppRouter />
                 </Content>

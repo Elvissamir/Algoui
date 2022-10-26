@@ -9,6 +9,7 @@ import useWindowResize from "../hooks/useWindowResize"
 import { AnimatePresence, motion } from "framer-motion"
 import MobileControls from "./MobileControls"
 import MobileControlsContext from "../context/MobileControlsContext"
+import ShowMobileMenu from "./ShowMobileMenu"
 
 const Layout = () => {
     const [showMenu, setShowMenu] = useState(false)
@@ -29,18 +30,7 @@ const Layout = () => {
 
     return (
         <div className="layout-container">
-            { windowSize.width < 1024 && 
-                <AnimatePresence>
-                    { showMenu && 
-                        <motion.div
-                            initial={{ translateX: '-100%' }}
-                            animate={{ translateX: '0%' }}
-                            exit={{ translateX: '-100%' }}
-                            transition={{ duration: 0.5, bounce: 0 }}
-                            className="mobile-menu-container">
-                                <MobileMenu /> 
-                        </motion.div>}
-                </AnimatePresence>}
+            <ShowMobileMenu showMenu={showMenu} />
             <MobileControlsContext.Provider value={{ mobileControls, setMobileControls }}>
                 { windowSize.width < 1024 &&
                     <AnimatePresence>

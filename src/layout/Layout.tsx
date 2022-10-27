@@ -4,9 +4,9 @@ import Content from "./Content"
 import Footer from "./Footer"
 import MobileControlsContext from "../context/MobileControlsContext"
 import ShowMobileMenu from "./ShowMobileMenu"
-import ShowNavbar from "./ShowNavbar"
 import ShowMobilebar from "./ShowMobilebar"
 import ShowMobileControls from "./ShowMobileControls"
+import Navbar from "./Navbar"
 
 const Layout = () => {
     const [showMenu, setShowMenu] = useState(false)
@@ -26,7 +26,7 @@ const Layout = () => {
     return (
         <div className="layout-container">
             <ShowMobileMenu showMenu={showMenu} />
-            <ShowNavbar />
+            <Navbar />
             <MobileControlsContext.Provider value={{ showControls: showMobcontrols, setShowControls: setShowMobcontrols}}>
                 <ShowMobilebar 
                     showMenu={showMenu} 

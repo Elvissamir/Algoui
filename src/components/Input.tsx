@@ -13,7 +13,6 @@ const Input = ({ id, value, type, disabled, handleChange }: InputProps) => {
         let css = ''
         if (type === 'number') css =  css+'input-number'
         else css = css+'input-text'
-        console.log(css)
 
         return disabled? css+' input-disabled' : css
     }

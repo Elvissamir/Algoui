@@ -1,10 +1,14 @@
 .navbar-container {
+    display: flex;
     position: relative;
     margin-bottom: 30px;
     height: 60px;
     width: 100%;
 
     .navbar-wrapper {
+        display: flex;
+        width: 100%;
+
         .navbar {
             border-bottom: 2px var(--brand-purple) solid;
             padding: 20px 0;
@@ -19,12 +23,17 @@
 
 @media (min-width: 1024px) {
     .navbar-container {
-        margin: 0;
-        padding: 0;
-    
+        align-items: center;
+        justify-content: center;
+
         .navbar-wrapper {
+            background-color: var(--brand-white);
+
             .navbar {
+                display: flex;
+                justify-content: space-between;
                 border-bottom: none;
+                padding: 0 10px;
             }
         }
         

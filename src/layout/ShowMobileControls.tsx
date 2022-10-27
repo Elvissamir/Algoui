@@ -1,15 +1,17 @@
 import { AnimatePresence, motion } from "framer-motion"
+import { useContext } from "react"
+import MobileControlsContext from "../context/MobileControlsContext"
 import useDisableOuterScroll from "../hooks/useDisableOuterScroll"
 import useWindowResize from "../hooks/useWindowResize"
-import MobileControls from "./MobileControls"
 
 interface ShowMobileControlsProps {
-    showControls: boolean
+    controls: JSX.Element | JSX.Element[]
 }
 
-const ShowMobileControls = ({ showControls }: ShowMobileControlsProps) => {
+const ShowMobileControls = ({ controls }: ShowMobileControlsProps) => {
     const { windowSize } = useWindowResize()
-    useDisableOuterScroll({ disable: showControls })
+    const {showControls} = useContext(MobileControlsContext)
+    useDisableOuterScroll({ disable: showControls as boolean })
 
     return (
         <>
@@ -22,7 +24,9 @@ const ShowMobileControls = ({ showControls }: ShowMobileControlsProps) => {
                             exit={{ translateX: '100%' }}
                             transition={{ duration: 0.5, bounce: 0 }}
                             className="mobile-controls-container scroll">
-                                <MobileControls />
+                                <div className="x-container">
+                                    {controls}
+                                </div>
                         </motion.div> }
                 </AnimatePresence>}
         </>

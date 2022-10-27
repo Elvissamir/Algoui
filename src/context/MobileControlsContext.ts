@@ -1,13 +1,13 @@
 import { createContext } from 'react'
 
 export interface MobileControlsContextI {
-    mobileControls: JSX.Element | null
-    setMobileControls: React.Dispatch<React.SetStateAction<JSX.Element | null>> | null
+    showControls: boolean | null
+    setShowControls: React.Dispatch<React.SetStateAction<boolean>> | null
 }
 
 const MobileControlsContext = createContext<MobileControlsContextI>({
-    mobileControls: null, 
-    setMobileControls: null
+    showControls: null,
+    setShowControls: null
 })
 
 export default MobileControlsContext

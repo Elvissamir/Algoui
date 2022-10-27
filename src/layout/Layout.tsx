@@ -10,27 +10,24 @@ import ShowMobileControls from "./ShowMobileControls"
 
 const Layout = () => {
     const [showMenu, setShowMenu] = useState(false)
-    const [showControls, setShowControls] = useState(false)
-    const [mobileControls, setMobileControls] = useState<JSX.Element | null>(null)
+    const [showMobcontrols, setShowMobcontrols] = useState(false)
 
     const handleToggleMenu = () => {
         setShowMenu(!showMenu)
     }
 
     const handleToggleControls = () => {
-        if (showMenu && !showControls) 
+        if (showMenu && !ShowMobileControls) 
             setShowMenu(false)
 
-        setShowControls(!showControls)
+        if (setShowMobcontrols) setShowMobcontrols(!showMobcontrols)
     }
 
     return (
         <div className="layout-container">
             <ShowMobileMenu showMenu={showMenu} />
             <ShowNavbar />
-            <MobileControlsContext.Provider value={{ mobileControls, setMobileControls }}>
-                <ShowMobileControls 
-                    showControls={showControls} />
+            <MobileControlsContext.Provider value={{ showControls: showMobcontrols, setShowControls: setShowMobcontrols}}>
                 <ShowMobilebar 
                     showMenu={showMenu} 
                     toggleMenu={handleToggleMenu}

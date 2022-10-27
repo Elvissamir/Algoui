@@ -41,7 +41,16 @@ const ArrayDSPage = () => {
     
     useEffect(() => {
         if (setMobileControls) setMobileControls(arrayControls)
-    }, [])
+    }, [ 
+        indexInput, 
+        valueInput, 
+        factorInput, 
+        lowLimitInput, 
+        highLimitInput,
+        includeHighLimit, 
+        includeLowLimit,
+        errors
+    ])
 
     return (
         <SectionContainer 

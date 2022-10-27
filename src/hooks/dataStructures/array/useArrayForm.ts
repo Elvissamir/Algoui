@@ -156,6 +156,7 @@ const useArrayForm = () => {
     }
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+        console.log('input change', e.target.id)
         const isValidInput = InputValidator.isValidNumber(e.target.value)
         const error = isValidInput? null : { message: 'Only numbers are allowed.'}
 

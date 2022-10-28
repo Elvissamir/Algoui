@@ -4,6 +4,7 @@ import routes, { dstructuresRoutes } from '../core/routes'
 import DataStructuresPage from '../pages/DataStructuresPage'
 import AlgorithmsPage from '../pages/AlgorithmsPage'
 import ArrayDSPage from '../pages/dataStructures/ArrayDSPage'
+import BackgroundGrid from './BackgroundGrid'
 
 const AppRouter = () => {
     return (
@@ -12,6 +13,8 @@ const AppRouter = () => {
             <Route path={routes.dstructures.route} element={<DataStructuresPage />} />
             <Route path={dstructuresRoutes.array.route} element={<ArrayDSPage />} />
             <Route path={routes.algorithms.route} element={<AlgorithmsPage />} />
+
+            <Route path='/test' element={<BackgroundGrid />} />
         </Routes>
     )
 }

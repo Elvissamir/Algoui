@@ -1,9 +1,27 @@
+:root {
+    --g1: rgb(98, 0, 234);
+    --g2: rgb(236, 64, 122);
+}
+
 .grid-background {
-    background-color: rgb(20, 20, 20);
+    // background-color: rgb(20, 20, 20);
+    background-image: linear-gradient(to right, var(--g1), var(--g2), var(--g1));
     height: 100vh;
     overflow: hidden;
+    background-size: 200%;
     margin: 0;
     width: 100%;
+    animation: backgroundG 5s linear infinite;
+
+    @keyframes backgroundG {
+        from {
+            background-position: 0% center;
+        }
+    
+        to {
+            background-position: -200% center;
+        }
+    }
 }
 
 .tiles {
@@ -16,5 +34,16 @@
 }
 
 .tile {
-    outline: 1px solid white;
+    position: relative;
+}
+
+.tile:before {
+    background-color: rgb(20, 20, 20);
+    content: "";
+    position: absolute;
+    inset: 0.5px;
+}
+
+.tile:hover {
+    opacity: 0.95;
 }

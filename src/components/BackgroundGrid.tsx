@@ -7,16 +7,13 @@ const BackgroundGrid = () => {
     const [rows, setRows] = useState(Math.floor(window.innerHeight / 50))
     const [tiles, setTiles] = useState<number[]>(new Array(columns * rows).fill(0))
     const controls = useAnimationControls()
-    const [startIndex, setStartIndex] = useState(0)
     const [origin, setOrigin] = useState({x: 1, y: 1})
     const [toggle, setToggle] = useState(false)
     const [animate, setAnimate] = useState(true)
 
     const createGrid = () => {
-        // const ncolums = Math.floor(window.innerWidth / 50)
-        // const nrows = Math.floor(window.innerHeight / 50)
-        const ncolums = 5
-        const nrows = 4
+        const ncolums = Math.floor(window.innerWidth / 50)
+        const nrows = Math.floor(window.innerHeight / 50)
         const ntiles = new Array(ncolums * nrows).fill(0)
 
         if (wrapper.current) {
@@ -30,7 +27,6 @@ const BackgroundGrid = () => {
     }
 
     const handleClick = async (index: number) => {
-        setStartIndex(index)
         setOrigin(calculateCoords(index))
         setAnimate(true)
     }

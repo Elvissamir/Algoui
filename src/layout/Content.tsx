@@ -4,10 +4,12 @@ interface ContentProps {
 
 const Content = ({ children }: ContentProps) => {
     return (
-        <div className="content-container x-container">
-            <main className="content">
-                {children}
-            </main>
+        <div className="content-container">
+            <div className="content-wrapper x-container">
+                <main className="content">
+                    {children}
+                </main>
+            </div>
         </div>
     )
 }

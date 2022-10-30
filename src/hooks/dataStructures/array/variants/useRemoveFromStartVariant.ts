@@ -8,7 +8,6 @@ const useRemoveFromStartVariant = () => {
             variant.color = i === 0? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000'
             variant.backgroundColor = i === 0? '#312e81' : '#ffff'
             variant.opacity = i === 0? [1,0,1,0] : 1
-            variant.position = i === 0? 'absolute' : 'static'
             variant.x = i === 0? -50 : 0
             variant.transition = { delay: i === 0? 0.05 : i * 0.025 }
 

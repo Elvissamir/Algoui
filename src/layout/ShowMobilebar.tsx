@@ -12,7 +12,7 @@ const ShowMobilebar = ({ showMenu, toggleMenu, toggleControls }: ShowMobilebarPr
 
     return (
         <>
-            { windowSize.width < 1024 && 
+            { windowSize.width <= 1024 && 
                 <Mobilebar 
                     showMenu={showMenu} 
                     toggleMenu={toggleMenu} 

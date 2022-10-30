@@ -11,7 +11,7 @@ const ShowMobileMenu = ({ showMenu }: ShowMobileMenuProps) => {
 
     return (
         <>
-            { windowSize.width < 1024 && 
+            { windowSize.width <= 1024 && 
                 <AnimatePresence>
                     { showMenu && 
                         <motion.div

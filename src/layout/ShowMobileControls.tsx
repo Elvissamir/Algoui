@@ -15,7 +15,7 @@ const ShowMobileControls = ({ controls }: ShowMobileControlsProps) => {
 
     return (
         <>
-            { windowSize.width < 1024 &&
+            { windowSize.width <= 1024 &&
                 <AnimatePresence>
                     { showControls && 
                         <motion.div

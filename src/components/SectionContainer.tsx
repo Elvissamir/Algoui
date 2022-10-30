@@ -21,9 +21,9 @@ const SectionContainer = ({ title, description, action, controls, bottom }: Sect
                 <p className="text-info">{description}</p>
             </div>
             <div className="section-action-wrapper">
-                {windowSize.width > 1024 && <div className="section-controls">{controls}</div>}
+                {windowSize.width > 1024 && <div className="section-controls scroll">{controls}</div>}
                 {windowSize.width <= 1024 && <ShowMobileControls controls={controls} />}
-                <div className='section-action'>{action}</div>
+                <div className='section-action scroll'>{action}</div>
             </div>
             <div className="section-bottom">{bottom}</div>
         </section>

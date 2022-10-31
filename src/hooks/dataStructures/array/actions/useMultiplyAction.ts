@@ -1,13 +1,11 @@
 import { AnimationControls } from 'framer-motion'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrayItem, ArrayOperation } from "../../../../core/dataStructures/ArrayDS"
 import useMultiplyVariant from "../variants/useMultiplyVariant"
 
 interface UseMultiplyActionProps {
     dataArray: ArrayItem[]
     setDataArray: React.Dispatch<React.SetStateAction<ArrayItem[]>>
-    actionIndex: number 
-    setActionIndex: React.Dispatch<React.SetStateAction<number>>
     factor: number 
     operation: ArrayOperation,
     controls: AnimationControls
@@ -19,23 +17,23 @@ interface UseMultiplyActionProps {
 
 const useMultiplyAction = ({ 
         dataArray, setDataArray,
-        actionIndex, setActionIndex,
         operation, setOperation,
         setExecutingOperation,
         factor, controls,
         afterAction
     }: UseMultiplyActionProps) => {
 
-    const multiplyByVariant = useMultiplyVariant({ actionIndex })
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const multiplyByVariant = useMultiplyVariant({ actionIndex: currentIndex })
 
     const multiplyAction = async () => {
         const ndataArray = [...dataArray]
 
-        ndataArray[actionIndex].val = ndataArray[actionIndex].val * factor
+        ndataArray[currentIndex].val = ndataArray[currentIndex].val * factor
         
         await controls.start(multiplyByVariant())
-
-        setActionIndex(actionIndex + 1)
+        
+        setCurrentIndex(currentIndex + 1)
         setDataArray(ndataArray)
     }
 
@@ -49,17 +47,19 @@ const useMultiplyAction = ({
 
     useEffect(() => {
         if (operation === 'multipy') {
-            if (actionIndex < dataArray.length) {
+            if (currentIndex < dataArray.length) {
                 const stepTimer = multiplyStepAction()
 
                 return () => clearInterval(stepTimer)
             }
 
+            setCurrentIndex(0)
             afterAction()
         }
     }, [dataArray, operation])
 
     const handleMultiply = async () => {
+
         multiplyAction()
 
         setOperation('multipy')

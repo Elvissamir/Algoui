@@ -102,8 +102,7 @@ const useArrayForm = () => {
         setExecutingOperation
     })
     const { handleMultiply } = useMultiplyAction({
-        dataArray, setDataArray,
-        actionIndex, setActionIndex, 
+        dataArray, setDataArray, 
         operation, setOperation,
         executingOperation, setExecutingOperation,
         controls, factor, afterAction

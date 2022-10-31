@@ -29,6 +29,8 @@ const useRemoveFromPositionAction = ({
     }
 
     const handleRemoveFromPosition = async () => {
+        if (dataArray.length === 0) return 
+
         await controls.start(removeFromPositionVariant())
 
         setOperation('remove-from')

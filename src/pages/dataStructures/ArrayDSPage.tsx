@@ -40,7 +40,7 @@ const ArrayDSPage = () => {
                     handlers={controlHandlers}
                     handleReset={handleReset}
                     handleInputChange={handleInputChange} />}
-            action={<ArrayAction data={dataArray} controls={controls} />} />
+            action={<ArrayAction data={dataArray} controls={controls} errors={errors} />} />
     )
 }
 

@@ -27,6 +27,8 @@ const useRemoveFromEndAction = ({
     }
 
     const handleRemoveFromEnd = async () => {
+        if (dataArray.length === 0) return 
+
         await controls.start(removeFromEndVariant())
 
         setOperation('remove-end')

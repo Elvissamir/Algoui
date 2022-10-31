@@ -14,6 +14,8 @@ const useSimpleSortAction = ({
     }: UseSimpleSortProps) => {
 
     const handleSortIncreasing = () => {
+        if (dataArray.length === 0) return 
+
         const ndataArray = [...dataArray]
         ndataArray.sort((a, b) => a.val - b.val)
 
@@ -24,6 +26,8 @@ const useSimpleSortAction = ({
     }
 
     const handleSortDecreasing = () => {
+        if (dataArray.length === 0) return 
+
         const ndataArray = [...dataArray]
         ndataArray.sort((a, b) => b.val - a.val)
 

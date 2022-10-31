@@ -1,6 +1,6 @@
 import { FieldError, FormDataError } from "../core/generalTypes"
 
-interface ErrorData {
+export interface ErrorData {
     field: string 
     error: FieldError | null
 }

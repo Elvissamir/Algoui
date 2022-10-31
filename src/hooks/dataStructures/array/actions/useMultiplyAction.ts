@@ -59,9 +59,9 @@ const useMultiplyAction = ({
     }, [dataArray, operation])
 
     const handleMultiply = async () => {
+        if (dataArray.length === 0) return 
 
         multiplyAction()
-
         setOperation('multipy')
         setExecutingOperation(true)
     }

@@ -14,6 +14,7 @@ interface UseFilterActionProps {
     operation: ArrayOperation
     setOperation:  React.Dispatch<React.SetStateAction<ArrayOperation>>
     setExecutingOperation: React.Dispatch<React.SetStateAction<boolean>>
+    validateArray: () => boolean
     afterAction: () => void
 }
 
@@ -23,7 +24,8 @@ const useFilterAction = ({
         operation, setOperation,
         includeHighLimit, includeLowLimit,
         controls, afterAction,
-        setExecutingOperation
+        setExecutingOperation,
+        validateArray
     }: UseFilterActionProps) => {
 
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -69,6 +71,8 @@ const useFilterAction = ({
     }, [dataArray, operation])
 
     const handleFilter = async () => {
+        if (!validateArray()) return
+
         filterItemsAction()
         setOperation('filter')
         setExecutingOperation(true)

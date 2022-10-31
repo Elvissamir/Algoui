@@ -1,12 +1,15 @@
 import { motion, AnimatePresence, AnimationControls } from "framer-motion"
 import { ArrayItem } from "../../../core/dataStructures/ArrayDS"
+import { FormDataError } from "../../../core/generalTypes"
+import FieldErrorInfo from "../../FieldErrorInfo"
 
 interface ArrayActionProps {
     data: ArrayItem[]
     controls: AnimationControls
+    errors: FormDataError
 }
 
-const ArrayAction = ({data, controls }: ArrayActionProps) => {
+const ArrayAction = ({data, controls, errors }: ArrayActionProps) => {
     return (
         <div className='array-container'>
             <ul className='array-item-list'>
@@ -24,6 +27,7 @@ const ArrayAction = ({data, controls }: ArrayActionProps) => {
                     )}  
                 </AnimatePresence>
             </ul>
+            { errors['data'] && <FieldErrorInfo error={errors['data']} /> }
         </div>
     )
 }

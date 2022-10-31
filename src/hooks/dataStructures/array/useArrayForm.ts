@@ -12,8 +12,10 @@ import useRemoveFromEndAction from "./actions/useRemoveFromEndAction"
 import useRemoveFromPositionAction from "./actions/useRemoveFromPositionAction"
 import useRemoveFromStartAction from "./actions/useRemoveFromStartAction"
 import useSimpleSortAction from "./actions/useSimpleSortAction"
+import useArrayAfterAction from "./useArrayAfterAction"
 import useArrayData from "./useArrayData"
 import useArrayFormData from "./useArrayFormData"
+import useArrayValidator from "./useArrayValidator"
 
 export interface ArrayFormControlHandlers {
     handleAddToStart: () => void
@@ -53,16 +55,15 @@ const useArrayForm = () => {
     } = useArrayFormData()
 
     const { handleSingleError } = useFormErrorsHandler({ errors, setErrors })
+    const { validateArray } = useArrayValidator({ dataArray, handleSingleError })
+    const { afterAction } = useArrayAfterAction({ 
+        dataArray, 
+        indexInput, setActionIndex,
+        setExecutingOperation, setOperation,
+        validateArray
+    })
     const controls = useAnimationControls()
 
-    const afterAction = () => {
-        if (InputValidator.isValidNumber(indexInput)) setActionIndex(parseInt(indexInput))
-        
-        setExecutingOperation(false)
-        setOperation(null)
-    } 
-
-    // ACTIONS 
     useIntroAction({ dataArray, afterAction, operation, controls })
 
     const { handleAddToStart } = useAddToStartAction({ 
@@ -98,7 +99,8 @@ const useArrayForm = () => {
         lowLimit, highLimit,
         includeLowLimit, includeHighLimit,
         afterAction, controls, 
-        setExecutingOperation
+        setExecutingOperation,
+        validateArray
     })
     const { handleMultiply } = useMultiplyAction({
         dataArray, setDataArray, 

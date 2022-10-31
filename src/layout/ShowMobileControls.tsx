@@ -24,7 +24,7 @@ const ShowMobileControls = ({ controls }: ShowMobileControlsProps) => {
                             exit={{ translateX: '100%' }}
                             transition={{ duration: 0.5, bounce: 0 }}
                             className="mobile-controls-container scroll">
-                                <div className="x-container">
+                                <div className="mobile-controls x-container">
                                     {controls}
                                 </div>
                         </motion.div> }

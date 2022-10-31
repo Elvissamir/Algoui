@@ -1,0 +1,7 @@
+export const pink = '#ec4899'
+export const purple = '#312e81'
+export const green = '#43cf51'
+export const red = '#b41419'
+export const blue = '#0c55c4'
+export const white = '#ffffff'
+export const gray = '#969696'

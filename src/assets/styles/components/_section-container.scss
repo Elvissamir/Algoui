@@ -35,6 +35,12 @@
 
 @media (min-width: 1024px) {
     .section-wrapper {
+        margin-top: 50px;
+
+        .section-top {
+            font-size: 22px;
+        }
+
         .section-action-wrapper {
             display: flex;
             flex-direction: row;

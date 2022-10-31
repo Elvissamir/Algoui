@@ -1,3 +1,5 @@
+import { purple, white } from "../../../../variants/colors"
+
 interface UseAddToPositionVariantProps {
     actionIndex: number 
 }
@@ -13,8 +15,8 @@ const useAddToPositionVariant = ({ actionIndex }: UseAddToPositionVariantProps) 
         }
 
         return (i: number) => ({
-            color: i === actionIndex? ['#ffff', '#ffff', '#ffff', '#000000'] : '#000000',
-            backgroundColor: i === actionIndex? ['#312e81', '#312e81', '#312e81', '#ffff'] : '#ffff',
+            color: i === actionIndex? [white, white, white, purple] : purple,
+            backgroundColor: i === actionIndex? [purple, purple, purple, white] : white,
             y: y(i),
             transition: { delay: i === 0? 0.05 : i * 0.025 },
         })

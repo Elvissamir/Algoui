@@ -1,6 +1,7 @@
 .mobile-controls-container {
     display: flex;
     position: fixed;
+    justify-content: center;
     background-color: var(--brand-white);
     bottom: 0;
     left: 0;
@@ -11,4 +12,9 @@
     height: calc(100vh - var(--mobile-bar));
     width: 100%;
     z-index: 1000;
+
+    .mobile-controls {
+        width: auto;
+        max-width: 90%;
+    }
 }

@@ -34,31 +34,14 @@
 @media (min-width: 1024px) {
     .section-wrapper {
         .section-action-wrapper {
-            margin-top: 25px;
-
-            .section-controls {
-                display: flex;
-                flex-direction: column;
-                width: auto;
-            }
-
-            .section-action {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-        }
-    }
-}
-
-@media (min-width: 1366px) {
-    .section-wrapper {
-        .section-action-wrapper {
+            display: flex;
             flex-direction: row;
+            margin-top: 25px;
             height: 500px;
 
             .section-controls {
                 display: flex;
+                flex-direction: column;
                 padding-right: 20px;
                 overflow-y: scroll;
                 width: auto;

@@ -95,7 +95,6 @@ const useArrayForm = () => {
     const { handleFilter } = useFilterAction({ 
         dataArray, setDataArray, 
         operation, setOperation,
-        actionIndex, setActionIndex,
         lowLimit, highLimit,
         includeLowLimit, includeHighLimit,
         afterAction, controls, 

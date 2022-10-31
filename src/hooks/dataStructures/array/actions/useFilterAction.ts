@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimationControls } from "framer-motion"
 import { ArrayItem, ArrayOperation } from "../../../../core/dataStructures/ArrayDS"
 import useFilterVariant from '../variants/useFilterVariant'
@@ -6,13 +6,11 @@ import useFilterVariant from '../variants/useFilterVariant'
 interface UseFilterActionProps {
     dataArray: ArrayItem[]
     setDataArray:  React.Dispatch<React.SetStateAction<ArrayItem[]>>
-    actionIndex: number 
     lowLimit: number 
     includeLowLimit: boolean
     highLimit: number 
     includeHighLimit: boolean 
     controls: AnimationControls
-    setActionIndex: React.Dispatch<React.SetStateAction<number>>
     operation: ArrayOperation
     setOperation:  React.Dispatch<React.SetStateAction<ArrayOperation>>
     setExecutingOperation: React.Dispatch<React.SetStateAction<boolean>>
@@ -21,7 +19,6 @@ interface UseFilterActionProps {
 
 const useFilterAction = ({ 
         dataArray, setDataArray,
-        actionIndex, setActionIndex,
         lowLimit, highLimit,
         operation, setOperation,
         includeHighLimit, includeLowLimit,
@@ -29,14 +26,15 @@ const useFilterAction = ({
         setExecutingOperation
     }: UseFilterActionProps) => {
 
-    const filterVariant = useFilterVariant({ actionIndex })
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const filterVariant = useFilterVariant({ actionIndex: currentIndex })
 
     const filterItemsAction = async () => {
         const ndataArray = [...dataArray]
 
-        if ((dataArray[actionIndex].val > highLimit && includeHighLimit) || (includeLowLimit && dataArray[actionIndex].val < lowLimit)) {
+        if ((dataArray[currentIndex].val > highLimit && includeHighLimit) || (includeLowLimit && dataArray[currentIndex].val < lowLimit)) {
             const ndataArray = [...dataArray]
-            ndataArray.splice(actionIndex, 1)
+            ndataArray.splice(currentIndex, 1)
 
             await controls.start(filterVariant())
 
@@ -45,7 +43,7 @@ const useFilterAction = ({
 
         await controls.start(filterVariant())
 
-        setActionIndex(actionIndex + 1)
+        setCurrentIndex(currentIndex + 1)
         setDataArray(ndataArray)
     }
 
@@ -59,12 +57,13 @@ const useFilterAction = ({
 
     useEffect(() => {
         if (operation === 'filter') {
-            if (actionIndex < dataArray.length) {
+            if (currentIndex < dataArray.length) {
                 const stepTimer = filterStepAction()
 
                 return () => clearInterval(stepTimer)
             }
 
+            setCurrentIndex(0)
             afterAction()
         }
     }, [dataArray, operation])

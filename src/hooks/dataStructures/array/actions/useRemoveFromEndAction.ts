@@ -7,13 +7,15 @@ interface UseRemoveFromEndAction {
     setDataArray: React.Dispatch<React.SetStateAction<ArrayItem[]>>
     controls: AnimationControls
     setOperation: React.Dispatch<React.SetStateAction<ArrayOperation>>
+    validateArray: () => boolean
     afterAction: () => void
 }
 
 const useRemoveFromEndAction = ({ 
         dataArray, setDataArray,
         setOperation, controls,
-        afterAction
+        afterAction,
+        validateArray
     }: UseRemoveFromEndAction) => {
     
     const removeFromEndVariant = useRemoveFromEndVariant({ dataArray })
@@ -27,7 +29,7 @@ const useRemoveFromEndAction = ({
     }
 
     const handleRemoveFromEnd = async () => {
-        if (dataArray.length === 0) return 
+        if (!validateArray()) return 
 
         await controls.start(removeFromEndVariant())
 

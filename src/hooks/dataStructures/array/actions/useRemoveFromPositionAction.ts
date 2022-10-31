@@ -8,6 +8,7 @@ interface UseRemoveFromPositionActionProps {
     actionIndex: number
     controls: AnimationControls
     setOperation: React.Dispatch<React.SetStateAction<ArrayOperation>>
+    validateArray: () => boolean
     afterAction: () => void
 }
 
@@ -16,6 +17,7 @@ const useRemoveFromPositionAction = ({
         actionIndex,
         afterAction,
         setOperation, controls,
+        validateArray
     }: UseRemoveFromPositionActionProps) => {
 
     const removeFromPositionVariant = useRemoveFromPositionVariant({ actionIndex })
@@ -29,7 +31,7 @@ const useRemoveFromPositionAction = ({
     }
 
     const handleRemoveFromPosition = async () => {
-        if (dataArray.length === 0) return 
+        if (!validateArray()) return 
 
         await controls.start(removeFromPositionVariant())
 

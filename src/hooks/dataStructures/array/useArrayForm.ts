@@ -106,29 +106,33 @@ const useArrayForm = () => {
         dataArray, setDataArray, 
         operation, setOperation,
         executingOperation, setExecutingOperation,
-        controls, factor, afterAction
+        controls, factor, afterAction,
+        validateArray
     })
 
     const { handleRemoveFromStart } = useRemoveFromStartAction({ 
         dataArray, setDataArray, 
         setOperation, controls, 
-        afterAction,
+        afterAction, validateArray
     })
 
     const { handleRemoveFromPosition } = useRemoveFromPositionAction({ 
         dataArray, setDataArray, 
         controls, actionIndex, 
         setOperation, afterAction,
+        validateArray
     })
 
     const { handleRemoveFromEnd } = useRemoveFromEndAction({ 
         dataArray, setDataArray, 
         setOperation, controls, afterAction,
+        validateArray
     })
 
     const { handleSortDecreasing, handleSortIncreasing } = useSimpleSortAction({ 
         dataArray, setDataArray, 
-        setOperation, afterAction
+        setOperation, afterAction,
+        validateArray
     })
     
     const controlHandlers: ArrayFormControlHandlers = {

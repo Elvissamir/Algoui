@@ -12,6 +12,7 @@ interface UseMultiplyActionProps {
     setOperation: React.Dispatch<React.SetStateAction<ArrayOperation>>
     executingOperation: boolean 
     setExecutingOperation: React.Dispatch<React.SetStateAction<boolean>>
+    validateArray: () => boolean
     afterAction: () => void
 }
 
@@ -20,7 +21,8 @@ const useMultiplyAction = ({
         operation, setOperation,
         setExecutingOperation,
         factor, controls,
-        afterAction
+        afterAction,
+        validateArray
     }: UseMultiplyActionProps) => {
 
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -59,7 +61,7 @@ const useMultiplyAction = ({
     }, [dataArray, operation])
 
     const handleMultiply = async () => {
-        if (dataArray.length === 0) return 
+        if (!validateArray()) return 
 
         multiplyAction()
         setOperation('multipy')

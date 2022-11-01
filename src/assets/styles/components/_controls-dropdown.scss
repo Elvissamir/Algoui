@@ -30,9 +30,18 @@
             }
 
             .dropdown-content {
-                display: none;
                 padding: 10px;
                 width: 100%;
+            }
+
+            .hide-content {
+                height: 0;
+                padding: 0;
+            }
+
+            .show-content {
+                display: flex;
+                height: auto;
             }
         }
     }

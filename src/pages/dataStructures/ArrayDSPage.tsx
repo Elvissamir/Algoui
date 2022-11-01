@@ -1,7 +1,12 @@
-import SectionContainer from '../../components/SectionContainer'
-import ArrayControls from '../../components/dataStructures/array/ArrayControls'
+import SectionContainer, { ControlsOption } from '../../components/SectionContainer'
 import ArrayAction from '../../components/dataStructures/array/ArrayAction'
 import useArrayForm from '../../hooks/dataStructures/array/useArrayForm'
+import AddItemControls from '../../components/dataStructures/array/AddItemControls'
+import RemoveItemControls from '../../components/dataStructures/array/RemoveItemControls'
+import SortItemControls from '../../components/dataStructures/array/SortItemControls'
+import MultiplyControls from '../../components/dataStructures/array/MultiplyControls'
+import FilterControls from '../../components/dataStructures/array/FilterControls'
+import ResetControls from '../../components/ResetControls'
 
 const ArrayDSPage = () => {
     const {
@@ -21,25 +26,64 @@ const ArrayDSPage = () => {
         handleInputChange,
     } = useArrayForm()
 
+    const ArrayControlOptions: ControlsOption[]  = [
+        {
+            name: 'Add Item', 
+            content: <AddItemControls 
+                indexInput={indexInput}
+                valueInput={valueInput}
+                executingOperation={executingOperation}
+                errors={errors}
+                handlers={controlHandlers}
+                handleInputChange={handleInputChange} />
+        },
+        {
+            name: 'Remove Item',
+            content: <RemoveItemControls
+                executingOperation={executingOperation}
+                handlers={controlHandlers} />
+        },
+        {
+            name: 'Sort Items',
+            content: <SortItemControls
+                executingOperation={executingOperation}
+                handlers={controlHandlers} />
+        },
+        {
+            name: 'Multiply Items',
+            content: <MultiplyControls
+            factorInput={factorInput}
+            executingOperation={executingOperation}
+            errors={errors}
+            handleInputChange={handleInputChange}
+            handlers={controlHandlers} />
+        },
+        {
+            name: 'Filter Items',
+            content: <FilterControls
+                lowLimitInput={lowLimitInput}
+                includeLowLimit={includeLowLimit} 
+                highLimitInput={highLimitInput}
+                includeHighLimit={includeHighLimit} 
+                executingOperation={executingOperation}
+                errors={errors}
+                handlers={controlHandlers}
+                handleInputChange={handleInputChange} />
+        },
+        {
+            name: 'Reset', 
+            content: <ResetControls 
+                handleReset={handleReset} />
+        }
+    ]
+
     return (
         <SectionContainer 
             title='Array Data Structure'
             description='Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
                 Aliquid dolores aliquam, laboriosam magnam amet ducimus illo. Officia, cumque distinctio illum est consequuntur similique alias exercitationem eos consequatur voluptatem molestias. 
                 Veniam?'
-            controls={<ArrayControls
-                    indexInput={indexInput} 
-                    valueInput={valueInput} 
-                    factorInput={factorInput}
-                    lowLimitInput={lowLimitInput}
-                    includeLowLimit={includeLowLimit}
-                    highLimitInput={highLimitInput}
-                    includeHighLimit={includeHighLimit}
-                    executingOperation={executingOperation} 
-                    errors={errors}
-                    handlers={controlHandlers}
-                    handleReset={handleReset}
-                    handleInputChange={handleInputChange} />}
+            controls={ArrayControlOptions}
             action={<ArrayAction data={dataArray} controls={controls} errors={errors} />} />
     )
 }

@@ -1,0 +1,51 @@
+.algoui-logo-container {
+    background-color: var(--brand-white);
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 27px;
+    width: 27px;
+
+    .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        .logo-circle {
+            display: flex;
+            border-radius: 50%;
+            background-color: white;
+            border: 1px var(--brand-purple) solid;
+            height: 6px;
+            width: 6px;
+            z-index: 2;
+        }
+    }
+
+    .logo-line {
+        position: absolute;
+        background-color: var(--brand-purple);
+    }
+    
+    .line-1 {
+        top: 2px;
+        left: 0;
+        height: 2px;
+        width: 50%;
+    }
+
+    .line-2 {
+        height: 21px;
+        width: 2px;
+    }
+
+    .line-3 {
+        top: 23px;
+        height: 2px;
+        right: 0;
+        width: 50%;
+    }
+}

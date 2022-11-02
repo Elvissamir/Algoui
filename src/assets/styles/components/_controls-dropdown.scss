@@ -1,11 +1,14 @@
 .controls-dropdown-container {
     display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     
     .controls-dropdown {
         display: flex;
         overflow-y: scroll;
-        height: 500px;
+        height: auto;
+        max-height: 350px;
         padding: 5px;
         list-style: none;
         flex-direction: column;

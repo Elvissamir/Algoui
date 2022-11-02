@@ -1,5 +1,5 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import { useState } from 'react'
+import { AnimatePresence, motion, useAnimationControls } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { ControlsOption } from "./SectionContainer"
 
 interface ControlsDropdownProps {   
@@ -17,9 +17,9 @@ const ControlsDropdown = ({ options }: ControlsDropdownProps) => {
 
     return (
         <div className="controls-dropdown-container">
-            <ul className="controls-dropdown scroll">
+            <motion.ul layout className="controls-dropdown scroll">
                 {options.map((option, index) => 
-                    <li className="dropdown-option" key={index}>
+                    <motion.li className="dropdown-option" key={index}>
                         <button 
                             onClick={() => handleToggleOption(index)}
                             className="dropdown-option-btn">{option.name}</button>
@@ -28,15 +28,14 @@ const ControlsDropdown = ({ options }: ControlsDropdownProps) => {
                                 <motion.div 
                                     initial={{ opacity: 0, height: 0 }}
                                     animate={{ opacity: 1, height: 'auto' }}
-                                    exit={{ opacity: 0, height: 0 }}
-                                    transition={{ bounce: 0 }}
+                                    exit={{ opacity: 0, height: 0, transition: {duration: 0.05} }}
                                     className="dropdown-content">
                                         {option.content}
                                 </motion.div>}
                         </AnimatePresence>
-                    </li>
+                    </motion.li>
                 )}
-            </ul>
+            </motion.ul>
         </div>
     )
 }

@@ -5,11 +5,11 @@
     .controls-dropdown {
         display: flex;
         overflow-y: scroll;
-        height: 200px;
+        height: 500px;
         padding: 5px;
         list-style: none;
         flex-direction: column;
-        width: 100%;
+        width: 400px;
 
         .dropdown-option {
             display: flex;
@@ -30,18 +30,18 @@
             }
 
             .dropdown-content {
-                padding: 10px;
                 width: 100%;
-            }
-
-            .hide-content {
-                height: 0;
-                padding: 0;
+                transition: all 1 ease-in-out;
             }
 
             .show-content {
-                display: flex;
                 height: auto;
+                width: 100%;
+            }
+            
+            .hide-content {
+                height: 0;
+                width: 100%;
             }
         }
     }

@@ -19,9 +19,104 @@
             border-radius: 50%;
             background-color: white;
             border: 1px var(--brand-purple) solid;
-            height: 6px;
-            width: 6px;
+            height: 7px;
+            width: 7px;
             z-index: 2;
+        }
+
+        .circle-1 {
+            animation: circle1 3s infinite;
+            animation-delay: 1s;
+            
+            @keyframes circle1 {
+                0% {
+                    background-color: var(--brand-white);
+                }
+
+                50% {
+                    background-color: var(--brand-purple);
+                }
+                
+                100% {
+                    background-color: var(--brand-white);
+                }
+            }
+        }
+
+        .circle-2 {
+            animation: circle2 3s infinite;
+            animation-delay: 1s;
+            
+            @keyframes circle2 {
+                0% {
+                    background-color: var(--brand-white);
+                }
+
+                50% {
+                    background-color: var(--brand-purple);
+                }
+                
+                100% {
+                    background-color: var(--brand-white);
+                }
+            }
+        }
+
+        .circle-5 {
+            animation: circle5 3s infinite;
+            animation-delay: 1s;
+            
+            @keyframes circle5 {
+                0% {
+                    background-color: var(--brand-white);
+                }
+
+                50% {
+                    background-color: var(--brand-purple);
+                }
+                
+                100% {
+                    background-color: var(--brand-white);
+                }
+            }
+        }
+
+        .circle-8 {
+            animation: circle8 3s infinite;
+            animation-delay: 1s;
+            
+            @keyframes circle8 {
+                0% {
+                    background-color: var(--brand-white);
+                }
+
+                50% {
+                    background-color: var(--brand-purple);
+                }
+                
+                100% {
+                    background-color: var(--brand-white);
+                }
+            }
+        }
+
+        .circle-9 {
+            animation: circle8 3s infinite;
+            animation-delay: 1s;
+            
+            @keyframes circle9 {
+                0% {
+                    background-color: var(--brand-white);
+                }
+
+                50% {
+                    background-color: var(--brand-purple);
+                }
+                
+                100% {
+                    background-color: var(--brand-white);
+                }
+            }
         }
     }
 

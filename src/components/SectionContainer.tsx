@@ -1,5 +1,5 @@
 import useWindowResize from "../hooks/useWindowResize"
-import ShowMobileControls from "../layout/ShowMobileControls"
+import ShowMobileControls from "./layout/ShowMobileControls"
 import ControlsDropdown from "./ControlsDropdown"
 
 export interface ControlsOption {

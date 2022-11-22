@@ -1,4 +1,4 @@
-import useWindowResize from "../hooks/useWindowResize"
+import useWindowResize from "../../hooks/useWindowResize"
 import Mobilebar from "./Mobilebar"
 
 interface ShowMobilebarProps {

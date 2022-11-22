@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import AlgouiIcon from "../assets/icons/AlgouiIcon"
+import AlgouiIcon from "./icons/AlgouiIcon"
 import routes from "../core/routes"
 
 const Logo = () => {

@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { useContext } from "react"
-import MobileControlsContext from "../context/MobileControlsContext"
-import useDisableOuterScroll from "../hooks/useDisableOuterScroll"
-import useWindowResize from "../hooks/useWindowResize"
+import MobileControlsContext from "../../context/MobileControlsContext"
+import useDisableOuterScroll from "../../hooks/useDisableOuterScroll"
+import useWindowResize from "../../hooks/useWindowResize"
 
 interface ShowMobileControlsProps {
     controls: JSX.Element | JSX.Element[]

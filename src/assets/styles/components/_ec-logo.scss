@@ -1,0 +1,351 @@
+.ec-logo-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .square-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .logo-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+
+            .ec-logo-letters {
+                height: 100px;
+                width: 100px;
+
+                text {
+                    fill: white;
+                }
+            }
+
+            .ec-letter {
+                font-size: 60px;
+                font-family: sans-serif;
+                color: white;
+            }
+    
+            .ec-logo-circuit {
+                margin-left: 10px;
+                
+                circle {
+                    fill: white;
+                }
+    
+                path:nth-child(2) {
+                    fill: var(--brand-color-c);
+                }
+            }
+        }
+
+        .square-logo-line {
+            height: 2px;
+            background-image: linear-gradient(to right, #18a3fa, #30adfc, #9bebfc);
+            width: 90%;
+        }
+
+        .ec-logo-footer {
+            color: #b0b2b8;
+            font-family: sans-serif;
+            margin-top: 5px;
+        }
+    }
+
+    .square-logo-2 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .logo-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+
+            .ec-logo-letters {
+                height: 100px;
+                width: 100px;
+
+                text {
+                    fill: white;
+                }
+            }
+
+            .ec-letter {
+                font-size: 60px;
+                font-family: sans-serif;
+                color: white;
+            }
+    
+            .ec-logo-circuit {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 2px white solid;
+                box-shadow: 0 0 15px var(--brand-color-a);
+                background-color: var(--brand-color-c);
+                border-radius: 50%;
+                margin-left: 5px;
+                padding: 5px;   
+    
+                path, circle, line {
+                    fill: var(--brand-color-c);
+                }
+    
+                path:first-child {
+                    fill: white;
+                }
+    
+                height: 65px;
+                width: 65px;
+            }
+        }
+
+        .square-logo-line {
+            height: 2px;
+            background-image: linear-gradient(to right, #18a3fa, #30adfc, #9bebfc);
+            width: 90%;
+        }
+
+        .ec-logo-footer {
+            color: #b0b2b8;
+            font-family: sans-serif;
+            margin-top: 5px;
+        }
+    }
+
+    .square-logo-3 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .logo-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+
+            .ec-logo-letters {
+                height: 100px;
+                width: 100px;
+
+                text {
+                    fill: white;
+                }
+            }
+
+            .ec-letter {
+                font-size: 60px;
+                letter-spacing: 2px;
+                font-family: sans-serif;
+                color: white;
+            }
+    
+            .ec-logo-circuit {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 2px white solid;
+                box-shadow: 0 0 15px var(--brand-color-a);
+                background-color: white;
+                border-radius: 50%;
+                margin-left: 5px;
+                padding: 5px;   
+    
+                path, circle, line {
+                    fill: var(--brand-color-c);
+                }
+    
+                path:first-child {
+                    fill: white;
+                }
+    
+                height: 65px;
+                width: 65px;
+            }
+        }
+
+        .square-logo-line {
+            height: 2px;
+            background-image: linear-gradient(to right, #18a3fa, #30adfc, #9bebfc);
+            width: 90%;
+        }
+
+        .ec-logo-footer {
+            color: #b0b2b8;
+            font-family: sans-serif;
+            margin-top: 5px;
+        }
+    }
+
+    .square-logo-4 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .logo-top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+
+            .ec-logo-letters {
+                height: 100px;
+                width: 100px;
+
+                text {
+                    fill: white;
+                }
+            }
+
+            .ec-letter {
+                font-size: 60px;
+                letter-spacing: 2px;
+                font-family: sans-serif;
+                color: white;
+            }
+    
+            .ec-logo-circuit {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 2px var(--brand-color-c) solid;
+                box-shadow: 0 0 15px var(--brand-color-a);
+                background-color: var(--brand-color-a);
+                border-radius: 50%;
+                margin-left: 5px;
+                padding: 2px;   
+    
+                circle {
+                    fill: var(--brand-color-a);
+                }
+
+                path {
+                    fill: var(--brand-color-a);
+                }
+    
+                path:first-child {
+                    fill: var(--brand-color-c);
+                }
+    
+                height: 65px;
+                width: 65px;
+            }
+        }
+
+        .square-logo-line {
+            height: 2px;
+            background-image: linear-gradient(to right, #18a3fa, #30adfc, #9bebfc);
+            width: 90%;
+        }
+
+        .ec-logo-footer {
+            color: #b0b2b8;
+            font-family: sans-serif;
+            margin-top: 5px;
+        }
+    }
+
+    .ec-logo {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        font-family: var(--font-a);
+        width: auto;
+
+        .logo-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+        }
+    
+        .circuit-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            padding: 2px;   
+            border: 1px white solid;
+            background-color: var(--brand-color-c);
+
+            circle, line {
+                fill: white;
+            }
+
+            path {
+                fill: white;
+            }
+
+            path:first-child {
+                fill: var(--brand-color-c);
+            }
+
+            height: 42px;
+            width: 42px;
+        }
+      
+        .ec-logo-text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+
+            .E {
+                color: white;
+                margin-left: 5px;
+            }
+
+            .C {
+                color: transparent;
+                margin-left: 5px;
+                -webkit-text-stroke-color: white;
+                -webkit-text-stroke-width: 1px;
+            }
+        }
+
+        .ec-logo-line {
+            background-image: linear-gradient(to right, #18a3fa, #30adfc, #9bebfc);
+            margin-top: 5px;
+            height: 2px;
+            width: 100%;
+        }
+
+        .ec-logo-footer {
+            color: #b0b2b8;
+            margin-top: 3px;
+            font-family: sans-serif;
+        }
+    }
+}
+
+@media (min-width: 1920px) {
+    .ec-logo-container {
+        .ec-logo {
+            .circuit-icon {
+                height: 52px;
+                width: 52px;
+            }
+
+            
+            .ec-logo-text {
+                font-size: 35px;
+
+                .E {
+                    margin-left: 10px;
+                }
+            }
+        }
+    }
+}

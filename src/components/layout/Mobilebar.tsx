@@ -1,4 +1,4 @@
-import ControlsIcon from "../assets/icons/ControlsIcon"
+import ControlsIcon from "../icons/ControlsIcon"
 
 interface MobilebarProps {
     showMenu: boolean

@@ -1,7 +1,7 @@
-import Logo from "../components/Logo"
-import NavList from "../components/NavList"
-import useScrollPosition from "../hooks/useScrollPosition"
-import useWindowResize from "../hooks/useWindowResize"
+import Logo from "../Logo"
+import NavList from "../NavList"
+import useScrollPosition from "../../hooks/useScrollPosition"
+import useWindowResize from "../../hooks/useWindowResize"
 
 const Navbar = () => {
     const { windowSize } = useWindowResize()

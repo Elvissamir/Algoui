@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion"
-import useWindowResize from "../hooks/useWindowResize"
+import useWindowResize from "../../hooks/useWindowResize"
 import MobileMenu from "./MobileMenu"
 
 interface ShowMobileMenuProps {

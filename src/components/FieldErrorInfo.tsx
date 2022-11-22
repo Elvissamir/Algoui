@@ -1,4 +1,4 @@
-import FieldErrorIcon from "../assets/icons/FieldErrorIcon"
+import FieldErrorIcon from "./icons/FieldErrorIcon"
 import { FieldError } from "../core/generalTypes"
 
 interface FieldErrorInfoProps {

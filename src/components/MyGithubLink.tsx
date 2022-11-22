@@ -1,4 +1,4 @@
-import GithubIcon from "../assets/icons/GithubIcon"
+import GithubIcon from "./icons/GithubIcon"
 import externalLinks from "../core/externalLinks"
 
 const MyGithubLink = () => {

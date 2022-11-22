@@ -1,5 +1,5 @@
-import Logo from "../components/Logo"
-import NavList from "../components/NavList"
+import Logo from "../Logo"
+import NavList from "../NavList"
 
 const MobileMenu = () => {
     return (

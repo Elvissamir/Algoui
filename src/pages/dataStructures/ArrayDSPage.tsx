@@ -1,12 +1,11 @@
 import SectionContainer, { ControlsOption } from '../../components/SectionContainer'
 import ArrayAction from '../../components/dataStructures/array/ArrayAction'
 import useArrayForm from '../../hooks/dataStructures/array/useArrayForm'
-import AddItemControls from '../../components/dataStructures/array/AddItemControls'
-import RemoveItemControls from '../../components/dataStructures/array/RemoveItemControls'
 import SortItemControls from '../../components/dataStructures/array/SortItemControls'
 import MultiplyControls from '../../components/dataStructures/array/MultiplyControls'
 import FilterControls from '../../components/dataStructures/array/FilterControls'
 import ResetControls from '../../components/ResetControls'
+import AddAndRemoveItemControls from '../../components/dataStructures/AddAndRemoveItemControls'
 
 const ArrayDSPage = () => {
     const {
@@ -28,20 +27,14 @@ const ArrayDSPage = () => {
 
     const ArrayControlOptions: ControlsOption[]  = [
         {
-            name: 'Add Item', 
-            content: <AddItemControls 
+            name: 'Add/Remove Item', 
+            content: <AddAndRemoveItemControls 
                 indexInput={indexInput}
                 valueInput={valueInput}
                 executingOperation={executingOperation}
                 errors={errors}
                 handlers={controlHandlers}
                 handleInputChange={handleInputChange} />
-        },
-        {
-            name: 'Remove Item',
-            content: <RemoveItemControls
-                executingOperation={executingOperation}
-                handlers={controlHandlers} />
         },
         {
             name: 'Sort Items',

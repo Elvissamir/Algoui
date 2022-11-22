@@ -25,7 +25,7 @@
         }
 
         .circle-1 {
-            animation: circle1 3s infinite;
+            animation: circle1 1s infinite;
             animation-delay: 1s;
             
             @keyframes circle1 {
@@ -33,75 +33,59 @@
                     background-color: var(--brand-white);
                 }
 
-                50% {
-                    background-color: var(--brand-purple);
-                }
-                
                 100% {
-                    background-color: var(--brand-white);
+                    background-color: var(--brand-purple);
                 }
             }
         }
 
         .circle-2 {
-            animation: circle2 3s infinite;
+            animation: circle2 1.2s infinite;
             animation-delay: 1s;
             
             @keyframes circle2 {
                 0% {
                     background-color: var(--brand-white);
                 }
-
-                50% {
-                    background-color: var(--brand-purple);
-                }
                 
                 100% {
-                    background-color: var(--brand-white);
+                    background-color: var(--brand-purple);
                 }
             }
         }
 
         .circle-5 {
-            animation: circle5 3s infinite;
+            animation: circle5 1.4s infinite;
             animation-delay: 1s;
             
             @keyframes circle5 {
                 0% {
                     background-color: var(--brand-white);
                 }
-
-                50% {
-                    background-color: var(--brand-purple);
-                }
                 
                 100% {
-                    background-color: var(--brand-white);
+                    background-color: var(--brand-purple);
                 }
             }
         }
 
         .circle-8 {
-            animation: circle8 3s infinite;
+            animation: circle8 1.6s infinite;
             animation-delay: 1s;
             
             @keyframes circle8 {
                 0% {
                     background-color: var(--brand-white);
                 }
-
-                50% {
-                    background-color: var(--brand-purple);
-                }
                 
                 100% {
-                    background-color: var(--brand-white);
+                    background-color: var(--brand-purple);
                 }
             }
         }
 
         .circle-9 {
-            animation: circle8 3s infinite;
+            animation: circle8 1.8s infinite;
             animation-delay: 1s;
             
             @keyframes circle9 {
@@ -109,12 +93,8 @@
                     background-color: var(--brand-white);
                 }
 
-                50% {
-                    background-color: var(--brand-purple);
-                }
-                
                 100% {
-                    background-color: var(--brand-white);
+                    background-color: var(--brand-purple);
                 }
             }
         }

@@ -40,7 +40,7 @@
                 }
     
                 path:nth-child(2) {
-                    fill: var(--brand-color-c);
+                    fill: var(--brand-purple);
                 }
             }
         }
@@ -278,7 +278,7 @@
             border-radius: 50%;
             padding: 2px;   
             border: 1px white solid;
-            background-color: var(--brand-color-c);
+            background-color: var(--brand-purple);
 
             circle, line {
                 fill: white;
@@ -289,7 +289,7 @@
             }
 
             path:first-child {
-                fill: var(--brand-color-c);
+                fill: var(--brand-purple);
             }
 
             height: 42px;

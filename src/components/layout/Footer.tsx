@@ -1,3 +1,4 @@
+import ECLogo from "../ECLogo"
 import AlgouiIcon from "../icons/AlgouiIcon"
 import CogIcon from "../icons/CogIcon"
 import GithubIcon from "../icons/GithubIcon"
@@ -35,7 +36,7 @@ const Footer = () => {
                         <p className="text">Designed and Developed</p>
                     </div>
                     <p className="text">by</p>
-                    <p className="text">Elvis Carrasco</p>
+                    <ECLogo />
                 </div>
                 <div className="footer-bottom">
                     <p className="text">Algo<span className="algoui-sletters">UI</span></p>

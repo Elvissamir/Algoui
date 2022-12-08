@@ -28,7 +28,8 @@ const ControlsDropdown = ({ options }: ControlsDropdownProps) => {
                                 <motion.div 
                                     initial={{ opacity: 0, height: 0, margin: '0' }}
                                     animate={{ opacity: 1, height: 'auto', margin: '20px 0' }}
-                                    exit={{ opacity: 0, height: 0, margin: '0', transition: {duration: 0.05} }}
+                                    exit={{ opacity: 0, height: 0, margin: '0' }}
+                                    transition={{ bounce: 0 }}
                                     className="dropdown-content">
                                         {option.content}
                                 </motion.div>}

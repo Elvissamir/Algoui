@@ -1,8 +1,8 @@
 import { ChangeEvent } from "react"
-import { FormDataError } from "../../core/generalTypes"
-import { ArrayFormControlHandlers } from "../../hooks/dataStructures/array/useArrayForm"
-import AddItemControls from "./array/AddItemControls"
-import RemoveItemControls from "./array/RemoveItemControls"
+import { FormDataError } from "../../../core/generalTypes"
+import { ArrayFormControlHandlers } from "../../../hooks/dataStructures/array/useArrayForm"
+import AddItemControls from "./AddItemControls"
+import RemoveItemControls from "./RemoveItemControls"
 
 interface AddAndRemoveItemControlsProps {
     valueInput: string 

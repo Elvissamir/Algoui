@@ -5,7 +5,7 @@ import SortItemControls from '../../components/dataStructures/array/SortItemCont
 import MultiplyControls from '../../components/dataStructures/array/MultiplyControls'
 import FilterControls from '../../components/dataStructures/array/FilterControls'
 import ResetControls from '../../components/ResetControls'
-import AddAndRemoveItemControls from '../../components/dataStructures/AddAndRemoveItemControls'
+import AddAndRemoveItemControls from '../../components/dataStructures/array/AddAndRemoveItemControls'
 
 const ArrayDSPage = () => {
     const {
